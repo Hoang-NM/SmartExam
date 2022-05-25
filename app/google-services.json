@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "92487889433",
+    "project_id": "smartexam-78c03",
+    "storage_bucket": "smartexam-78c03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92487889433:android:535628b7a447d645e9f088",
+        "android_client_info": {
+          "package_name": "hoang.nguyenminh.smartexam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92487889433-klu873t8h6l35ih2dhvsi43r298voobi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hoang.nguyenminh.smartexam",
+            "certificate_hash": "538602ee9cd4ab3a7badab8993a347ee7bf40228"
+          }
+        },
+        {
+          "client_id": "92487889433-8r4pear9e2rom2t3n71ar06flktqdq2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDznIsu6ZZ-ecEukeuN8pCS_DSxPYHs7gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92487889433-8r4pear9e2rom2t3n71ar06flktqdq2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
