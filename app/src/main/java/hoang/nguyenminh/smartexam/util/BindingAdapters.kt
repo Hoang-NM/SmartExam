@@ -22,7 +22,5 @@ fun TextView.dateFormatter(string: String?) {
             val format = SimpleDateFormat("dd/MM/yyy", Locale.getDefault())
             this.text = format.format(it)
         }
-
     }
-
 }

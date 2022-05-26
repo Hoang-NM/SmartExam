@@ -1,12 +1,12 @@
 package hoang.nguyenminh.smartexam.di
 
 import hoang.nguyenminh.smartexam.BuildConfig
-import hoang.nguyenminh.smartexam.network.UserDetailsService
-import hoang.nguyenminh.smartexam.network.UserListService
+import hoang.nguyenminh.smartexam.network.SmartExamLocalService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hoang.nguyenminh.smartexam.network.SmartExamCloudService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -41,12 +41,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): UserListService =
-        retrofit.create(UserListService::class.java)
+    fun provideCloudService(retrofit: Retrofit): SmartExamCloudService =
+        retrofit.create(SmartExamCloudService::class.java)
 
     @Provides
     @Singleton
-    fun provideUserDetailsService(retrofit: Retrofit): UserDetailsService =
-        retrofit.create(UserDetailsService::class.java)
-
+    fun provideLocalService(retrofit: Retrofit): SmartExamLocalService =
+        retrofit.create(SmartExamLocalService::class.java)
 }

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.network.model
+package hoang.nguyenminh.smartexam.model
 
 
 import hoang.nguyenminh.smartexam.database.DatabaseUserListItem
