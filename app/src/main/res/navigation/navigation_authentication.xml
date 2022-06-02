@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/fragment_login">
+
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="hoang.nguyenminh.smartexam.ui.authentication.login.LoginFragment"
+        android:label="@string/lbl_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/fragment_register"
+        android:name="hoang.nguyenminh.smartexam.ui.authentication.register.RegisterFragment"
+        android:label="@string/lbl_register"
+        tools:layout="@layout/fragment_register" />
+
+    <action
+        android:id="@+id/to_login"
+        app:destination="@id/fragment_login"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/fragment_login"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/to_register"
+        app:destination="@id/fragment_register"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@layout/fragment_register"
+        app:popUpToInclusive="true" />
+</navigation>

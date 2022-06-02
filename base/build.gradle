@@ -105,4 +105,8 @@ dependencies {
 
     // Timber
     api "com.jakewharton.timber:timber:$timber_version"
+
+    // DataStore
+    api "androidx.datastore:datastore:$datastore_version"
+    api "androidx.datastore:datastore-preferences:$datastore_version"
 }

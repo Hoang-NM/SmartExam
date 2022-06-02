@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space_minimum">1px</dimen>
+    <dimen name="space_line_thin">0.5dp</dimen>
+    <dimen name="space_line">1dp</dimen>
+
+    <dimen name="space_small">2dp</dimen>
+    <dimen name="space_xsmall">4dp</dimen>
+    <dimen name="space_xxsmall">6dp</dimen>
+    <dimen name="space_xxxsmall">8dp</dimen>
+
+    <dimen name="space_medium">10dp</dimen>
+    <dimen name="space_xmedium">12dp</dimen>
+    <dimen name="space_xxmedium">14dp</dimen>
+    <dimen name="space_xxxmedium">16dp</dimen>
+
+    <dimen name="space_large">20dp</dimen>
+    <dimen name="space_xlarge">24dp</dimen>
+    <dimen name="space_xxlarge">28dp</dimen>
+    <dimen name="space_xxxlarge">32dp</dimen>
+
+    <dimen name="margin_horizontal_xxxlarge">80dp</dimen>
+    <dimen name="margin_horizontal_xxlarge">60dp</dimen>
+    <dimen name="margin_horizontal_xlarge">40dp</dimen>
+    <dimen name="margin_horizontal_large">30dp</dimen>
+
+    <dimen name="font_small">6sp</dimen>
+    <dimen name="font_xsmall">8sp</dimen>
+    <dimen name="font_xxsmall">10sp</dimen>
+    <dimen name="font_xxxsmall">12sp</dimen>
+
+    <dimen name="font_medium">14sp</dimen>
+    <dimen name="font_xmedium">16sp</dimen>
+    <dimen name="font_xxmedium">18sp</dimen>
+    <dimen name="font_xxxmedium">20sp</dimen>
+
+    <dimen name="font_large">24sp</dimen>
+    <dimen name="font_xlarge">28sp</dimen>
+    <dimen name="font_xxlarge">32sp</dimen>
+    <dimen name="font_xxxlarge">40sp</dimen>
+
+    <dimen name="radius_round">32dp</dimen>
+    <dimen name="radius_large">16dp</dimen>
+    <dimen name="radius_xmedium">12dp</dimen>
+    <dimen name="radius_medium">8dp</dimen>
+    <dimen name="radius_small">4dp</dimen>
+
+    <dimen name="elevation_small">1dp</dimen>
+    <dimen name="elevation_medium">3dp</dimen>
+    <dimen name="elevation_large">6dp</dimen>
+
+    <dimen name="common_button_height">48dp</dimen>
+    <dimen name="common_edittext_height">56dp</dimen>
+</resources>

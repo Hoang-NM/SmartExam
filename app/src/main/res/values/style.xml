@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Clickable">
+        <item name="android:foreground">@drawable/ripple_fx</item>
+    </style>
+
+    <style name="AppWidget" />
+
+    <style name="AppWidget.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/common_button_height</item>
+        <item name="android:foreground">@drawable/ripple_fx_button</item>
+        <item name="android:background">@drawable/shape_button</item>
+        <item name="android:backgroundTint">@color/bg_button_state_list</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.Button</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/text_button_state_list</item>
+        <item name="background">@drawable/shape_button</item>
+        <item name="backgroundTint">@color/bg_button_state_list</item>
+    </style>
+
+    <style name="AppWidget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.TextInputLayout.Label</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="expandedHintEnabled">true</item>
+    </style>
+</resources>

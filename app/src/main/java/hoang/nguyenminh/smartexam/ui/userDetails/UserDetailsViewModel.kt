@@ -3,7 +3,7 @@ package hoang.nguyenminh.smartexam.ui.userDetails
 import androidx.databinding.ObservableParcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import hoang.nguyenminh.smartexam.domain.UserDetails
+import hoang.nguyenminh.smartexam.model.UserDetails
 import hoang.nguyenminh.smartexam.repository.local.SmartExamLocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

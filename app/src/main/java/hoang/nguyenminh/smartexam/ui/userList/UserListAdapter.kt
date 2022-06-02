@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.smartexam.databinding.ItemUsersListBinding
-import hoang.nguyenminh.smartexam.domain.UserListItem
-import javax.inject.Inject
+import hoang.nguyenminh.smartexam.model.UserListItem
 
 class UsersListAdapter(private val onRequestDetail: (UserListItem) -> Unit) :
     ListAdapter<UserListItem, UsersListAdapter.ViewHolder>(UsersListDiffCallback()) {

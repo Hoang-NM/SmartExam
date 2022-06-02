@@ -3,4 +3,15 @@
     <string name="default_notification_channel" translatable="false">Smart Exam Push Notification</string>
     <string name="default_notification_channel_id" translatable="false">hoang.nguyenminh.smartexam</string>
     <string name="default_notification_channel_description" translatable="false">Smart Exam Notification Channel</string>
+
+    <!-- Authentication -->
+    <string name="lbl_login">Login</string>
+    <string name="lbl_register">Register</string>
+    <string name="lbl_username">Username</string>
+    <string name="lbl_password">Password</string>
+    <string name="hint_username">Enter your username</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="lbl_create_account">Don\'t have an account? Create now.</string>
+    <string name="lbl_already_have_account">Already have an account? Login now.</string>
+    <string name="confirm_exit_app">Press again to exit</string>
 </resources>

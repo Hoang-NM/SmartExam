@@ -20,7 +20,10 @@
 
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
              animated drawable. One of these is required. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_faze</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_faze_foreground</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">
+            @drawable/ic_faze_foreground
+        </item>
 
         <!-- Required for animated icons -->
         <item name="windowSplashScreenAnimationDuration">200</item>
