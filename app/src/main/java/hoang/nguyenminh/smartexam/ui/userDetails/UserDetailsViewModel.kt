@@ -12,15 +12,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailsViewModel @Inject constructor(
-    private val userDetailsRepository: SmartExamLocalRepository
+    private val smartExamLocalRepository: SmartExamLocalRepository
 ) : ViewModel() {
 
     val userDetails = ObservableParcelable(UserDetails())
 
-    fun getUserDetails(user: String) = userDetailsRepository.getUserDetails(user)
+    fun getUserDetails(user: String) = smartExamLocalRepository.getUserDetails(user)
 
     fun refreshUserDetails(user: String) = viewModelScope.launch(Dispatchers.IO) {
-        userDetailsRepository.refreshUserDetails(user)
+        smartExamLocalRepository.refreshUserDetails(user)
     }
 
 }

@@ -4,36 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import hoang.nguyenminh.smartexam.R
-import hoang.nguyenminh.smartexam.databinding.FragmentUserDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.smartexam.databinding.FragmentUserDetailsBinding
 
 @AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
     private val viewModel: UserDetailsViewModel by viewModels()
     private val args: UserDetailsFragmentArgs by navArgs()
 
-    private var _binding: FragmentUserDetailsBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentUserDetailsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-
-        _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_user_details, container, false
-        )
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        return binding.root
-    }
+    ): View = FragmentUserDetailsBinding.inflate(inflater, container, false).apply {
+        binding = this
+        viewModel = viewModel
+        lifecycleOwner = viewLifecycleOwner
+    }.root
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,14 +34,14 @@ class UserDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserDetails(args.user).observe(viewLifecycleOwner, {
+        viewModel.getUserDetails(args.user).observe(viewLifecycleOwner) {
             viewModel.userDetails.set(it)
-        })
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 
 }

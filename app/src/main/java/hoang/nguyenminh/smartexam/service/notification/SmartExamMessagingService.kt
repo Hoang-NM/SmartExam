@@ -13,7 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.appInstance
-import hoang.nguyenminh.smartexam.ui.MainActivity
+import hoang.nguyenminh.smartexam.ui.main.MainActivity
 import timber.log.Timber
 
 class SmartExamMessagingService : FirebaseMessagingService() {

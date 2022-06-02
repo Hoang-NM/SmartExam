@@ -7,29 +7,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.smartexam.databinding.ItemUsersListBinding
 import hoang.nguyenminh.smartexam.domain.UserListItem
-import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
-@FragmentScoped
-class UsersListAdapter @Inject constructor(val clickListener: ClickListener) :
+class UsersListAdapter(private val onRequestDetail: (UserListItem) -> Unit) :
     ListAdapter<UserListItem, UsersListAdapter.ViewHolder>(UsersListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, clickListener)
+        holder.bind(item, onRequestDetail)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder.from(parent)
 
     class ViewHolder private constructor(private val binding: ItemUsersListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: UserListItem, clickListener: ClickListener) {
+        fun bind(item: UserListItem, clickListener: (UserListItem) -> Unit) {
             binding.data = item
             binding.executePendingBindings()
-            binding.clickListener = clickListener
+            binding.root.setOnClickListener {
+                clickListener(item)
+            }
         }
 
         companion object {
@@ -52,13 +51,4 @@ class UsersListDiffCallback : DiffUtil.ItemCallback<UserListItem>() {
         return oldItem == newItem
     }
 
-}
-
-class ClickListener @Inject constructor() {
-
-    var onItemClick: ((UserListItem) -> Unit)? = null
-
-    fun onClick(data: UserListItem) {
-        onItemClick?.invoke(data)
-    }
 }

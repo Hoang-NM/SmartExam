@@ -4,54 +4,46 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import hoang.nguyenminh.smartexam.R
-import hoang.nguyenminh.smartexam.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import hoang.nguyenminh.smartexam.databinding.FragmentUserListBinding
 
 @AndroidEntryPoint
 class UserListFragment : Fragment() {
+
     private val viewModel: UserListViewModel by viewModels()
-
-    @Inject
-    lateinit var adapter: UsersListAdapter
-
-    private var _binding: FragmentUserListBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentUserListBinding? = null
+    private var adapter: UsersListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View = FragmentUserListBinding.inflate(inflater, container, false).apply {
+        binding = this
+        viewModel = viewModel
+        lifecycleOwner = viewLifecycleOwner
+        recyclerView.adapter = UsersListAdapter {
+            findNavController().navigate(UserListFragmentDirections.actionUsersListToUserDetails(it.username))
+        }.also {
+            adapter = it
+        }
+    }.root
 
-        _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_user_list, container, false
-        )
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.recyclerView.adapter = adapter
-
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.data.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        adapter.clickListener.onItemClick = {
-            findNavController().navigate(UserListFragmentDirections.actionUsersListToUserDetails(it.username))
+            adapter?.submitList(it)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.recyclerView.adapter = null
-        _binding = null
+        binding?.recyclerView?.adapter = null
+        binding = null
     }
 }
+

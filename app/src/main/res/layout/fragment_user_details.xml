@@ -14,17 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            imageUrl="@{viewModel.userDetails.avatar}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="16dp"
+            app:imageUrl="@{viewModel.userDetails.avatar}"
             app:layout_constraintEnd_toStartOf="@id/personalLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/personalLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
             app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,15 +44,15 @@
                 android:text="@{viewModel.userDetails.name}"
                 tools:text="Name" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_since"
-                dateFormatter="@{viewModel.userDetails.userSince}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                app:dateFormatter="@{viewModel.userDetails.userSince}"
                 tools:text="User since" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
                 android:text="@{viewModel.userDetails.location}"
                 tools:text="Location" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
