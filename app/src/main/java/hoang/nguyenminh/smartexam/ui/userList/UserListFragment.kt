@@ -23,7 +23,7 @@ class UserListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = FragmentUserListBinding.inflate(inflater, container, false).apply {
         binding = this
-        viewModel = viewModel
+        viewModel = this@UserListFragment.viewModel
         lifecycleOwner = viewLifecycleOwner
         recyclerView.adapter = UsersListAdapter {
             findNavController().navigate(UserListFragmentDirections.actionUsersListToUserDetails(it.username))

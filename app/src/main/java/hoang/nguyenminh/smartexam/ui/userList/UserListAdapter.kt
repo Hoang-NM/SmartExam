@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.smartexam.databinding.ItemUsersListBinding
-import hoang.nguyenminh.smartexam.model.UserListItem
+import hoang.nguyenminh.smartexam.model.user.UserListItem
 
 class UsersListAdapter(private val onRequestDetail: (UserListItem) -> Unit) :
     ListAdapter<UserListItem, UsersListAdapter.ViewHolder>(UsersListDiffCallback()) {
@@ -42,12 +42,9 @@ class UsersListAdapter(private val onRequestDetail: (UserListItem) -> Unit) :
 
 class UsersListDiffCallback : DiffUtil.ItemCallback<UserListItem>() {
 
-    override fun areItemsTheSame(oldItem: UserListItem, newItem: UserListItem): Boolean {
-        return oldItem.id == newItem.id
-    }
+    override fun areItemsTheSame(oldItem: UserListItem, newItem: UserListItem): Boolean =
+        oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: UserListItem, newItem: UserListItem): Boolean {
-        return oldItem == newItem
-    }
-
+    override fun areContentsTheSame(oldItem: UserListItem, newItem: UserListItem): Boolean =
+        oldItem == newItem
 }

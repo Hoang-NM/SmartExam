@@ -1,9 +1,9 @@
-package hoang.nguyenminh.smartexam.model
+package hoang.nguyenminh.smartexam.model.user
 
 
-import hoang.nguyenminh.smartexam.database.DatabaseUserListItem
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import hoang.nguyenminh.smartexam.database.DatabaseUserListItem
 
 @JsonClass(generateAdapter = true)
 data class NetworkUserListItem(

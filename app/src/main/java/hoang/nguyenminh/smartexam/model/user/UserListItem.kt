@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.model
+package hoang.nguyenminh.smartexam.model.user
 
 data class UserListItem(
     val id: Int,

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.model
+package hoang.nguyenminh.smartexam.model.user
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

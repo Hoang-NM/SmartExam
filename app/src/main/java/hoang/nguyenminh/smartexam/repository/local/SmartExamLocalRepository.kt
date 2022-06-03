@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import hoang.nguyenminh.smartexam.database.UsersDatabase
 import hoang.nguyenminh.smartexam.database.asDomainModel
-import hoang.nguyenminh.smartexam.model.UserDetails
-import hoang.nguyenminh.smartexam.model.UserListItem
+import hoang.nguyenminh.smartexam.model.user.UserDetails
+import hoang.nguyenminh.smartexam.model.user.UserListItem
+import hoang.nguyenminh.smartexam.model.user.asDatabaseModel
 import hoang.nguyenminh.smartexam.network.SmartExamLocalService
-import hoang.nguyenminh.smartexam.model.asDatabaseModel
 import timber.log.Timber
 import javax.inject.Inject
 

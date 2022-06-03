@@ -109,4 +109,7 @@ dependencies {
     // DataStore
     api "androidx.datastore:datastore:$datastore_version"
     api "androidx.datastore:datastore-preferences:$datastore_version"
+
+    // Event Bus
+    api "org.greenrobot:eventbus:$event_bus_version"
 }

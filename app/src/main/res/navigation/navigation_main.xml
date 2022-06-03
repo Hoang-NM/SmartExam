@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/users_list">
+    app:startDestination="@id/fragment_exam_execution">
 
     <fragment
         android:id="@+id/users_list"
@@ -24,6 +24,11 @@
             android:name="user"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment_exam_execution"
+        android:name="hoang.nguyenminh.smartexam.ui.exam_execution.host.ExamExecutionFragment"
+        tools:layout="@layout/fragment_exam_execution" />
 
 </navigation>
 

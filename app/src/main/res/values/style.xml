@@ -28,4 +28,10 @@
         <item name="hintAnimationEnabled">true</item>
         <item name="expandedHintEnabled">true</item>
     </style>
+
+    <style name="AppWidget.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:lineSpacingMultiplier">1.4</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.Content</item>
+    </style>
 </resources>

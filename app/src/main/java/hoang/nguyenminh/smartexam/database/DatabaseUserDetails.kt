@@ -2,7 +2,7 @@ package hoang.nguyenminh.smartexam.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import hoang.nguyenminh.smartexam.model.UserDetails
+import hoang.nguyenminh.smartexam.model.user.UserDetails
 
 @Entity
 data class DatabaseUserDetails constructor(

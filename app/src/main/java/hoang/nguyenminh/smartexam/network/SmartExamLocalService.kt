@@ -1,7 +1,7 @@
 package hoang.nguyenminh.smartexam.network
 
-import hoang.nguyenminh.smartexam.model.NetworkUserDetails
-import hoang.nguyenminh.smartexam.model.NetworkUserListItem
+import hoang.nguyenminh.smartexam.model.user.NetworkUserDetails
+import hoang.nguyenminh.smartexam.model.user.NetworkUserListItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 
