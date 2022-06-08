@@ -43,7 +43,8 @@
                 android:hint="@string/hint_username"
                 android:inputType="text"
                 android:lines="1"
-                android:minHeight="@dimen/common_edittext_height" />
+                android:minHeight="@dimen/common_edittext_height"
+                android:text="@={vm.userName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +66,8 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:minHeight="@dimen/common_edittext_height" />
+                android:minHeight="@dimen/common_edittext_height"
+                android:text="@{vm.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton

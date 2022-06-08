@@ -43,7 +43,8 @@
                 android:hint="@string/hint_username"
                 android:inputType="text"
                 android:lines="1"
-                android:minHeight="@dimen/common_edittext_height" />
+                android:minHeight="@dimen/common_edittext_height"
+                android:text="@{vm.userName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +66,31 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:lines="1"
-                android:minHeight="@dimen/common_edittext_height" />
+                android:minHeight="@dimen/common_edittext_height"
+                android:text="@{vm.password}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edt_re_enter_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_large"
+            android:text="@string/lbl_re_enter_password"
+            app:boxCornerRadiusTopEnd="@dimen/radius_medium"
+            app:boxCornerRadiusTopStart="@dimen/space_medium"
+            app:layout_constraintTop_toBottomOf="@id/edt_password"
+            app:passwordToggleEnabled="true"
+            tools:text="@tools:sample/full_names">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/AppTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_re_enter_password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:minHeight="@dimen/common_edittext_height"
+                android:text="@{vm.reEnterPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -75,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_large"
             android:text="@string/lbl_register"
-            app:layout_constraintTop_toBottomOf="@id/edt_password" />
+            app:layout_constraintTop_toBottomOf="@id/edt_re_enter_password" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lbl_already_have_account"

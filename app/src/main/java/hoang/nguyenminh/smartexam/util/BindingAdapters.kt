@@ -1,5 +1,6 @@
 package hoang.nguyenminh.smartexam.util
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -27,5 +28,18 @@ object BindingAdapters {
                 this.text = format.format(it)
             }
         }
+    }
+
+    @BindingAdapter("viewCompatEnabled")
+    @JvmStatic
+    fun View.viewCompatEnabled(enabled: Boolean) {
+        isEnabled = enabled
+        isClickable = enabled
+    }
+
+    @BindingAdapter("viewCompatVisibility")
+    @JvmStatic
+    fun View.viewCompatVisibility(visible: Boolean) {
+        visibility = if (visible) View.VISIBLE else View.GONE
     }
 }
