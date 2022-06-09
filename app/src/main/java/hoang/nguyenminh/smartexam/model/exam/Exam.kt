@@ -29,7 +29,8 @@ data class Answer(
 @Parcelize
 data class Choice(
     val index: Int,
-    val content: String
+    val content: String,
+    var isSelected: Boolean = false
 ) : Parcelable
 
 enum class ChoiceIndex(val index: Int) {

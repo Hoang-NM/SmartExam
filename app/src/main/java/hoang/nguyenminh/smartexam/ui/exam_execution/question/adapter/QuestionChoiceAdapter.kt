@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.smartexam.databinding.ItemQuestionChoiceBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
+import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatSelected
 
-class QuestionChoiceAdapter(private val onSelectChoice: (Choice) -> Unit) :
+class QuestionChoiceAdapter(private val onSelectChoice: (Int, Choice) -> Unit) :
     ListAdapter<Choice, QuestionChoiceAdapter.ViewHolder>(QuestionChoiceDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -22,11 +23,13 @@ class QuestionChoiceAdapter(private val onSelectChoice: (Choice) -> Unit) :
     class ViewHolder private constructor(val binding: ItemQuestionChoiceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Choice, clickListener: (Choice) -> Unit) {
+        fun bind(item: Choice, clickListener: (Int, Choice) -> Unit) {
             binding.apply {
                 lblContent.text = item.content
-                root.setOnClickListener {
-                    clickListener(item)
+                lblContent.viewCompatSelected(item.isSelected)
+                lblContent.setOnClickListener {
+                    item.isSelected = !item.isSelected
+                    clickListener(adapterPosition, item)
                 }
                 executePendingBindings()
             }

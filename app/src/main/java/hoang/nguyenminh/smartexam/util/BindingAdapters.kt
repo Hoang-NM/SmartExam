@@ -42,4 +42,10 @@ object BindingAdapters {
     fun View.viewCompatVisibility(visible: Boolean) {
         visibility = if (visible) View.VISIBLE else View.GONE
     }
+
+    @BindingAdapter("viewCompatSelected")
+    @JvmStatic
+    fun View.viewCompatSelected(selected: Boolean) {
+        isSelected = selected
+    }
 }

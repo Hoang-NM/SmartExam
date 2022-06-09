@@ -7,15 +7,11 @@
 
     <style name="AppTextAppearance.Label" parent="AppTextAppearance">
         <item name="android:textColor">@color/black_900</item>
+        <item name="android:textSize">@dimen/font_xxmedium</item>
     </style>
 
     <style name="AppTextAppearance.Content" parent="AppTextAppearance">
         <item name="android:textColor">@color/black_900</item>
-    </style>
-
-    <style name="AppTextAppearance.Choice" parent="AppTextAppearance">
-        <item name="android:textColor">@color/choice_text_color_selector</item>
-        <item name="android:background">@color/choice_background_state_selector</item>
     </style>
 
     <style name="AppTextAppearance.Button" parent="AppTextAppearance">

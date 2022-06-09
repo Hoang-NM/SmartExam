@@ -4,12 +4,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lbl_content"
-        style="@style/Clickable"
+        style="@style/AppWidget.ItemChoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center|start"
         android:padding="@dimen/space_medium"
-        android:textAppearance="@style/AppTextAppearance.Choice"
         tools:text="@tools:sample/cities"
         tools:textColor="@color/black_900" />
 </layout>

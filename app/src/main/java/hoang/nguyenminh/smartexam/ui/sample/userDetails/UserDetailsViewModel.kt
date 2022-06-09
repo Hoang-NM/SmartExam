@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.userDetails
+package hoang.nguyenminh.smartexam.ui.sample.userDetails
 
 import androidx.databinding.ObservableParcelable
 import androidx.lifecycle.ViewModel

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_plain_rect"
+        app:cardElevation="@dimen/elevation_large">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back"
+                style="@style/ClickableIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/space_medium"
+                android:src="@drawable/ic_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_question_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textAppearance="@style/AppTextAppearance.Label" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_next"
+                style="@style/ClickableIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/space_medium"
+                android:src="@drawable/ic_next" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

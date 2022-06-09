@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_medium"
             android:text="@string/lbl_already_have_account"
-            android:textAppearance="@style/AppTextAppearance.Label"
+            android:textAppearance="@style/AppTextAppearance.Content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

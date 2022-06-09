@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.userList
+package hoang.nguyenminh.smartexam.ui.sample.userList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

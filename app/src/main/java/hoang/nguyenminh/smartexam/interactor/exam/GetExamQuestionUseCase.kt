@@ -10,17 +10,14 @@ import javax.inject.Inject
 class GetExamQuestionUseCase @Inject constructor(private val repository: SmartExamCloudRepository) {
 
     fun getExamQuestion(): Exam {
-        val choices = listOf(
-            Choice(0, "Choice 1"), Choice(1, "Choice 2"),
-            Choice(2, "Choice 3"), Choice(3, "Choice 4")
-        )
-        val questions = listOf(
-            Question(0, "Question 1", choices),
-            Question(1, "Question 2", choices),
-            Question(2, "Question 3", choices),
-            Question(3, "Question 4", choices),
-            Question(4, "Question 5", choices),
-        )
+        val choices = (1..200).map {
+            Choice(it, "Choice $it")
+        }
+        var startIndex = -4
+        val questions = (1..50).map {
+            startIndex += 4
+            Question(it, "Question $it", choices.subList(startIndex, startIndex + 4))
+        }
         return Exam(0, 60 * DateTimeXs.MINUTE, questions)
     }
 }

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.userList
+package hoang.nguyenminh.smartexam.ui.sample.userList
 
 import android.os.Bundle
 import android.view.LayoutInflater
