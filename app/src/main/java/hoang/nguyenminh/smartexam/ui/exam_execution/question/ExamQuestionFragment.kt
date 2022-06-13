@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,9 +43,7 @@ class ExamQuestionFragment : Fragment() {
 
     companion object {
         fun newInstance(question: Question): ExamQuestionFragment = ExamQuestionFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(KEY_QUESTION, question)
-            }
+            arguments = bundleOf(KEY_QUESTION to question)
         }
     }
 

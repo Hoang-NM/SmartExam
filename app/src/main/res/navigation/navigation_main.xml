@@ -28,6 +28,7 @@
     <fragment
         android:id="@+id/fragment_exam_execution"
         android:name="hoang.nguyenminh.smartexam.ui.exam_execution.host.ExamExecutionFragment"
+        android:label="@string/lbl_exam_execution"
         tools:layout="@layout/fragment_exam_execution" />
 
 </navigation>
