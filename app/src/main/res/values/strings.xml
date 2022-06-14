@@ -19,4 +19,5 @@
 
     <!-- Exam Execution -->
     <string name="lbl_exam_execution">Exam Execution</string>
+    <string name="lbl_exam_capture">Exam Capture</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/fragment_exam_execution">
+    app:startDestination="@id/fragment_exam_capture">
 
     <fragment
         android:id="@+id/users_list"
@@ -31,5 +31,17 @@
         android:label="@string/lbl_exam_execution"
         tools:layout="@layout/fragment_exam_execution" />
 
-</navigation>
+    <fragment
+        android:id="@+id/fragment_exam_capture"
+        android:name="hoang.nguyenminh.smartexam.ui.exam_capture.ExamCaptureFragment"
+        android:label="@string/lbl_exam_capture"
+        tools:layout="@layout/fragment_exam_capture" />
 
+    <action
+        android:id="@+id/to_exam_execution"
+        app:destination="@id/fragment_exam_execution" />
+
+    <action
+        android:id="@+id/to_exam_capture"
+        app:destination="@id/fragment_exam_capture" />
+</navigation>

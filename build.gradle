@@ -23,6 +23,7 @@ buildscript {
         timber_version = '5.0.1'
         datastore_version = '1.0.0'
         event_bus_version = '3.3.1'
+        camerax_version = '1.2.0-alpha02'
     }
 
     dependencies {

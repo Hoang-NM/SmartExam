@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="hoang.nguyenminh.smartexam">
 
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".SmartExamApplication"
         android:allowBackup="true"
