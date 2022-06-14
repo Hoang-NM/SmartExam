@@ -17,6 +17,11 @@
     <string name="lbl_already_have_account">Already have an account? Login now.</string>
     <string name="confirm_exit_app">Press again to exit</string>
 
+    <!-- Main -->
+    <string name="label_menu_home">Home</string>
+    <string name="label_menu_exam">Exam</string>
+    <string name="label_menu_profile">Profile</string>
+
     <!-- Exam Execution -->
     <string name="lbl_exam_execution">Exam Execution</string>
     <string name="lbl_exam_capture">Exam Capture</string>

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam_execution.host
+package hoang.nguyenminh.smartexam.ui.exam.execution.host
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
-import hoang.nguyenminh.smartexam.ui.exam_execution.host.adapter.ExamExecutionPagerAdapter
+import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
 import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.util.collectLatestOnLifecycle
 
@@ -53,6 +53,7 @@ class ExamExecutionFragment : Fragment() {
 
         btnFinish.setOnClickListener {
             Toast.makeText(requireContext(), "Finish exam", Toast.LENGTH_SHORT).show()
+            activity?.onBackPressed()
         }
 
         viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {

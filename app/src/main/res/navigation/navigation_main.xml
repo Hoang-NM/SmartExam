@@ -3,7 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/fragment_exam_capture">
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="hoang.nguyenminh.smartexam.ui.home.HomeFragment"
+        android:label="@string/label_menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/fragment_exam"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.host.ExamFragment"
+        android:label="@string/label_menu_exam"
+        tools:layout="@layout/fragment_exam" />
+
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="hoang.nguyenminh.smartexam.ui.profile.ProfileFragment"
+        android:label="@string/label_menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/fragment_exam_execution"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.execution.host.ExamExecutionFragment"
+        android:label="@string/lbl_exam_execution"
+        tools:layout="@layout/fragment_exam_execution" />
+
+    <fragment
+        android:id="@+id/fragment_exam_capture"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.capture.ExamCaptureFragment"
+        android:label="@string/lbl_exam_capture"
+        tools:layout="@layout/fragment_exam_capture" />
+
+    <action
+        android:id="@+id/to_home"
+        app:destination="@id/fragment_home" />
+
+    <action
+        android:id="@+id/to_exam"
+        app:destination="@id/fragment_exam" />
+
+    <action
+        android:id="@+id/to_profile"
+        app:destination="@id/fragment_profile" />
+
+    <action
+        android:id="@+id/to_exam_execution"
+        app:destination="@id/fragment_exam_execution" />
+
+    <action
+        android:id="@+id/to_exam_capture"
+        app:destination="@id/fragment_exam_capture" />
 
     <fragment
         android:id="@+id/users_list"
@@ -24,24 +74,4 @@
             android:name="user"
             app:argType="string" />
     </fragment>
-
-    <fragment
-        android:id="@+id/fragment_exam_execution"
-        android:name="hoang.nguyenminh.smartexam.ui.exam_execution.host.ExamExecutionFragment"
-        android:label="@string/lbl_exam_execution"
-        tools:layout="@layout/fragment_exam_execution" />
-
-    <fragment
-        android:id="@+id/fragment_exam_capture"
-        android:name="hoang.nguyenminh.smartexam.ui.exam_capture.ExamCaptureFragment"
-        android:label="@string/lbl_exam_capture"
-        tools:layout="@layout/fragment_exam_capture" />
-
-    <action
-        android:id="@+id/to_exam_execution"
-        app:destination="@id/fragment_exam_execution" />
-
-    <action
-        android:id="@+id/to_exam_capture"
-        app:destination="@id/fragment_exam_capture" />
 </navigation>

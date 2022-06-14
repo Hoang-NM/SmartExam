@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam_execution.question
+package hoang.nguyenminh.smartexam.ui.exam.execution.question
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
 import hoang.nguyenminh.smartexam.model.exam.Question
-import hoang.nguyenminh.smartexam.ui.exam_execution.question.adapter.QuestionChoiceAdapter
+import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionChoiceAdapter
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -49,6 +49,7 @@ class ExamQuestionFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding = null
         adapter = null
     }
 

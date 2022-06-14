@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam_capture
+package hoang.nguyenminh.smartexam.ui.exam.capture
 
 import android.Manifest
 import android.content.ContentValues
@@ -19,6 +19,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
 import hoang.nguyenminh.smartexam.databinding.FragmentExamCaptureBinding
@@ -34,6 +35,8 @@ import java.util.*
 class ExamCaptureFragment : Fragment() {
 
     private var binding: FragmentExamCaptureBinding? = null
+
+    private val viewModel by viewModels<ExamCaptureViewModel>()
 
     private var cameraPermissionLauncher: ActivityResultLauncher<String>? = null
 
@@ -78,6 +81,11 @@ class ExamCaptureFragment : Fragment() {
             capture(requireContext())
         }
     }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 
     private fun requestCameraPermission() {
         cameraPermissionLauncher?.launch(Manifest.permission.CAMERA)

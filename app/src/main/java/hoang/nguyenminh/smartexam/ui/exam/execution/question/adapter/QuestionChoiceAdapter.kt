@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam_execution.question.adapter
+package hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

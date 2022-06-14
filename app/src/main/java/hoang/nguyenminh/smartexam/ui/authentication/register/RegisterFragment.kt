@@ -16,7 +16,9 @@ import hoang.nguyenminh.smartexam.ui.main.MainActivity
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
+
     private val viewModel by viewModels<LoginViewModel>()
+
     private var binding: FragmentRegisterBinding? = null
 
     override fun onCreateView(

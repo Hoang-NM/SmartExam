@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
+import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 
 @AndroidEntryPoint
 class AuthenticationActivity : AppCompatActivity() {
@@ -22,25 +23,38 @@ class AuthenticationActivity : AppCompatActivity() {
         ).apply {
             binding = this
 
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            navHostFragment.navController.addOnDestinationChangedListener { navController, destination, args ->
-                lblTitle.text = destination.label
+            appbar.apply {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+                navHostFragment.navController.apply {
+                    addOnDestinationChangedListener { _, destination, _ ->
+                        lblTitle.text = destination.label
+                        (previousBackStackEntry == null).let {
+                            imgNavigation.viewCompatVisibility(!it)
+                        }
+                    }
+                }
+
+                imgNavigation.setOnClickListener {
+                    onBackPressed()
+                }
+
+                setSupportActionBar(toolBar.also {
+                    it.navigationIcon = null
+                })
             }
 
-            imgNavigation.setOnClickListener {
-                onBackPressed()
-            }
-
-            setSupportActionBar(toolBar.also {
-                it.navigationIcon = null
-            })
             supportActionBar?.run {
                 setDisplayHomeAsUpEnabled(false)
                 setDisplayShowHomeEnabled(false)
                 setDisplayShowTitleEnabled(false)
             }
-
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

@@ -1,9 +1,9 @@
-package hoang.nguyenminh.smartexam.ui.exam_execution.host.adapter
+package hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import hoang.nguyenminh.smartexam.model.exam.Question
-import hoang.nguyenminh.smartexam.ui.exam_execution.question.ExamQuestionFragment
+import hoang.nguyenminh.smartexam.ui.exam.execution.question.ExamQuestionFragment
 
 class ExamExecutionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
