@@ -1,28 +1,29 @@
 package hoang.nguyenminh.smartexam.ui.exam.host
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hoang.nguyenminh.base.scene.BaseAndroidViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamMenuUseCase
 import hoang.nguyenminh.smartexam.model.main.MenuItem
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExamViewModel @Inject constructor(private val repository: SmartExamCloudRepository) :
-    ViewModel() {
+class ExamViewModel @Inject constructor(application: Application) :
+    BaseAndroidViewModel(application) {
 
     @Inject
     lateinit var useCase: GetExamMenuUseCase
 
     val flowOfMenuItem = MutableStateFlow<List<MenuItem>?>(null)
 
-    init {
+    override fun onReady() {
+        super.onReady()
         flowOfMenuItem.value ?: viewModelScope.launch(Dispatchers.IO) {
-            flowOfMenuItem.value = useCase.getExamMenu()
+            flowOfMenuItem.value = useCase(coroutineContext, Unit)
         }
     }
 }

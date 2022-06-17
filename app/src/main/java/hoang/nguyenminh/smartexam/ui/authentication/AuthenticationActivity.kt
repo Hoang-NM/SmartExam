@@ -1,23 +1,33 @@
 package hoang.nguyenminh.smartexam.ui.authentication
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseActivity
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
 import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 
 @AndroidEntryPoint
-class AuthenticationActivity : AppCompatActivity() {
+class AuthenticationActivity : BaseActivity() {
+
+    override val viewModel by viewModels<AuthenticationViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: ActivityAuthenticationBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateViewDataBinding(): ViewDataBinding =
         DataBindingUtil.setContentView<ActivityAuthenticationBinding>(
             this, R.layout.activity_authentication
         ).apply {
@@ -51,7 +61,6 @@ class AuthenticationActivity : AppCompatActivity() {
                 setDisplayShowTitleEnabled(false)
             }
         }
-    }
 
     override fun onDestroy() {
         super.onDestroy()

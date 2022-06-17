@@ -1,12 +1,12 @@
 package hoang.nguyenminh.smartexam
 
-import android.app.Application
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
+import hoang.nguyenminh.base.BaseApplication
 import timber.log.Timber
 
 @HiltAndroidApp
-class SmartExamApplication : Application() {
+class SmartExamApplication : BaseApplication() {
 
     companion object {
         private lateinit var instance: SmartExamApplication

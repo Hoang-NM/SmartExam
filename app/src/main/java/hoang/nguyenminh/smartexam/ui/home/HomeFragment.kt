@@ -1,28 +1,28 @@
 package hoang.nguyenminh.smartexam.ui.home
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
+
+    override val viewModel by viewModels<HomeViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentHomeBinding? = null
 
-    private val viewModel by viewModels<HomeViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = FragmentHomeBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentHomeBinding.inflate(inflater, container, false).apply {
         binding = this
-    }.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

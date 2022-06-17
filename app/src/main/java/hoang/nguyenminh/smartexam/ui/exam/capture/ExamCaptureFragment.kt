@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -18,10 +17,12 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentExamCaptureBinding
 import hoang.nguyenminh.smartexam.util.ConfirmRequest
 import hoang.nguyenminh.smartexam.util.DateTimeXs
@@ -32,11 +33,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ExamCaptureFragment : Fragment() {
+class ExamCaptureFragment : BaseFragment() {
+
+    override val viewModel by viewModels<ExamCaptureViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentExamCaptureBinding? = null
-
-    private val viewModel by viewModels<ExamCaptureViewModel>()
 
     private var cameraPermissionLauncher: ActivityResultLauncher<String>? = null
 
@@ -66,9 +69,9 @@ class ExamCaptureFragment : Fragment() {
             }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = FragmentExamCaptureBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentExamCaptureBinding.inflate(inflater, container, false).apply {
         binding = this
 
         if (requireContext().isAllPermissionsGranted(Manifest.permission.CAMERA)) {
@@ -80,7 +83,7 @@ class ExamCaptureFragment : Fragment() {
         btnCapture.setOnClickListener {
             capture(requireContext())
         }
-    }.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

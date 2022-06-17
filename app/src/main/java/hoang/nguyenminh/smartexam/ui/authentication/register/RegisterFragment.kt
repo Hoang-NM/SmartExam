@@ -1,29 +1,31 @@
 package hoang.nguyenminh.smartexam.ui.authentication.register
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentRegisterBinding
 import hoang.nguyenminh.smartexam.ui.authentication.login.LoginFragmentDirections
 import hoang.nguyenminh.smartexam.ui.authentication.login.LoginViewModel
 import hoang.nguyenminh.smartexam.ui.main.MainActivity
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
 
-    private val viewModel by viewModels<LoginViewModel>()
+    override val viewModel by viewModels<LoginViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentRegisterBinding? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = FragmentRegisterBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentRegisterBinding.inflate(inflater, container, false).apply {
         binding = this
         btnRegister.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
@@ -33,7 +35,7 @@ class RegisterFragment : Fragment() {
         lblAlreadyHaveAccount.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.toLogin())
         }
-    }.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

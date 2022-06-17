@@ -1,9 +1,9 @@
 package hoang.nguyenminh.smartexam.ui.authentication.login
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
+import hoang.nguyenminh.base.scene.BaseAndroidViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-    private val smartExamCloudRepository: SmartExamCloudRepository
-) : ViewModel() {
+class LoginViewModel @Inject constructor(application: Application) :
+    BaseAndroidViewModel(application) {
 
     val userName = MutableStateFlow("")
     val password = MutableStateFlow("")

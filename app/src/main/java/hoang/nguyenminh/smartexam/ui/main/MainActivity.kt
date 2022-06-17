@@ -1,23 +1,27 @@
 package hoang.nguyenminh.smartexam.ui.main
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseActivity
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityMainBinding
 import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    private var doubleBackToExitPressedOnce = false
+    override val viewModel by viewModels<MainViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
+
     private var binding: ActivityMainBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateViewDataBinding(): ViewDataBinding =
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
             binding = this
 
@@ -55,17 +59,6 @@ class MainActivity : AppCompatActivity() {
                 setDisplayShowTitleEnabled(false)
             }
         }
-    }
-
-//    override fun onBackPressed() {
-//        if (doubleBackToExitPressedOnce) {
-//            super.onBackPressed()
-//            return
-//        }
-//        this.doubleBackToExitPressedOnce = true
-//        Toast.makeText(this, R.string.confirm_exit_app, Toast.LENGTH_SHORT).show()
-//        Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

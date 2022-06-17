@@ -1,13 +1,13 @@
 package hoang.nguyenminh.smartexam.ui.exam.execution.question
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
 import hoang.nguyenminh.smartexam.model.exam.Question
@@ -15,21 +15,21 @@ import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionCho
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ExamQuestionFragment : Fragment() {
+class ExamQuestionFragment : BaseFragment() {
 
     private val KEY_QUESTION = "question"
 
-    private val viewModel by viewModels<ExamQuestionViewModel>()
+    override val viewModel by viewModels<ExamQuestionViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentExamQuestionBinding? = null
 
     private var adapter: QuestionChoiceAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
         binding = this
         val question: Question = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
         lblQuestion.text = question.question
@@ -39,7 +39,7 @@ class ExamQuestionFragment : Fragment() {
             adapter = it
         }
         adapter?.submitList(question.choices)
-    }.root
+    }
 
     companion object {
         fun newInstance(question: Question): ExamQuestionFragment = ExamQuestionFragment().apply {

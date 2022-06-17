@@ -1,39 +1,41 @@
 package hoang.nguyenminh.smartexam.ui.exam.execution.host
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
 import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
 import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.util.collectLatestOnLifecycle
 
 @AndroidEntryPoint
-class ExamExecutionFragment : Fragment() {
+class ExamExecutionFragment : BaseFragment() {
 
-    private val viewModel by viewModels<ExamExecutionViewModel>()
+    override val viewModel by viewModels<ExamExecutionViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentExamExecutionBinding? = null
 
     private var pagerAdapter: ExamExecutionPagerAdapter? = null
 
-    @SuppressLint("SetTextI18n")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
         binding = this
         vpQuestion.apply {
             adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
                 pagerAdapter = it
             }
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                @SuppressLint("SetTextI18n")
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     pagerAdapter?.isLastPage(position)?.let { btnFinish.viewCompatVisibility(it) }
@@ -61,7 +63,7 @@ class ExamExecutionFragment : Fragment() {
             pagerAdapter?.listOfQuestions = it.questions
             vpQuestion.offscreenPageLimit = it.questions.size
         }
-    }.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

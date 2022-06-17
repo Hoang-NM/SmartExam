@@ -1,13 +1,13 @@
 package hoang.nguyenminh.smartexam.ui.exam.host
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
@@ -15,19 +15,19 @@ import hoang.nguyenminh.smartexam.ui.exam.host.adapter.ExamMenuAdapter
 import hoang.nguyenminh.smartexam.util.collectLatestOnLifecycle
 
 @AndroidEntryPoint
-class ExamFragment : Fragment() {
+class ExamFragment : BaseFragment() {
+
+    override val viewModel by viewModels<ExamViewModel>()
+
+    override fun getViewModelVariableId(): Int = BR.vm
 
     private var binding: FragmentExamBinding? = null
 
-    private val viewModel by viewModels<ExamViewModel>()
-
     private var adapter: ExamMenuAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = FragmentExamBinding.inflate(inflater, container, false).apply {
+    override fun onCreateViewDataBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): ViewDataBinding = FragmentExamBinding.inflate(inflater, container, false).apply {
         binding = this
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
@@ -48,7 +48,7 @@ class ExamFragment : Fragment() {
             adapter?.submitList(it)
             adapter?.notifyItemRangeInserted(0, it.size)
         }
-    }.root
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

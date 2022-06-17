@@ -8,7 +8,3 @@ interface Scene {
 
     fun lifecycleOwner(): LifecycleOwner
 }
-
-interface IViewModel {
-
-}
