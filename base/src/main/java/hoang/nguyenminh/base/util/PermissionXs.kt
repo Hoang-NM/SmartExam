@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.util
+package hoang.nguyenminh.base.util
 
 import android.content.Context
 import android.content.pm.PackageManager

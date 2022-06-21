@@ -7,12 +7,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.base.util.collectLatestOnLifecycle
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
 import hoang.nguyenminh.smartexam.ui.exam.host.adapter.ExamMenuAdapter
-import hoang.nguyenminh.smartexam.util.collectLatestOnLifecycle
 
 @AndroidEntryPoint
 class ExamFragment : BaseFragment() {

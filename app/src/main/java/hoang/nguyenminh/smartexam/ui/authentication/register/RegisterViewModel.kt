@@ -13,15 +13,24 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(application: Application) :
     BaseAndroidViewModel(application) {
-    val userName = MutableStateFlow("")
-    val password = MutableStateFlow("")
-    val reEnterPassword = MutableStateFlow("")
 
-    val enabled = combine(
-        flow = userName,
-        flow2 = password,
-        flow3 = reEnterPassword
+    private val flowOfUserName = MutableStateFlow("")
+
+    private val flowOfPassword = MutableStateFlow("")
+
+    private val flowOfReEnterPassword = MutableStateFlow("")
+
+    private val enabled = combine(
+        flow = flowOfUserName,
+        flow2 = flowOfPassword,
+        flow3 = flowOfReEnterPassword
     ) { userName, password, reEnterPassword ->
         userName.isNotBlank() && password.isNotBlank() && reEnterPassword.isNotBlank() && password == reEnterPassword
     }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    fun getUserName(): MutableStateFlow<String> = flowOfUserName
+
+    fun getPassword(): MutableStateFlow<String> = flowOfPassword
+
+    fun getReEnterPassword(): MutableStateFlow<String> = flowOfReEnterPassword
 }

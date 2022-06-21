@@ -22,12 +22,12 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
 import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.base.util.ConfirmRequest
+import hoang.nguyenminh.base.util.DateTimeXs
+import hoang.nguyenminh.base.util.buildAlertDialog
+import hoang.nguyenminh.base.util.isAllPermissionsGranted
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentExamCaptureBinding
-import hoang.nguyenminh.smartexam.util.ConfirmRequest
-import hoang.nguyenminh.smartexam.util.DateTimeXs
-import hoang.nguyenminh.smartexam.util.buildAlertDialog
-import hoang.nguyenminh.smartexam.util.isAllPermissionsGranted
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*

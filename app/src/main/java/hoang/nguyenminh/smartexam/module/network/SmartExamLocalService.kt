@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.network
+package hoang.nguyenminh.smartexam.module.network
 
 import hoang.nguyenminh.smartexam.model.user.NetworkUserDetails
 import hoang.nguyenminh.smartexam.model.user.NetworkUserListItem

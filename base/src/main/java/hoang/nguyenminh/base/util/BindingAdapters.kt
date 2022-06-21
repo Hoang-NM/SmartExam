@@ -1,12 +1,12 @@
-package hoang.nguyenminh.smartexam.util
+package hoang.nguyenminh.base.util
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import hoang.nguyenminh.smartexam.util.DateTimeXs.FORMAT_DATE
-import hoang.nguyenminh.smartexam.util.DateTimeXs.FORMAT_DATE_TIME_ISO
+import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE
+import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE_TIME_ISO
 import java.text.SimpleDateFormat
 import java.util.*
 

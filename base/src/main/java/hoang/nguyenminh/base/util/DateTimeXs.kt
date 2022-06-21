@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.util
+package hoang.nguyenminh.base.util
 
 object DateTimeXs {
     const val FORMAT_DATE = "dd/MM/yyy"

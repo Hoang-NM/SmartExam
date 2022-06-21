@@ -1,6 +1,6 @@
 package hoang.nguyenminh.smartexam.repository.cloud
 
-import hoang.nguyenminh.smartexam.network.SmartExamCloudService
+import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
 import javax.inject.Inject
 
 class SmartExamCloudRepositoryImpl @Inject constructor(

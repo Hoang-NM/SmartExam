@@ -14,10 +14,16 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(application: Application) :
     BaseAndroidViewModel(application) {
 
-    val userName = MutableStateFlow("")
-    val password = MutableStateFlow("")
+    private val flowOfUserName = MutableStateFlow("hoang")
 
-    val enabled = combine(flow = userName, flow2 = password) { userName, password ->
-        userName.isNotBlank() && password.isNotBlank()
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
+    private val flowOfPassword = MutableStateFlow("123456")
+
+    private val flowOfEnabled =
+        combine(flow = flowOfUserName, flow2 = flowOfPassword) { userName, password ->
+            userName.isNotBlank() && password.isNotBlank()
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    fun getUserName(): MutableStateFlow<String> = flowOfUserName
+
+    fun getPassword(): MutableStateFlow<String> = flowOfPassword
 }

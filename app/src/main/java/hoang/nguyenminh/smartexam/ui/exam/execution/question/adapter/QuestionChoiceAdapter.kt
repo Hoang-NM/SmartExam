@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
 import hoang.nguyenminh.smartexam.databinding.ItemQuestionChoiceBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
-import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatSelected
 
 class QuestionChoiceAdapter(private val onSelectChoice: (Int, Choice) -> Unit) :
     ListAdapter<Choice, QuestionChoiceAdapter.ViewHolder>(QuestionChoiceDiffCallback()) {

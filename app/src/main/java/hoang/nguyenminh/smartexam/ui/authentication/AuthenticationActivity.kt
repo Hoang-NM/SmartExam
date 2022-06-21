@@ -8,10 +8,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.scene.BaseActivity
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
-import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
 
 @AndroidEntryPoint
 class AuthenticationActivity : BaseActivity() {

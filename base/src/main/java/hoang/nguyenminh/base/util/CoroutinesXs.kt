@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.util
+package hoang.nguyenminh.base.util
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

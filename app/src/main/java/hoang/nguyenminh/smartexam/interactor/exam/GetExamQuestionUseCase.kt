@@ -1,11 +1,11 @@
 package hoang.nguyenminh.smartexam.interactor.exam
 
 import hoang.nguyenminh.base.usecase.CoroutinesUseCase
+import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.smartexam.model.exam.Choice
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
-import hoang.nguyenminh.smartexam.util.DateTimeXs
 import javax.inject.Inject
 
 class GetExamQuestionUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :

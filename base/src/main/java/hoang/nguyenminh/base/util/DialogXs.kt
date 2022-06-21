@@ -1,10 +1,10 @@
-package hoang.nguyenminh.smartexam.util
+package hoang.nguyenminh.base.util
 
 import android.content.Context
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
-import hoang.nguyenminh.smartexam.appInstance
+import hoang.nguyenminh.base.appInstance
 import java.io.Serializable
 
 data class ConfirmRequest(

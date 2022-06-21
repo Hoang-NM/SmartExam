@@ -9,11 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.scene.BaseFragment
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
+import hoang.nguyenminh.base.util.collectLatestOnLifecycle
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
 import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
-import hoang.nguyenminh.smartexam.util.BindingAdapters.viewCompatVisibility
-import hoang.nguyenminh.smartexam.util.collectLatestOnLifecycle
 
 @AndroidEntryPoint
 class ExamExecutionFragment : BaseFragment() {

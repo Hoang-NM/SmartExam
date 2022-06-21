@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hoang.nguyenminh.base.network.RetrofitXs
 import hoang.nguyenminh.smartexam.model.AppConst
-import hoang.nguyenminh.smartexam.network.SmartExamCloudService
-import hoang.nguyenminh.smartexam.network.SmartExamLocalService
+import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
+import hoang.nguyenminh.smartexam.module.network.SmartExamLocalService
 import retrofit2.create
 import javax.inject.Singleton
 
