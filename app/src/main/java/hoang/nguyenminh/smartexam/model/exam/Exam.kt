@@ -1,35 +1,42 @@
 package hoang.nguyenminh.smartexam.model.exam
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
+@JsonClass(generateAdapter = true)
 data class Exam(
-    val id: Int,
-    val timeLimit: Long,
-    val questions: List<Question>
+    @Json(name = "id") val id: Int,
+    @Json(name = "timeLimit") val timeLimit: Long,
+    @Json(name = "questions") val questions: List<Question>
 )
 
+@JsonClass(generateAdapter = true)
 data class SubmitExamRequest(
-    val id: Int,
-    val answers: List<Answer>
+    @Json(name = "id") val id: Int,
+    @Json(name = "answers") val answers: List<Answer>
 )
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Question(
-    val id: Int,
-    val question: String,
-    val choices: List<Choice>
+    @Json(name = "id") val id: Int,
+    @Json(name = "question") val question: String,
+    @Json(name = "choices") val choices: List<Choice>
 ) : Parcelable
 
+@JsonClass(generateAdapter = true)
 data class Answer(
-    val id: Int,
-    val answer: Int
+    @Json(name = "id") val id: Int,
+    @Json(name = "answer") val answer: Int
 )
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Choice(
-    val index: Int,
-    val content: String,
+    @Json(name = "index") val index: Int,
+    @Json(name = "content") val content: String,
     var isSelected: Boolean = false
 ) : Parcelable
 

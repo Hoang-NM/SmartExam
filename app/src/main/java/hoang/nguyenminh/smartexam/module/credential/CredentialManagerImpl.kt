@@ -3,12 +3,15 @@ package hoang.nguyenminh.smartexam.module.credential
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import hoang.nguyenminh.base.serializer.Serializer
 import hoang.nguyenminh.base.util.primitiveDataStore
 import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore("credential")
 
-class CredentialManagerImpl @Inject constructor(context: Context) : CredentialManager {
+class CredentialManagerImpl @Inject constructor(
+    context: Context, serializer: Serializer
+) : CredentialManager {
 
     private val preferences = context.dataStore
 
