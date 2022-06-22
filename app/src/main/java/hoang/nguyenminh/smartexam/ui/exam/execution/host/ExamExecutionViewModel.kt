@@ -23,7 +23,7 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     override fun onReady() {
         super.onReady()
         flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-            flowOfExam.value = useCase(coroutineContext, Unit)
+            flowOfExam.value = useCase(coroutineContext, 50)
         }
     }
 }

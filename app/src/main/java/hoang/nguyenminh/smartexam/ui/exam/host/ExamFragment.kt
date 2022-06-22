@@ -32,7 +32,7 @@ class ExamFragment : BaseFragment() {
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
                 AppNavigator.MENU_EXAM_EXECUTION -> findNavController().navigate(
-                    NavigationMainDirections.toExamExecution()
+                    NavigationMainDirections.toExamExecution(50)
                 )
                 AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
                     NavigationMainDirections.toExamCapture()

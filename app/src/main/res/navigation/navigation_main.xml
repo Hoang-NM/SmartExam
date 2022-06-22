@@ -27,7 +27,12 @@
         android:id="@+id/fragment_exam_execution"
         android:name="hoang.nguyenminh.smartexam.ui.exam.execution.host.ExamExecutionFragment"
         android:label="@string/lbl_exam_execution"
-        tools:layout="@layout/fragment_exam_execution" />
+        tools:layout="@layout/fragment_exam_execution">
+
+        <argument
+            android:name="count"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_exam_capture"
