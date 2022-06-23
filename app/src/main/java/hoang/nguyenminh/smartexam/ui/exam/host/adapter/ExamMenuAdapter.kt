@@ -13,7 +13,7 @@ class ExamMenuAdapter(private val onItemSelected: (Int, MenuItem) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, onItemSelected)
+        holder.bind(item, position, onItemSelected)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -22,12 +22,12 @@ class ExamMenuAdapter(private val onItemSelected: (Int, MenuItem) -> Unit) :
     class ViewHolder private constructor(val binding: ItemCardMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MenuItem, clickListener: (Int, MenuItem) -> Unit) {
+        fun bind(item: MenuItem, position: Int, clickListener: (Int, MenuItem) -> Unit) {
             binding.apply {
                 cardStringLabel = root.resources.getString(item.label)
                 cardDrawableIcon = item.icon
                 setCardOnClick {
-                    clickListener(adapterPosition, item)
+                    clickListener(position, item)
                 }
                 executePendingBindings()
             }

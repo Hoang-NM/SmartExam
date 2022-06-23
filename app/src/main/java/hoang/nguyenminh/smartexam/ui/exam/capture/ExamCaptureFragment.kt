@@ -17,7 +17,6 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
@@ -33,14 +32,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ExamCaptureFragment : BaseFragment() {
+class ExamCaptureFragment : BaseFragment<FragmentExamCaptureBinding>() {
 
     override val viewModel by viewModels<ExamCaptureViewModel>()
 
     override fun getViewModelVariableId(): Int = BR.vm
 
-    private var binding: FragmentExamCaptureBinding? = null
-
+    private var storagePermissionLauncher: ActivityResultLauncher<String>? = null
     private var cameraPermissionLauncher: ActivityResultLauncher<String>? = null
 
     private val imageCapture by lazy {
@@ -49,48 +47,68 @@ class ExamCaptureFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        storagePermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                if (it) {
+                    return@registerForActivityResult
+                } else {
+                    ConfirmRequest(message = "Please allow application access the external storage to continue",
+                        positive = getString(R.string.agree),
+                        onPositiveSelected = {
+                            requestPermission()
+                        },
+                        negative = getString(R.string.cancel),
+                        onNegativeSelected = {
+                            requireActivity().onBackPressed()
+                        }).buildAlertDialog(requireContext())
+                }
+            }
         cameraPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 if (it) {
                     startCamera()
                 } else {
-                    ConfirmRequest(
-                        message = "Please allow application access the camera to continue",
+                    ConfirmRequest(message = "Please allow application access the camera to continue",
                         positive = getString(R.string.agree),
                         onPositiveSelected = {
-                            requestCameraPermission()
+                            requestPermission()
                         },
                         negative = getString(R.string.cancel),
                         onNegativeSelected = {
                             requireActivity().onBackPressed()
-                        }
-                    ).buildAlertDialog(requireContext())
+                        }).buildAlertDialog(requireContext())
                 }
             }
     }
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
-    ): ViewDataBinding = FragmentExamCaptureBinding.inflate(inflater, container, false).apply {
-        binding = this
+    ): FragmentExamCaptureBinding =
+        FragmentExamCaptureBinding.inflate(inflater, container, false).apply {
+            binding = this
 
-        if (requireContext().isAllPermissionsGranted(Manifest.permission.CAMERA)) {
-            startCamera()
-        } else {
-            requestCameraPermission()
-        }
+            if (requireContext().isAllPermissionsGranted(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                startCamera()
+            } else {
+                requestPermission()
+            }
 
-        btnCapture.setOnClickListener {
-            capture(requireContext())
+            btnCapture.setOnClickListener {
+                capture(requireContext())
+            }
         }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 
-    private fun requestCameraPermission() {
+    private fun requestPermission() {
+        storagePermissionLauncher?.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         cameraPermissionLauncher?.launch(Manifest.permission.CAMERA)
     }
 
@@ -140,8 +158,7 @@ class ExamCaptureFragment : BaseFragment() {
         ).build()
 
         // Set up image capture listener, which is triggered after photo has been taken
-        imageCapture.takePicture(
-            outputOptions,
+        imageCapture.takePicture(outputOptions,
             ContextCompat.getMainExecutor(context),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
@@ -153,7 +170,6 @@ class ExamCaptureFragment : BaseFragment() {
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                     Timber.d(msg)
                 }
-            }
-        )
+            })
     }
 }

@@ -42,7 +42,10 @@
     <style name="AppWidget.ItemChoice" parent="AppWidget">
         <item name="android:foreground">@drawable/ripple_fx</item>
         <item name="android:textColor">@color/choice_text_color_selector</item>
-        <item name="android:background">@color/choice_background_state_selector</item>
+        <item name="android:background">@drawable/shape_plain_rect</item>
+        <item name="background">@drawable/shape_plain_rect</item>
+        <item name="android:backgroundTint">@color/choice_background_state_selector</item>
+        <item name="backgroundTint">@color/choice_background_state_selector</item>
     </style>
 
     <style name="AppTextAppearance.ToolbarTitle" parent="AppTextAppearance">

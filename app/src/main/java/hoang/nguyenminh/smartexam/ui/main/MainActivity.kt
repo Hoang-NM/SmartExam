@@ -2,7 +2,6 @@ package hoang.nguyenminh.smartexam.ui.main
 
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,15 +12,13 @@ import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override val viewModel by viewModels<MainViewModel>()
 
     override fun getViewModelVariableId(): Int = BR.vm
 
-    private var binding: ActivityMainBinding? = null
-
-    override fun onCreateViewDataBinding(): ViewDataBinding =
+    override fun onCreateViewDataBinding(): ActivityMainBinding =
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
             binding = this
 
@@ -59,9 +56,4 @@ class MainActivity : BaseActivity() {
                 setDisplayShowTitleEnabled(false)
             }
         }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
-    }
 }

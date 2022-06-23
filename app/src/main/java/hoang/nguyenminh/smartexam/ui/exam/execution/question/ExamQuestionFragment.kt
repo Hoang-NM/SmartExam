@@ -3,7 +3,6 @@ package hoang.nguyenminh.smartexam.ui.exam.execution.question
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.scene.BaseFragment
@@ -15,7 +14,7 @@ import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionCho
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ExamQuestionFragment : BaseFragment() {
+class ExamQuestionFragment : BaseFragment<FragmentExamQuestionBinding>() {
 
     private val KEY_QUESTION = "question"
 
@@ -23,23 +22,22 @@ class ExamQuestionFragment : BaseFragment() {
 
     override fun getViewModelVariableId(): Int = BR.vm
 
-    private var binding: FragmentExamQuestionBinding? = null
-
     private var adapter: QuestionChoiceAdapter? = null
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
-    ): ViewDataBinding = FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
-        binding = this
-        val question: Question = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
-        lblQuestion.text = question.question
-        recChoices.adapter = QuestionChoiceAdapter { pos, model ->
-            saveSelectedChoice(pos, model)
-        }.also {
-            adapter = it
+    ): FragmentExamQuestionBinding =
+        FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
+            binding = this
+            val question: Question = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
+            lblQuestion.text = question.question
+            recChoices.adapter = QuestionChoiceAdapter { pos, model ->
+                saveSelectedChoice(pos, model)
+            }.also {
+                adapter = it
+            }
+            adapter?.submitList(question.choices)
         }
-        adapter?.submitList(question.choices)
-    }
 
     companion object {
         fun newInstance(question: Question): ExamQuestionFragment = ExamQuestionFragment().apply {
@@ -49,7 +47,6 @@ class ExamQuestionFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
         adapter = null
     }
 

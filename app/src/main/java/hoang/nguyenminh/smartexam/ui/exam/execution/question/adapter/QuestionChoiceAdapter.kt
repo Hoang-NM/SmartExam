@@ -14,7 +14,7 @@ class QuestionChoiceAdapter(private val onSelectChoice: (Int, Choice) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, onSelectChoice)
+        holder.bind(item, position, onSelectChoice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -23,13 +23,13 @@ class QuestionChoiceAdapter(private val onSelectChoice: (Int, Choice) -> Unit) :
     class ViewHolder private constructor(val binding: ItemQuestionChoiceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Choice, clickListener: (Int, Choice) -> Unit) {
+        fun bind(item: Choice, position: Int, clickListener: (Int, Choice) -> Unit) {
             binding.apply {
                 lblContent.text = item.content
                 lblContent.viewCompatSelected(item.isSelected)
                 lblContent.setOnClickListener {
                     item.isSelected = !item.isSelected
-                    clickListener(adapterPosition, item)
+                    clickListener(position, item)
                 }
                 executePendingBindings()
             }

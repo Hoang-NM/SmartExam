@@ -9,7 +9,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 
-abstract class BaseFragment : Fragment(), Scene {
+abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
+
+    protected var binding: T? = null
 
     protected abstract val viewModel: BaseAndroidViewModel
 
@@ -24,12 +26,16 @@ abstract class BaseFragment : Fragment(), Scene {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        return onCreateViewDataBinding(inflater, container).apply {
-            lifecycleOwner = viewLifecycleOwner
-            setVariable(getViewModelVariableId(), viewModel)
-            executePendingBindings()
-        }.root
+    ): View? = onCreateViewDataBinding(inflater, container).apply {
+        binding = this
+        lifecycleOwner = viewLifecycleOwner
+        setVariable(getViewModelVariableId(), viewModel)
+        executePendingBindings()
+    }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     override fun onDestroy() {
@@ -44,7 +50,7 @@ abstract class BaseFragment : Fragment(), Scene {
 
     protected abstract fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
-    ): ViewDataBinding
+    ): T
 
     override fun getSceneResource(): Resources = resources
 

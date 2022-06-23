@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.scene.BaseActivity
@@ -14,20 +13,18 @@ import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
 
 @AndroidEntryPoint
-class AuthenticationActivity : BaseActivity() {
+class AuthenticationActivity : BaseActivity<ActivityAuthenticationBinding>() {
 
     override val viewModel by viewModels<AuthenticationViewModel>()
 
     override fun getViewModelVariableId(): Int = BR.vm
-
-    private var binding: ActivityAuthenticationBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateViewDataBinding(): ViewDataBinding =
+    override fun onCreateViewDataBinding(): ActivityAuthenticationBinding =
         DataBindingUtil.setContentView<ActivityAuthenticationBinding>(
             this, R.layout.activity_authentication
         ).apply {
@@ -61,9 +58,4 @@ class AuthenticationActivity : BaseActivity() {
                 setDisplayShowTitleEnabled(false)
             }
         }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
-    }
 }

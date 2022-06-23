@@ -6,26 +6,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 
-abstract class BaseActivity : AppCompatActivity(), Scene {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
+
+    protected var binding: T? = null
 
     protected abstract val viewModel: BaseAndroidViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = onCreateViewDataBinding().apply {
-            lifecycleOwner = this@BaseActivity
-        }
         viewModel.run {
             onBind(savedInstanceState)
             onAttachScene(this@BaseActivity)
-            viewBinding.setVariable(getViewModelVariableId(), this)
             onReady()
         }
-        viewBinding.executePendingBindings()
+        binding = onCreateViewDataBinding().apply {
+            lifecycleOwner = this@BaseActivity
+            setVariable(getViewModelVariableId(), this)
+            executePendingBindings()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        binding = null
         viewModel.run {
             onDetachScene(this@BaseActivity)
             onUnBind()
@@ -34,7 +37,7 @@ abstract class BaseActivity : AppCompatActivity(), Scene {
 
     protected abstract fun getViewModelVariableId(): Int
 
-    protected abstract fun onCreateViewDataBinding(): ViewDataBinding
+    protected abstract fun onCreateViewDataBinding(): T
 
     override fun getSceneResource(): Resources = resources
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,29 +15,29 @@ import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
 import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
 
 @AndroidEntryPoint
-class ExamExecutionFragment : BaseFragment() {
+class ExamExecutionFragment : BaseFragment<FragmentExamExecutionBinding>() {
 
     override val viewModel by viewModels<ExamExecutionViewModel>()
 
     override fun getViewModelVariableId(): Int = BR.vm
 
-    private var binding: FragmentExamExecutionBinding? = null
-
     private var pagerAdapter: ExamExecutionPagerAdapter? = null
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
-    ): ViewDataBinding = FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
-        binding = this
-        vpQuestion.apply {
-            adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
-                pagerAdapter = it
-            }
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                @SuppressLint("SetTextI18n")
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    pagerAdapter?.isLastPage(position)?.let { btnFinish.viewCompatVisibility(it) }
+    ): FragmentExamExecutionBinding =
+        FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
+            binding = this
+            vpQuestion.apply {
+                adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
+                    pagerAdapter = it
+                }
+                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    @SuppressLint("SetTextI18n")
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        pagerAdapter?.isLastPage(position)
+                            ?.let { btnFinish.viewCompatVisibility(it) }
                     viewBottom.lblQuestionInfo.text = "${position + 1} / ${pagerAdapter?.itemCount}"
                 }
             })
