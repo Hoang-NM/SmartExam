@@ -3,7 +3,7 @@ package hoang.nguyenminh.smartexam.ui.authentication.register
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.base.scene.BaseAndroidViewModel
+import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(application: Application) :
-    BaseAndroidViewModel(application) {
+    SmartExamViewModel(application) {
 
     private val flowOfUserName = MutableStateFlow("")
 

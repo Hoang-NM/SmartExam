@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseFragment
-import hoang.nguyenminh.smartexam.BR
+import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
 import hoang.nguyenminh.smartexam.model.exam.Question
@@ -14,13 +13,11 @@ import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionCho
 import timber.log.Timber
 
 @AndroidEntryPoint
-class ExamQuestionFragment : BaseFragment<FragmentExamQuestionBinding>() {
+class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
 
     private val KEY_QUESTION = "question"
 
     override val viewModel by viewModels<ExamQuestionViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     private var adapter: QuestionChoiceAdapter? = null
 

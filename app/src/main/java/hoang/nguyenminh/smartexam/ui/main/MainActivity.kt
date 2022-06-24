@@ -5,18 +5,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseActivity
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
-import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
+import hoang.nguyenminh.smartexam.base.SmartExamActivity
 import hoang.nguyenminh.smartexam.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : SmartExamActivity<ActivityMainBinding>() {
 
     override val viewModel by viewModels<MainViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     override fun onCreateViewDataBinding(): ActivityMainBinding =
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {

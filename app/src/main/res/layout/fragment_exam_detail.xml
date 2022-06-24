@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="hoang.nguyenminh.smartexam.ui.exam.detail.ExamDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_medium">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_medium"
+            android:gravity="center_vertical"
+            android:paddingVertical="@dimen/space_xxsmall"
+            android:text="@{vm.detail.name}"
+            android:textAppearance="@style/AppTextAppearance.Content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/label_menu_exam" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/space_xxsmall"
+            android:text="@{vm.detail.executedDate}"
+            android:textAppearance="@style/AppTextAppearance.Content"
+            app:layout_constraintEnd_toEndOf="@id/lbl_name"
+            app:layout_constraintStart_toStartOf="@id/lbl_name"
+            app:layout_constraintTop_toBottomOf="@id/lbl_name"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_result"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/space_xxsmall"
+            android:text="@{vm.detail.result}"
+            android:textAppearance="@style/AppTextAppearance.Content"
+            app:layout_constraintEnd_toEndOf="@id/lbl_name"
+            app:layout_constraintStart_toStartOf="@id/lbl_name"
+            app:layout_constraintTop_toBottomOf="@id/lbl_date"
+            tools:text="@tools:sample/us_zipcodes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

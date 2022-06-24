@@ -5,20 +5,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseFragment
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
-import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.NavigationMainDirections
+import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
 import hoang.nguyenminh.smartexam.ui.exam.host.adapter.ExamMenuAdapter
 
 @AndroidEntryPoint
-class ExamFragment : BaseFragment<FragmentExamBinding>() {
+class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
 
     override val viewModel by viewModels<ExamViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     private var adapter: ExamMenuAdapter? = null
 
@@ -33,6 +30,9 @@ class ExamFragment : BaseFragment<FragmentExamBinding>() {
                 )
                 AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
                     NavigationMainDirections.toExamCapture()
+                )
+                AppNavigator.MENU_EXAM_HISTORY -> findNavController().navigate(
+                    NavigationMainDirections.toExamHistory()
                 )
                 else -> throw IllegalArgumentException("Exam menu item not found")
             }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_medium"
+        app:cardBackgroundColor="?colorSurface"
+        app:cardCornerRadius="@dimen/radius_medium"
+        app:cardElevation="@dimen/elevation_medium"
+        app:strokeColor="@color/border_button_card_state_list"
+        app:strokeWidth="@dimen/space_line">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_medium">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_icon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_star"
+                android:tint="?colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/lbl_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/lbl_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_medium"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/space_xxsmall"
+                android:textAppearance="@style/AppTextAppearance.Content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/label_menu_exam" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/space_xxsmall"
+                android:textAppearance="@style/AppTextAppearance.Content"
+                app:layout_constraintEnd_toEndOf="@id/lbl_name"
+                app:layout_constraintStart_toStartOf="@id/lbl_name"
+                app:layout_constraintTop_toBottomOf="@id/lbl_name"
+                tools:text="@tools:sample/date/ddmmyy" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -4,16 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseFragment
-import hoang.nguyenminh.smartexam.BR
+import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
 
     override val viewModel by viewModels<HomeViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?

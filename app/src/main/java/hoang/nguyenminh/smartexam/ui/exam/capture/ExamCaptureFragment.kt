@@ -20,23 +20,20 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
-import hoang.nguyenminh.base.scene.BaseFragment
 import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.base.util.buildAlertDialog
 import hoang.nguyenminh.base.util.isAllPermissionsGranted
-import hoang.nguyenminh.smartexam.BR
+import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamCaptureBinding
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ExamCaptureFragment : BaseFragment<FragmentExamCaptureBinding>() {
+class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
     override val viewModel by viewModels<ExamCaptureViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     private var storagePermissionLauncher: ActivityResultLauncher<String>? = null
     private var cameraPermissionLauncher: ActivityResultLauncher<String>? = null

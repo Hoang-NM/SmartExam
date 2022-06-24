@@ -6,18 +6,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseActivity
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
-import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
+import hoang.nguyenminh.smartexam.base.SmartExamActivity
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
 
 @AndroidEntryPoint
-class AuthenticationActivity : BaseActivity<ActivityAuthenticationBinding>() {
+class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>() {
 
     override val viewModel by viewModels<AuthenticationViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

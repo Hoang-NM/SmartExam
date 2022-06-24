@@ -40,6 +40,23 @@
         android:label="@string/lbl_exam_capture"
         tools:layout="@layout/fragment_exam_capture" />
 
+    <fragment
+        android:id="@+id/fragment_exam_history"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.history.ExamHistoryFragment"
+        android:label="@string/lbl_exam_history"
+        tools:layout="@layout/fragment_exam_history" />
+
+    <fragment
+        android:id="@+id/fragment_exam_detail"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.detail.ExamDetailFragment"
+        android:label="@string/lbl_exam_detail"
+        tools:layout="@layout/fragment_exam_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
     <action
         android:id="@+id/to_home"
         app:destination="@id/fragment_home" />
@@ -59,6 +76,14 @@
     <action
         android:id="@+id/to_exam_capture"
         app:destination="@id/fragment_exam_capture" />
+
+    <action
+        android:id="@+id/to_exam_history"
+        app:destination="@id/fragment_exam_history" />
+
+    <action
+        android:id="@+id/to_exam_detail"
+        app:destination="@id/fragment_exam_detail" />
 
     <fragment
         android:id="@+id/users_list"

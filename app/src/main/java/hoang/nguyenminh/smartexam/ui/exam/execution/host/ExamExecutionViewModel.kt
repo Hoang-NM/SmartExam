@@ -3,7 +3,7 @@ package hoang.nguyenminh.smartexam.ui.exam.execution.host
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.base.scene.BaseAndroidViewModel
+import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamQuestionUseCase
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExamExecutionViewModel @Inject constructor(application: Application) :
-    BaseAndroidViewModel(application) {
+    SmartExamViewModel(application) {
 
     @Inject
     lateinit var useCase: GetExamQuestionUseCase

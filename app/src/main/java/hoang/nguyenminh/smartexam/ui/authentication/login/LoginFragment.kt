@@ -6,17 +6,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.scene.BaseFragment
-import hoang.nguyenminh.smartexam.BR
+import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
 import hoang.nguyenminh.smartexam.ui.main.MainActivity
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
 
     override val viewModel by viewModels<LoginViewModel>()
-
-    override fun getViewModelVariableId(): Int = BR.vm
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
