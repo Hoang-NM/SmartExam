@@ -18,7 +18,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.run {
-            onBind(savedInstanceState)
+            onBind(arguments)
             onAttachScene(this@BaseFragment)
             onReady()
         }

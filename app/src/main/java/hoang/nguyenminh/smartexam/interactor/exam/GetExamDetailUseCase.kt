@@ -10,7 +10,7 @@ class GetExamDetailUseCase @Inject constructor(private val repository: SmartExam
 
     override suspend fun run(params: Int): ExamDetail = getDetail(params)
 
-    private fun getDetail(id: Int): ExamDetail = examList.map {
+    private fun getDetail(id: Int): ExamDetail = examList.firstOrNull { it.id == id }?.let {
         ExamDetail(it.id, it.name, it.executedDate, "50/50")
-    }.firstOrNull { it.id == id } ?: ExamDetail(0, "Sample Exam", "1970/01/01", "50/50")
+    } ?: ExamDetail(0, "Sample Exam", "1970/01/01", "50/50")
 }

@@ -15,7 +15,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.run {
-            onBind(savedInstanceState)
+            onBind(intent.extras)
             onAttachScene(this@BaseActivity)
             onReady()
         }
