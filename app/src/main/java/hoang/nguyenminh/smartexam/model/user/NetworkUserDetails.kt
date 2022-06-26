@@ -1,76 +1,74 @@
 package hoang.nguyenminh.smartexam.model.user
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import hoang.nguyenminh.smartexam.database.DatabaseUserDetails
 
-@JsonClass(generateAdapter = true)
 data class NetworkUserDetails(
-    @Json(name = "avatar_url")
-    val avatarUrl: String,
-    @Json(name = "bio")
-    val bio: String? = null,
-    @Json(name = "blog")
-    val blog: String? = null,
-    @Json(name = "company")
-    val company: String? = null,
-    @Json(name = "created_at")
-    val createdAt: String? = null,
-    @Json(name = "email")
-    val email: String? = null,
-    @Json(name = "events_url")
-    val eventsUrl: String? = null,
-    @Json(name = "followers")
-    val followers: Int? = null,
-    @Json(name = "followers_url")
-    val followersUrl: String? = null,
-    @Json(name = "following")
-    val following: Int? = null,
-    @Json(name = "following_url")
-    val followingUrl: String? = null,
-    @Json(name = "gists_url")
-    val gistsUrl: String? = null,
-    @Json(name = "gravatar_id")
-    val gravatarId: String? = null,
-    @Json(name = "hireable")
-    val hireable: Boolean? = null,
-    @Json(name = "html_url")
-    val htmlUrl: String? = null,
-    @Json(name = "id")
-    val id: Int,
-    @Json(name = "location")
-    val location: String? = null,
-    @Json(name = "login")
-    val login: String,
-    @Json(name = "name")
-    val name: String? = null,
-    @Json(name = "node_id")
-    val nodeId: String? = null,
-    @Json(name = "organizations_url")
-    val organizationsUrl: String? = null,
-    @Json(name = "public_gists")
-    val publicGists: Int? = null,
-    @Json(name = "public_repos")
-    val publicRepos: Int? = null,
-    @Json(name = "received_events_url")
-    val receivedEventsUrl: String? = null,
-    @Json(name = "repos_url")
-    val reposUrl: String? = null,
-    @Json(name = "site_admin")
-    val siteAdmin: Boolean? = null,
-    @Json(name = "starred_url")
-    val starredUrl: String? = null,
-    @Json(name = "subscriptions_url")
-    val subscriptionsUrl: String? = null,
-    @Json(name = "twitter_username")
-    val twitterUsername: String? = null,
-    @Json(name = "type")
-    val type: String? = null,
-    @Json(name = "updated_at")
-    val updatedAt: String? = null,
-    @Json(name = "url")
-    val url: String? = null
+    @SerializedName("avatar_url") @Expose val avatarUrl: String,
+    @SerializedName("bio")
+    @Expose val bio: String? = null,
+    @SerializedName("blog")
+    @Expose val blog: String? = null,
+    @SerializedName("company")
+    @Expose val company: String? = null,
+    @SerializedName("created_at")
+    @Expose val createdAt: String? = null,
+    @SerializedName("email")
+    @Expose val email: String? = null,
+    @SerializedName("events_url")
+    @Expose val eventsUrl: String? = null,
+    @SerializedName("followers")
+    @Expose val followers: Int? = null,
+    @SerializedName("followers_url")
+    @Expose val followersUrl: String? = null,
+    @SerializedName("following")
+    @Expose val following: Int? = null,
+    @SerializedName("following_url")
+    @Expose val followingUrl: String? = null,
+    @SerializedName("gists_url")
+    @Expose val gistsUrl: String? = null,
+    @SerializedName("gravatar_id")
+    @Expose val gravatarId: String? = null,
+    @SerializedName("hireable")
+    @Expose val hireable: Boolean? = null,
+    @SerializedName("html_url")
+    @Expose val htmlUrl: String? = null,
+    @SerializedName("id")
+    @Expose val id: Int,
+    @SerializedName("location")
+    @Expose val location: String? = null,
+    @SerializedName("login")
+    @Expose val login: String,
+    @SerializedName("name")
+    @Expose val name: String? = null,
+    @SerializedName("node_id")
+    @Expose val nodeId: String? = null,
+    @SerializedName("organizations_url")
+    @Expose val organizationsUrl: String? = null,
+    @SerializedName("public_gists")
+    @Expose val publicGists: Int? = null,
+    @SerializedName("public_repos")
+    @Expose val publicRepos: Int? = null,
+    @SerializedName("received_events_url")
+    @Expose val receivedEventsUrl: String? = null,
+    @SerializedName("repos_url")
+    @Expose val reposUrl: String? = null,
+    @SerializedName("site_admin")
+    @Expose val siteAdmin: Boolean? = null,
+    @SerializedName("starred_url")
+    @Expose val starredUrl: String? = null,
+    @SerializedName("subscriptions_url")
+    @Expose val subscriptionsUrl: String? = null,
+    @SerializedName("twitter_username")
+    @Expose val twitterUsername: String? = null,
+    @SerializedName("type")
+    @Expose val type: String? = null,
+    @SerializedName("updated_at")
+    @Expose val updatedAt: String? = null,
+    @SerializedName("url")
+    @Expose val url: String? = null
 )
 
 fun NetworkUserDetails.asDatabaseModel(): DatabaseUserDetails {

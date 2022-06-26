@@ -1,48 +1,47 @@
 package hoang.nguyenminh.smartexam.model.user
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import hoang.nguyenminh.smartexam.database.DatabaseUserListItem
 
-@JsonClass(generateAdapter = true)
 data class NetworkUserListItem(
-    @Json(name = "avatar_url")
-    val avatarUrl: String,
-    @Json(name = "events_url")
-    val eventsUrl: String,
-    @Json(name = "followers_url")
-    val followersUrl: String,
-    @Json(name = "following_url")
-    val followingUrl: String,
-    @Json(name = "gists_url")
-    val gistsUrl: String,
-    @Json(name = "gravatar_id")
-    val gravatarId: String,
-    @Json(name = "html_url")
-    val htmlUrl: String,
-    @Json(name = "id")
-    val id: Int,
-    @Json(name = "login")
-    val login: String,
-    @Json(name = "node_id")
-    val nodeId: String,
-    @Json(name = "organizations_url")
-    val organizationsUrl: String,
-    @Json(name = "received_events_url")
-    val receivedEventsUrl: String,
-    @Json(name = "repos_url")
-    val reposUrl: String,
-    @Json(name = "site_admin")
-    val siteAdmin: Boolean,
-    @Json(name = "starred_url")
-    val starredUrl: String,
-    @Json(name = "subscriptions_url")
-    val subscriptionsUrl: String,
-    @Json(name = "type")
-    val type: String,
-    @Json(name = "url")
-    val url: String
+    @SerializedName("avatar_url")
+    @Expose val avatarUrl: String,
+    @SerializedName("events_url")
+    @Expose val eventsUrl: String,
+    @SerializedName("followers_url")
+    @Expose val followersUrl: String,
+    @SerializedName("following_url")
+    @Expose val followingUrl: String,
+    @SerializedName("gists_url")
+    @Expose val gistsUrl: String,
+    @SerializedName("gravatar_id")
+    @Expose val gravatarId: String,
+    @SerializedName("html_url")
+    @Expose val htmlUrl: String,
+    @SerializedName("id")
+    @Expose val id: Int,
+    @SerializedName("login")
+    @Expose val login: String,
+    @SerializedName("node_id")
+    @Expose val nodeId: String,
+    @SerializedName("organizations_url")
+    @Expose val organizationsUrl: String,
+    @SerializedName("received_events_url")
+    @Expose val receivedEventsUrl: String,
+    @SerializedName("repos_url")
+    @Expose val reposUrl: String,
+    @SerializedName("site_admin")
+    @Expose val siteAdmin: Boolean,
+    @SerializedName("starred_url")
+    @Expose val starredUrl: String,
+    @SerializedName("subscriptions_url")
+    @Expose val subscriptionsUrl: String,
+    @SerializedName("type")
+    @Expose val type: String,
+    @SerializedName("url")
+    @Expose val url: String
 )
 
 fun List<NetworkUserListItem>.asDatabaseModel(): List<DatabaseUserListItem> {

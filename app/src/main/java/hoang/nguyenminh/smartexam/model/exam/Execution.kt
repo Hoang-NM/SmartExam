@@ -1,53 +1,48 @@
 package hoang.nguyenminh.smartexam.model.exam
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@JsonClass(generateAdapter = true)
 data class Exam(
-    @Json(name = "id") val id: Int,
-    @Json(name = "time") val timeLimit: Long,
-    @Json(name = "name") val name: String,
-    @Json(name = "subject") val subject: String,
-    @Json(name = "status") val status: String,
-    @Json(name = "createdAt") val createdAt: String,
-    @Json(name = "result") val result: String = "50/50"
+    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("time") @Expose val timeLimit: Long,
+    @SerializedName("name") @Expose val name: String,
+    @SerializedName("subject") @Expose val subject: String,
+    @SerializedName("status") @Expose val status: String,
+    @SerializedName("createdAt") @Expose val createdAt: String,
+    @SerializedName("result") @Expose val result: String = "50/50"
 )
 
-@JsonClass(generateAdapter = true)
 data class SubmitExamRequest(
-    @Json(name = "id") val id: Int,
-    @Json(name = "answers") val answers: List<Answer>
+    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("answers") @Expose val answers: List<Answer>
 )
 
 @Parcelize
-@JsonClass(generateAdapter = true)
 data class Question(
-    @Json(name = "id") val id: Int,
-    @Json(name = "content") val question: String,
-    @Json(name = "optionA") val optionA: String,
-    @Json(name = "optionB") val optionB: String,
-    @Json(name = "optionC") val optionC: String,
-    @Json(name = "optionD") val optionD: String,
-    @Json(name = "choices") val choices: List<Choice>
+    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("content") @Expose val question: String,
+    @SerializedName("optionA") @Expose val optionA: String,
+    @SerializedName("optionB") @Expose val optionB: String,
+    @SerializedName("optionC") @Expose val optionC: String,
+    @SerializedName("optionD") @Expose val optionD: String,
+    @SerializedName("choices") @Expose val choices: List<Choice>
 ) : Parcelable {
 
     fun combineOptions(): List<String> = mutableListOf(optionA, optionB, optionC, optionD)
 }
 
-@JsonClass(generateAdapter = true)
 data class Answer(
-    @Json(name = "id") val id: Int,
-    @Json(name = "answer") val answer: Int
+    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("answer") @Expose val answer: Int
 )
 
 @Parcelize
-@JsonClass(generateAdapter = true)
 data class Choice(
-    @Json(name = "index") val index: Int,
-    @Json(name = "content") val content: String,
+    @SerializedName("index") @Expose val index: Int,
+    @SerializedName("content") @Expose val content: String,
     var isSelected: Boolean = false
 ) : Parcelable
 

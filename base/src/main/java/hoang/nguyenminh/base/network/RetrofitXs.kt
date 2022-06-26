@@ -1,6 +1,7 @@
 package hoang.nguyenminh.base.network
 
 import android.app.Application
+import com.google.gson.GsonBuilder
 import hoang.nguyenminh.base.appInstance
 import hoang.nguyenminh.base.isDebugMode
 import okhttp3.Cache
@@ -11,7 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitXs {
@@ -35,12 +36,13 @@ object RetrofitXs {
             baseUrl(baseUrl)
             client(httpClient(logLevel))
             addCallAdapterFactory(defaultCallFactory())
-            addConverterFactory(defaultMoshiConverter())
+            addConverterFactory(defaultGsonConverter())
         }.build()
 
     fun defaultCallFactory(): CallAdapter.Factory = RxJava3CallAdapterFactory.create()
 
-    fun defaultMoshiConverter(): MoshiConverterFactory = MoshiConverterFactory.create()
+    fun defaultGsonConverter(): GsonConverterFactory =
+        GsonConverterFactory.create(GsonBuilder().excludeFieldsWithoutExposeAnnotation().create())
 
     fun defaultCache(application: Application) = Cache(application.cacheDir, CACHE_SIZE)
 

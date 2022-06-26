@@ -18,7 +18,7 @@ buildscript {
         okhttp_version = '4.9.3'
         retrofit_version = '2.9.0'
         retrofit_coroutines_version = '0.9.2'
-        moshi_version = '1.13.0'
+        gson_version = '2.9.0'
         glide_version = '4.13.2'
         room_version = '2.4.2'
         timber_version = '5.0.1'

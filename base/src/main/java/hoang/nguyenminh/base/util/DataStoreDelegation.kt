@@ -3,7 +3,7 @@ package hoang.nguyenminh.base.util
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import com.squareup.moshi.Types
+import com.google.gson.reflect.TypeToken
 import hoang.nguyenminh.base.serializer.Serializer
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
@@ -84,7 +84,7 @@ inline fun <reified T> serializableDataStore(
 ) = SerializableDataStoreDelegate(
     preferences,
     serializer,
-    Types.getRawType(T::class.java),
+    TypeToken.get(T::class.java).type,
     prefKey,
     defaultValue
 )
