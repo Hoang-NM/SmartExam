@@ -55,10 +55,10 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
                 activity?.onBackPressed()
             }
 
-            viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
+            viewModel.flowOfQuestions.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
-                pagerAdapter?.listOfQuestions = it.questions
-                vpQuestion.offscreenPageLimit = it.questions.size
+                pagerAdapter?.listOfQuestions = it
+                vpQuestion.offscreenPageLimit = it.size
             }
         }
 

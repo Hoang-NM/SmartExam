@@ -7,9 +7,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
-import hoang.nguyenminh.smartexam.model.exam.Choice
 import hoang.nguyenminh.smartexam.model.exam.Question
-import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionChoiceAdapter
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -19,8 +17,6 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
 
     override val viewModel by viewModels<ExamQuestionViewModel>()
 
-    private var adapter: QuestionChoiceAdapter? = null
-
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamQuestionBinding =
@@ -28,12 +24,10 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
             binding = this
             val question: Question = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
             lblQuestion.text = question.question
-            recChoices.adapter = QuestionChoiceAdapter { pos, model ->
-                saveSelectedChoice(pos, model)
-            }.also {
-                adapter = it
-            }
-            adapter?.submitList(question.choices)
+            lblOptionA.text = question.optionA
+            lblOptionB.text = question.optionB
+            lblOptionC.text = question.optionC
+            lblOptionD.text = question.optionD
         }
 
     companion object {
@@ -42,13 +36,7 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter = null
-    }
-
-    private fun saveSelectedChoice(position: Int, choice: Choice) {
-        Timber.e("Save choice: index = ${choice.index} - content = ${choice.content}")
-        adapter?.notifyItemChanged(position)
+    private fun saveSelectedChoice(answer: String) {
+        Timber.e("Save answer: answer = $answer")
     }
 }

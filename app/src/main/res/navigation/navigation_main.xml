@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_exam_execution">
 
         <argument
-            android:name="count"
+            android:name="id"
             app:argType="integer" />
     </fragment>
 
@@ -41,10 +41,15 @@
         tools:layout="@layout/fragment_exam_capture" />
 
     <fragment
-        android:id="@+id/fragment_exam_history"
-        android:name="hoang.nguyenminh.smartexam.ui.exam.history.ExamHistoryFragment"
+        android:id="@+id/fragment_exam_list"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.list.ExamListFragment"
         android:label="@string/lbl_exam_history"
-        tools:layout="@layout/fragment_exam_history" />
+        tools:layout="@layout/fragment_exam_list">
+
+        <argument
+            android:name="action"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_exam_detail"
@@ -78,8 +83,8 @@
         app:destination="@id/fragment_exam_capture" />
 
     <action
-        android:id="@+id/to_exam_history"
-        app:destination="@id/fragment_exam_history" />
+        android:id="@+id/to_exam_list"
+        app:destination="@id/fragment_exam_list" />
 
     <action
         android:id="@+id/to_exam_detail"

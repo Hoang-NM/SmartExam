@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.history.adapter
+package hoang.nguyenminh.smartexam.ui.exam.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.setOnSafeClickListener
-import hoang.nguyenminh.smartexam.databinding.ItemExamHistoryBinding
-import hoang.nguyenminh.smartexam.model.exam.ExamHistory
+import hoang.nguyenminh.smartexam.databinding.ItemExamListBinding
+import hoang.nguyenminh.smartexam.model.exam.Exam
 
-class ExamHistoryAdapter(private val onItemClick: (Int) -> Unit) :
-    ListAdapter<ExamHistory, ExamHistoryAdapter.ViewHolder>(ExamHistoryDiffCallback()) {
+class ExamListAdapter(private val onItemClick: (Int) -> Unit) :
+    ListAdapter<Exam, ExamListAdapter.ViewHolder>(ExamListDiffCallback()) {
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): ViewHolder = ViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -21,13 +20,13 @@ class ExamHistoryAdapter(private val onItemClick: (Int) -> Unit) :
         holder.bind(item, onItemClick)
     }
 
-    class ViewHolder private constructor(val binding: ItemExamHistoryBinding) :
+    class ViewHolder private constructor(val binding: ItemExamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ExamHistory, onItemClick: (Int) -> Unit) {
+        fun bind(item: Exam, onItemClick: (Int) -> Unit) {
             binding.apply {
                 lblName.text = item.name
-                lblDate.text = item.executedDate
+                lblDate.text = item.createdAt
                 root.setOnSafeClickListener {
                     onItemClick(item.id)
                 }
@@ -38,18 +37,18 @@ class ExamHistoryAdapter(private val onItemClick: (Int) -> Unit) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemExamHistoryBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemExamListBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
 }
 
-class ExamHistoryDiffCallback : DiffUtil.ItemCallback<ExamHistory>() {
+class ExamListDiffCallback : DiffUtil.ItemCallback<Exam>() {
 
-    override fun areItemsTheSame(oldItem: ExamHistory, newItem: ExamHistory): Boolean =
+    override fun areItemsTheSame(oldItem: Exam, newItem: Exam): Boolean =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: ExamHistory, newItem: ExamHistory): Boolean =
+    override fun areContentsTheSame(oldItem: Exam, newItem: Exam): Boolean =
         oldItem == newItem
 }

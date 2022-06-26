@@ -5,8 +5,8 @@ import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
 import javax.inject.Inject
 
-class GetExamDetailUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :
-    CoroutinesUseCase<Exam, Int>() {
+class GetExamHistoryUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :
+    CoroutinesUseCase<List<Exam>, Unit>() {
 
-    override suspend fun run(params: Int): Exam = repository.getExam(params)
+    override suspend fun run(params: Unit): List<Exam> = repository.getExamList()
 }

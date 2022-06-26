@@ -26,13 +26,13 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
                 AppNavigator.MENU_EXAM_EXECUTION -> findNavController().navigate(
-                    NavigationMainDirections.toExamExecution(50)
+                    NavigationMainDirections.toExamList(ExamAction.EXECUTION)
                 )
                 AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
                     NavigationMainDirections.toExamCapture()
                 )
                 AppNavigator.MENU_EXAM_HISTORY -> findNavController().navigate(
-                    NavigationMainDirections.toExamHistory()
+                    NavigationMainDirections.toExamList(ExamAction.VIEW_RESULT)
                 )
                 else -> throw IllegalArgumentException("Exam menu item not found")
             }
@@ -50,4 +50,9 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
         super.onDestroyView()
         adapter = null
     }
+}
+
+object ExamAction {
+    const val EXECUTION = 0
+    const val VIEW_RESULT = 1
 }

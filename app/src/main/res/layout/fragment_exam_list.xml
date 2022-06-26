@@ -15,7 +15,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="3"
-            tools:listitem="@layout/item_exam_history" />
+            tools:listitem="@layout/item_exam_list" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/space_xxsmall"
-            android:text="@{vm.detail.executedDate}"
+            android:text="@{vm.detail.createdAt}"
             android:textAppearance="@style/AppTextAppearance.Content"
             app:layout_constraintEnd_toEndOf="@id/lbl_name"
             app:layout_constraintStart_toStartOf="@id/lbl_name"
