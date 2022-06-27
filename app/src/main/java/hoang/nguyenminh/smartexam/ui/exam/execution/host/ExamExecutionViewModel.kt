@@ -1,6 +1,7 @@
 package hoang.nguyenminh.smartexam.ui.exam.execution.host
 
 import android.app.Application
+import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
@@ -20,10 +21,14 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
 
     val flowOfQuestions = MutableStateFlow<List<Question>?>(null)
 
-    override fun onReady() {
-        super.onReady()
-        flowOfQuestions.value ?: viewModelScope.launch(Dispatchers.IO) {
-            flowOfQuestions.value = useCase(coroutineContext, 50)
+    override fun onBind(args: Bundle?) {
+        super.onBind(args)
+        args?.let {
+            ExamExecutionFragmentArgs.fromBundle(it)
+        }?.let {
+            flowOfQuestions.value ?: viewModelScope.launch(Dispatchers.IO) {
+                flowOfQuestions.value = useCase(coroutineContext, it.id)
+            }
         }
     }
 }

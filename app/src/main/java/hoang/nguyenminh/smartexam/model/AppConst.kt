@@ -1,7 +1,7 @@
 package hoang.nguyenminh.smartexam.model
 
 object AppConst {
-    const val BASE_URL = "https://api.publicapis.org/"
+    const val BASE_URL = "https://6df5-58-187-94-173.ap.ngrok.io/api/"
 }
 
 object AppNavigator {
