@@ -55,3 +55,7 @@ enum class ChoiceIndex(val index: Int) {
         }
     }
 }
+
+data class SubmitExamImageRequest(
+    val path: String
+)

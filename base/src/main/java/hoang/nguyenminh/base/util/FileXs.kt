@@ -1,6 +1,7 @@
 package hoang.nguyenminh.base.util
 
 import android.content.Context
+import android.webkit.MimeTypeMap
 import java.io.File
 import java.io.FileFilter
 
@@ -17,3 +18,8 @@ object FileXs {
         }
     }
 }
+
+fun File.getMimeType(fallback: String = "image/*"): String =
+    MimeTypeMap.getFileExtensionFromUrl(toString())?.run {
+        MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase())
+    } ?: fallback

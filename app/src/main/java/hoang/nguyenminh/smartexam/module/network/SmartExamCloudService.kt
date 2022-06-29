@@ -3,7 +3,10 @@ package hoang.nguyenminh.smartexam.module.network
 import hoang.nguyenminh.smartexam.model.BaseResponse
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
+import okhttp3.MultipartBody
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface SmartExamCloudService {
@@ -16,4 +19,7 @@ interface SmartExamCloudService {
 
     @GET("get-question")
     suspend fun getQuestionList(@Query("id") id: Int): BaseResponse<List<Question>>
+
+    @POST("")
+    suspend fun sendExamImage(@Body image: MultipartBody)
 }

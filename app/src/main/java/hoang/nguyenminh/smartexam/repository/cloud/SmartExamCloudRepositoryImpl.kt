@@ -4,6 +4,7 @@ import hoang.nguyenminh.smartexam.model.BaseResponse
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class SmartExamCloudRepositoryImpl @Inject constructor(
@@ -18,4 +19,6 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 
     override suspend fun getQuestionList(id: Int): List<Question> =
         service.getQuestionList(id).unwrap()
+
+    override suspend fun sendExamImage(image: MultipartBody) = service.sendExamImage(image)
 }

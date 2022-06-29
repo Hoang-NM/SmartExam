@@ -1,11 +1,16 @@
 package hoang.nguyenminh.smartexam.ui.exam.display
 
-import android.net.Uri
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.util.postImageRotate
+import hoang.nguyenminh.base.util.rotate
+import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.databinding.FragmentImageDisplayBinding
@@ -24,6 +29,14 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
     ): FragmentImageDisplayBinding =
         FragmentImageDisplayBinding.inflate(inflater, container, false).apply {
             binding = this
-            image.setImageURI(Uri.parse(navArgs.path))
+            navArgs.path.let {
+                val matrix = Matrix().apply { postImageRotate(it) }
+                val bitmap = BitmapFactory.decodeFile(it).apply { rotate(matrix) }
+                image.setImageBitmap(bitmap)
+            }
+            btnSend.setOnSafeClickListener {
+                (viewModel as ImageDisplayViewModel).sendExamImage(navArgs.path)
+                findNavController().navigate(ImageDisplayFragmentDirections.popToExamMenu())
+            }
         }
 }

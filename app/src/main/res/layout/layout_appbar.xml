@@ -36,7 +36,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lbl_title"
-                style="@style/AppTextAppearance.ToolbarTitle"
+                style="@style/AppWidget.ToolbarTitle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

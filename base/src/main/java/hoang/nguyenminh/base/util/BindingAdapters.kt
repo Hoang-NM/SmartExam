@@ -10,6 +10,7 @@ import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE_TIME_ISO
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 object BindingAdapters {
 
     @BindingAdapter("imageUrl")

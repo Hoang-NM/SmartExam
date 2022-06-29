@@ -126,7 +126,7 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
     private fun createTempImagePath(image: ImageProxy): String {
         val tempFile = FileXs.createTempFile(
-            requireContext(), "smart-exam-${System.currentTimeMillis()}", ".jpg"
+            requireContext(), "smart-exam-${System.currentTimeMillis()}", ".jpeg"
         )
         val source = image.planes[0].buffer
         tempFile.sink().buffer().apply {
