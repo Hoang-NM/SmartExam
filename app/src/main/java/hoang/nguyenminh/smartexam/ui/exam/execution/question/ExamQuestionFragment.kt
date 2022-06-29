@@ -15,7 +15,7 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
 
     private val KEY_QUESTION = "question"
 
-    override val viewModel by viewModels<ExamQuestionViewModel>()
+    override val viewModel: ExamQuestionViewModel by viewModels()
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?

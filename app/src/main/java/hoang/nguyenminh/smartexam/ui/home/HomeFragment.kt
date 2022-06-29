@@ -10,7 +10,7 @@ import hoang.nguyenminh.smartexam.databinding.FragmentHomeBinding
 @AndroidEntryPoint
 class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
 
-    override val viewModel by viewModels<HomeViewModel>()
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?

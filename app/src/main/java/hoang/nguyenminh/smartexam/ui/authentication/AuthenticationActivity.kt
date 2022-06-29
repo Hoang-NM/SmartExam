@@ -14,7 +14,7 @@ import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
 @AndroidEntryPoint
 class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>() {
 
-    override val viewModel by viewModels<AuthenticationViewModel>()
+    override val viewModel: AuthenticationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

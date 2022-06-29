@@ -16,7 +16,7 @@ import hoang.nguyenminh.smartexam.ui.exam.list.adapter.ExamListAdapter
 @AndroidEntryPoint
 class ExamListFragment : SmartExamFragment<FragmentExamListBinding>() {
 
-    override val viewModel by viewModels<ExamListViewModel>()
+    override val viewModel: ExamListViewModel by viewModels()
 
     private val args by navArgs<ExamListFragmentArgs>()
 

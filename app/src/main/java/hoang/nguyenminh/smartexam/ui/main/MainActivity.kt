@@ -13,7 +13,7 @@ import hoang.nguyenminh.smartexam.databinding.ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : SmartExamActivity<ActivityMainBinding>() {
 
-    override val viewModel by viewModels<MainViewModel>()
+    override val viewModel: MainViewModel by viewModels()
 
     override fun onCreateViewDataBinding(): ActivityMainBinding =
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {

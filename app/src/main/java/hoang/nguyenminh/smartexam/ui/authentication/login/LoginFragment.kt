@@ -13,7 +13,7 @@ import hoang.nguyenminh.smartexam.ui.main.MainActivity
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
 
-    override val viewModel by viewModels<LoginViewModel>()
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?

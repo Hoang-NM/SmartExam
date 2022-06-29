@@ -16,7 +16,7 @@ import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPa
 @AndroidEntryPoint
 class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() {
 
-    override val viewModel by viewModels<ExamExecutionViewModel>()
+    override val viewModel: ExamExecutionViewModel by viewModels()
 
     private var pagerAdapter: ExamExecutionPagerAdapter? = null
 

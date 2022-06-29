@@ -14,7 +14,7 @@ import hoang.nguyenminh.smartexam.ui.main.MainActivity
 @AndroidEntryPoint
 class RegisterFragment : SmartExamFragment<FragmentRegisterBinding>() {
 
-    override val viewModel by viewModels<RegisterViewModel>()
+    override val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?

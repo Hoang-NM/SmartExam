@@ -31,7 +31,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
-    override val viewModel by viewModels<ExamCaptureViewModel>()
+    override val viewModel: ExamCaptureViewModel by viewModels()
 
     private var permissionLauncher: ActivityResultLauncher<Array<String>>? = null
 

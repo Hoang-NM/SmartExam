@@ -12,14 +12,13 @@ import hoang.nguyenminh.base.util.postImageRotate
 import hoang.nguyenminh.base.util.rotate
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
-import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.databinding.FragmentImageDisplayBinding
 
 
 @AndroidEntryPoint
 class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
 
-    override val viewModel: SmartExamViewModel by viewModels<ImageDisplayViewModel>()
+    override val viewModel: ImageDisplayViewModel by viewModels()
 
     private val navArgs by navArgs<ImageDisplayFragmentArgs>()
 
@@ -35,7 +34,7 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
                 image.setImageBitmap(bitmap)
             }
             btnSend.setOnSafeClickListener {
-                (viewModel as ImageDisplayViewModel).sendExamImage(navArgs.path)
+                viewModel.sendExamImage(navArgs.path)
                 findNavController().navigate(ImageDisplayFragmentDirections.popToExamMenu())
             }
         }

@@ -10,7 +10,7 @@ import hoang.nguyenminh.smartexam.databinding.FragmentExamDetailBinding
 @AndroidEntryPoint
 class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
 
-    override val viewModel by viewModels<ExamDetailViewModel>()
+    override val viewModel: ExamDetailViewModel by viewModels()
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater,

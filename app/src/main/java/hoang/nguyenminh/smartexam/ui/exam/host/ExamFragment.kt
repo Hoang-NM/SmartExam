@@ -15,7 +15,7 @@ import hoang.nguyenminh.smartexam.ui.exam.host.adapter.ExamMenuAdapter
 @AndroidEntryPoint
 class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
 
-    override val viewModel by viewModels<ExamViewModel>()
+    override val viewModel: ExamViewModel by viewModels()
 
     private var adapter: ExamMenuAdapter? = null
 
