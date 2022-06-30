@@ -8,6 +8,5 @@ import javax.inject.Inject
 class GetQuestionListUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :
     CoroutinesUseCase<List<Question>, Int>() {
 
-    override suspend fun run(params: Int): List<Question> =
-        repository.getQuestionList(params)
+    override suspend fun run(params: Int): List<Question> = repository.getQuestionList(params)
 }

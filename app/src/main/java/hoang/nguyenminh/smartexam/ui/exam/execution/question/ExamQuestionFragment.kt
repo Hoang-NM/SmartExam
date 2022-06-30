@@ -2,13 +2,15 @@ package hoang.nguyenminh.smartexam.ui.exam.execution.question
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
+import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
 import hoang.nguyenminh.smartexam.model.exam.Question
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
@@ -24,10 +26,18 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
             binding = this
             val question: Question = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
             lblQuestion.text = question.question
-            lblOptionA.text = question.optionA
-            lblOptionB.text = question.optionB
-            lblOptionC.text = question.optionC
-            lblOptionD.text = question.optionD
+            lblOptionA.setupOption(question.optionA, question.isASelected) {
+                question.isASelected = !question.isASelected
+            }
+            lblOptionB.setupOption(question.optionB, question.isBSelected) {
+                question.isBSelected = !question.isBSelected
+            }
+            lblOptionC.setupOption(question.optionC, question.isCSelected) {
+                question.isCSelected = !question.isCSelected
+            }
+            lblOptionD.setupOption(question.optionD, question.isDSelected) {
+                question.isDSelected = !question.isDSelected
+            }
         }
 
     companion object {
@@ -35,8 +45,13 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
             arguments = bundleOf(KEY_QUESTION to question)
         }
     }
+}
 
-    private fun saveSelectedChoice(answer: String) {
-        Timber.e("Save answer: answer = $answer")
+fun TextView.setupOption(content: String, selectedState: Boolean, onClick: () -> Unit) {
+    text = content
+    viewCompatSelected(selectedState)
+    setOnClickListener {
+        isSelected = !isSelected
+        onClick()
     }
 }

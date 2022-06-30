@@ -7,11 +7,11 @@ import kotlinx.parcelize.Parcelize
 
 data class Exam(
     @SerializedName("id") @Expose val id: Int,
-    @SerializedName("time") @Expose val timeLimit: Long,
-    @SerializedName("name") @Expose val name: String,
-    @SerializedName("subject") @Expose val subject: String,
-    @SerializedName("status") @Expose val status: String,
-    @SerializedName("createdAt") @Expose val createdAt: String,
+    @SerializedName("time") @Expose val timeLimit: Long? = null,
+    @SerializedName("name") @Expose val name: String = "",
+    @SerializedName("subject") @Expose val subject: String? = null,
+    @SerializedName("status") @Expose val status: String? = null,
+    @SerializedName("createdAt") @Expose val createdAt: String? = null,
     @SerializedName("result") @Expose val result: String = "50/50"
 )
 
@@ -28,7 +28,11 @@ data class Question(
     @SerializedName("optionB") @Expose val optionB: String,
     @SerializedName("optionC") @Expose val optionC: String,
     @SerializedName("optionD") @Expose val optionD: String,
-    @SerializedName("choices") @Expose val choices: List<Choice>
+    var isASelected: Boolean = false,
+    var isBSelected: Boolean = false,
+    var isCSelected: Boolean = false,
+    var isDSelected: Boolean = false,
+    @SerializedName("choices") @Expose val choices: List<Choice>? = null
 ) : Parcelable {
 
     fun combineOptions(): List<String> = mutableListOf(optionA, optionB, optionC, optionD)

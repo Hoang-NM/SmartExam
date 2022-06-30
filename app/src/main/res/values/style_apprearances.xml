@@ -10,6 +10,11 @@
         <item name="android:textSize">@dimen/font_xxmedium</item>
     </style>
 
+    <style name="AppTextAppearance.Title" parent="AppTextAppearance">
+        <item name="android:textColor">@color/black_900</item>
+        <item name="android:textSize">@dimen/font_xmedium</item>
+    </style>
+
     <style name="AppTextAppearance.Content" parent="AppTextAppearance">
         <item name="android:textColor">@color/black_900</item>
     </style>
