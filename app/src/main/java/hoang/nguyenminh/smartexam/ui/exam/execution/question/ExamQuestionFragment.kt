@@ -7,7 +7,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
-import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamQuestionBinding
 import hoang.nguyenminh.smartexam.model.exam.Question
@@ -28,15 +27,19 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
             lblQuestion.text = question.question
             lblOptionA.setupOption(question.optionA, question.isASelected) {
                 question.isASelected = !question.isASelected
+                viewModel.saveSelectedChoice(question.id, "A")
             }
             lblOptionB.setupOption(question.optionB, question.isBSelected) {
                 question.isBSelected = !question.isBSelected
+                viewModel.saveSelectedChoice(question.id, "B")
             }
             lblOptionC.setupOption(question.optionC, question.isCSelected) {
                 question.isCSelected = !question.isCSelected
+                viewModel.saveSelectedChoice(question.id, "C")
             }
             lblOptionD.setupOption(question.optionD, question.isDSelected) {
                 question.isDSelected = !question.isDSelected
+                viewModel.saveSelectedChoice(question.id, "D")
             }
         }
 

@@ -34,4 +34,10 @@
     <style name="AppTextAppearance.TextInputLayout.Input" parent="AppTextAppearance.TextInputLayout">
         <item name="android:textColor">@color/black_900</item>
     </style>
+
+    <style name="AppTextAppearance.QuestionIndex" parent="AppTextAppearance">
+        <item name="android:textColor">@color/question_index_color_selector</item>
+        <item name="android:textSize">@dimen/font_xmedium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

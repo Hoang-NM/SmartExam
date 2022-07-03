@@ -76,6 +76,8 @@ fun <T> primitiveDataStore(
     defaultValue: T?
 ) = PrimitiveTypeDataStore(preferences, prefKey, defaultValue)
 
+//fun <T> serializablePreferencesKey(name: String): Preferences.Key<T> = Preferences.Key(name)
+
 inline fun <reified T> serializableDataStore(
     preferences: DataStore<Preferences>,
     serializer: Serializer,

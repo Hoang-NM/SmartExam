@@ -33,10 +33,13 @@ data class Question(
     var isCSelected: Boolean = false,
     var isDSelected: Boolean = false,
     @SerializedName("choices") @Expose val choices: List<Choice>? = null
-) : Parcelable {
+) : Parcelable
 
-    fun combineOptions(): List<String> = mutableListOf(optionA, optionB, optionC, optionD)
-}
+data class QuestionIndex(
+    val index: Int,
+    val isSelected: Boolean = false,
+    val isAnswered: Boolean = false
+)
 
 data class Answer(
     @SerializedName("id") @Expose val id: Int,

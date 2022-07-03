@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lbl_content"
+        style="@style/ClickableIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/space_medium"
+        android:background="@drawable/bg_round_selector"
+        android:gravity="center"
+        android:textAppearance="@style/AppTextAppearance.QuestionIndex"
+        tools:text="10"
+        tools:textColor="@color/black" />
+</layout>

@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
+import hoang.nguyenminh.base.util.setOnSafeClickListener
+import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
 import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
@@ -48,6 +52,14 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
                 imgNext.setOnClickListener {
                     vpQuestion.setCurrentItem(vpQuestion.currentItem + 1, true)
                 }
+                lblQuestionInfo.setOnSafeClickListener {
+                    findNavController().navigate(
+                        NavigationMainDirections.toQuestionNavigation(
+                            pagerAdapter?.listOfQuestions?.size ?: 1,
+                            vpQuestion.currentItem + 1
+                        )
+                    )
+                }
             }
 
             btnFinish.setOnClickListener {
@@ -60,6 +72,10 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
                 pagerAdapter?.listOfQuestions = it
                 vpQuestion.offscreenPageLimit = it.size
             }
+
+            setFragmentResultListener(KEY_QUESTION_INDEX) { key, bundle ->
+                vpQuestion.currentItem = bundle.getInt(key) - 1
+            }
         }
 
     override fun onDestroyView() {
@@ -67,3 +83,5 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
         pagerAdapter = null
     }
 }
+
+const val KEY_QUESTION_INDEX = "KEY_QUESTION_INDEX"

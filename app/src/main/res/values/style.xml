@@ -77,4 +77,10 @@
         <item name="fabSize">normal</item>
         <item name="maxImageSize">@dimen/space_xxxlarge</item>
     </style>
+
+    <style name="AppBottomSheetCardShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/radius_large</item>
+        <item name="cornerSizeTopLeft">@dimen/radius_large</item>
+    </style>
 </resources>

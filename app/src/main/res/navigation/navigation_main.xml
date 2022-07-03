@@ -79,6 +79,21 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <dialog
+        android:id="@+id/dialog_question_navigation"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.execution.navigation_dialog.ExamQuestionNavigationDialog"
+        android:label="@string/lbl_exam_execution"
+        tools:layout="@layout/dialog_question_navigation">
+
+        <argument
+            android:name="count"
+            app:argType="integer" />
+
+        <argument
+            android:name="index"
+            app:argType="integer" />
+    </dialog>
+
     <action
         android:id="@+id/to_home"
         app:destination="@id/fragment_home" />
@@ -110,6 +125,10 @@
     <action
         android:id="@+id/to_image_display"
         app:destination="@id/fragment_image_display" />
+
+    <action
+        android:id="@+id/to_question_navigation"
+        app:destination="@id/dialog_question_navigation" />
 
     <fragment
         android:id="@+id/users_list"

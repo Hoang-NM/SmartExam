@@ -16,9 +16,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_back"
                 style="@style/ClickableIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="@dimen/space_medium"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="@dimen/space_xmedium"
                 android:src="@drawable/ic_back" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -33,9 +33,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_next"
                 style="@style/ClickableIcon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="@dimen/space_medium"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="@dimen/space_xmedium"
                 android:src="@drawable/ic_next" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
