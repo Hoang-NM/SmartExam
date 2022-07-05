@@ -63,6 +63,9 @@ dependencies {
 
     // Room
     kapt "androidx.room:room-compiler:$room_version"
+
+    // MlKit - Object detection
+    implementation 'com.google.mlkit:object-detection:17.0.0'
 }
 
 kapt {
