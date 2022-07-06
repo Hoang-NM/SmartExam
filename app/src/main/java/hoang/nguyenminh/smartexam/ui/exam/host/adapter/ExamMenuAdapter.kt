@@ -1,10 +1,12 @@
 package hoang.nguyenminh.smartexam.ui.exam.host.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.databinding.ItemCardMenuBinding
 import hoang.nguyenminh.smartexam.model.main.MenuItem
 
@@ -22,11 +24,12 @@ class ExamMenuAdapter(private val onItemSelected: (Int, MenuItem) -> Unit) :
     class ViewHolder private constructor(val binding: ItemCardMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(item: MenuItem, position: Int, clickListener: (Int, MenuItem) -> Unit) {
             binding.apply {
-                cardStringLabel = root.resources.getString(item.label)
-                cardDrawableIcon = item.icon
-                setCardOnClick {
+                label.text = root.resources.getString(item.label)
+                cardIcon.setImageResource(item.icon)
+                cardView.setOnSafeClickListener {
                     clickListener(position, item)
                 }
                 executePendingBindings()

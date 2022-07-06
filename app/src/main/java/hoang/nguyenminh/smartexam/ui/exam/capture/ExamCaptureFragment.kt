@@ -33,7 +33,7 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
     override val viewModel: ExamCaptureViewModel by viewModels()
 
-    private var permissionLauncher: ActivityResultLauncher<Array<String>>? = null
+    private var permissionLauncher: ActivityResultLauncher<String>? = null
 
     private val imageCapture by lazy {
         ImageCapture.Builder().build()
@@ -42,11 +42,12 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         permissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-                if (it.all { true }) {
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                if (it) {
                     startCamera()
                 } else {
-                    ConfirmRequest(message = "Please allow application access the required permissions to continue",
+                    ConfirmRequest(
+                        message = "Please allow application access the required permissions to continue",
                         positive = getString(R.string.agree),
                         onPositiveSelected = {
                             requestPermission()
@@ -86,9 +87,7 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
     }
 
     private fun requestPermission() {
-        permissionLauncher?.launch(
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-        )
+        permissionLauncher?.launch(Manifest.permission.CAMERA)
     }
 
     private fun startCamera() {

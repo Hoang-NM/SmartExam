@@ -17,7 +17,7 @@
             android:id="@+id/btn_send"
             style="@style/AppWidget.FloatingActionButton"
             android:layout_gravity="end|bottom"
-            android:layout_margin="@dimen/space_xxxlarge"
+            android:layout_margin="@dimen/space_large"
             android:contentDescription="@string/description_action_send_image"
             android:src="@drawable/ic_send" />
     </FrameLayout>

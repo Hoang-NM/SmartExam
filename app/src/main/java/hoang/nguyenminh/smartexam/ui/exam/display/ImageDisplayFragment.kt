@@ -30,8 +30,8 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
             binding = this
             navArgs.path.let {
                 val matrix = Matrix().apply { postImageRotate(it) }
-                val bitmap = BitmapFactory.decodeFile(it).apply { rotate(matrix) }
-                image.setImageBitmap(bitmap)
+                val bitmap = BitmapFactory.decodeFile(it)
+                image.setImageBitmap(bitmap.rotate(matrix))
             }
             btnSend.setOnSafeClickListener {
                 viewModel.sendExamImage(navArgs.path)

@@ -3,27 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="cardDrawableIcon"
-            type="Integer" />
-
-        <variable
-            name="cardStringLabel"
-            type="String" />
-
-        <variable
-            name="cardOnClick"
-            type="android.view.View.OnClickListener" />
-    </data>
-
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space_medium"
         android:minHeight="120dp"
-        android:onClick="@{cardOnClick}"
         app:cardBackgroundColor="?colorSurface"
         app:cardCornerRadius="@dimen/radius_medium"
         app:cardElevation="@dimen/elevation_medium"
@@ -36,21 +21,21 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/card_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="16dp"
-                android:src="@{cardDrawableIcon}"
-                android:tint="?colorSecondary"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="@dimen/space_xlarge"
+                android:layout_marginTop="@dimen/space_xxxmedium"
+                android:tint="?colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_faze" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/space_medium"
-                android:paddingHorizontal="24dp"
-                android:text="@{cardStringLabel}"
+                android:paddingHorizontal="@dimen/space_xlarge"
                 android:textColor="?colorOnBackground"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

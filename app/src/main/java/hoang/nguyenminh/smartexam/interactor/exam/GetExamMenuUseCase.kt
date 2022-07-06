@@ -15,17 +15,17 @@ class GetExamMenuUseCase @Inject constructor(private val repository: SmartExamCl
     private fun getExamMenu(): List<MenuItem> = listOf(
         MenuItem(
             AppNavigator.MENU_EXAM_EXECUTION,
-            R.drawable.ic_faze,
+            R.drawable.ic_document,
             R.string.lbl_exam_execution
         ),
         MenuItem(
             AppNavigator.MENU_EXAM_CAPTURE,
-            R.drawable.ic_faze,
+            R.drawable.ic_camera,
             R.string.lbl_exam_capture
         ),
         MenuItem(
             AppNavigator.MENU_EXAM_HISTORY,
-            R.drawable.ic_faze,
+            R.drawable.ic_history,
             R.string.lbl_exam_history
         )
     )

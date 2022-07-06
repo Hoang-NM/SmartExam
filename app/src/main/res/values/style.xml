@@ -71,11 +71,12 @@
     <style name="AppWidget.FloatingActionButton" parent="AppWidget">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:tint">?colorOnPrimary</item>
-        <item name="android:backgroundTint">?colorPrimary</item>
-        <item name="backgroundTint">?colorPrimary</item>
+        <item name="android:tint">@color/black</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="backgroundTint">@color/white</item>
         <item name="fabSize">normal</item>
-        <item name="maxImageSize">@dimen/space_xxxlarge</item>
+        <item name="fabCustomSize">60dp</item>
+        <item name="maxImageSize">@dimen/margin_horizontal_xlarge</item>
     </style>
 
     <style name="AppBottomSheetCardShapeAppearance">
