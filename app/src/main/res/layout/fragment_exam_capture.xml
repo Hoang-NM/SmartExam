@@ -11,23 +11,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_capture"
-            style="@style/ClickableIcon"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            style="@style/AppWidget.FloatingActionButton"
             android:layout_margin="@dimen/space_large"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/description_action_capture_image"
+            android:src="@drawable/ic_camera"
+            app:fabCustomSize="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:maxImageSize="40dp" />
 
-        <hoang.nguyenminh.smartexam.util.GraphicOverlay
+        <hoang.nguyenminh.smartexam.util.CornerFocusZoneView
             android:id="@+id/graphic_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/preview"
+            android:layout_margin="@dimen/margin_horizontal_xlarge"
             app:layout_constraintEnd_toEndOf="@id/preview"
+            app:layout_constraintHeight_percent="0.7"
             app:layout_constraintStart_toStartOf="@id/preview"
             app:layout_constraintTop_toTopOf="@id/preview" />
     </androidx.constraintlayout.widget.ConstraintLayout>

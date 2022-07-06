@@ -28,5 +28,6 @@
     <string name="lbl_exam_history">Exam History</string>
     <string name="lbl_exam_detail">Exam Detail</string>
     <string name="lbl_exam_image">Exam Image</string>
+    <string name="description_action_capture_image">Capture exam image</string>
     <string name="description_action_send_image">Send exam image</string>
 </resources>
