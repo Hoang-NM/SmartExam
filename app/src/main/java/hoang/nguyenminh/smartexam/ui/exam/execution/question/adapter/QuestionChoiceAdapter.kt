@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
+import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ItemQuestionChoiceBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
 
@@ -23,9 +24,11 @@ class QuestionChoiceAdapter(private val onSelectChoice: (Int, Choice) -> Unit) :
     class ViewHolder private constructor(val binding: ItemQuestionChoiceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private val formatContent = itemView.context.getString(R.string.format_choice_content)
+
         fun bind(item: Choice, position: Int, clickListener: (Int, Choice) -> Unit) {
             binding.apply {
-                lblContent.text = item.content
+                lblContent.text = String.format(formatContent, item.index.identity, item.content)
                 lblContent.viewCompatSelected(item.isSelected)
                 lblContent.setOnClickListener {
                     item.isSelected = !item.isSelected

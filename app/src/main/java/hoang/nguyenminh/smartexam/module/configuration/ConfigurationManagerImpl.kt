@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import hoang.nguyenminh.base.serializer.Serializer
-import hoang.nguyenminh.base.util.primitiveDataStore
+import hoang.nguyenminh.base.util.serializableDataStore
+import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore("configuration")
 
 class ConfigurationManagerImpl @Inject constructor(
-    context: Context, val serializer: Serializer
+    context: Context, serializer: Serializer
 ) : ConfigurationManager {
 
     private val preferences = context.dataStore
@@ -19,17 +21,23 @@ class ConfigurationManagerImpl @Inject constructor(
         val KEY_OF_EXAM = stringPreferencesKey("KEY_OF_EXAM")
     }
 
-    private var prefOfExam: String? by primitiveDataStore(
-        preferences, KEY_OF_EXAM, null
+    private var prefOfExam: ExamModel? by serializableDataStore(
+        preferences, serializer, KEY_OF_EXAM, null
     )
 
-    override fun saveCurrentExam(exam: String) {
+    override fun saveCurrentExam(exam: ExamModel) {
         prefOfExam = exam
     }
 
-    override fun saveCurrentAnswer() {
-        TODO("Not yet implemented")
+    override fun saveCurrentAnswer(question: QuestionModel) {
+        prefOfExam?.questions?.find {
+            it.id == question.id
+        }?.choices = question.choices
     }
 
-    override fun getUnfinishedExam(): String? = prefOfExam
+    override fun getUnfinishedExam(): ExamModel? = prefOfExam
+
+    override fun clearFinishedExam() {
+        prefOfExam = null
+    }
 }

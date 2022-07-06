@@ -25,46 +25,14 @@
             tools:lines="5"
             tools:text="@tools:sample/lorem/random" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lbl_option_a"
-            style="@style/AppWidget.ItemChoice"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_choices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_medium"
-            android:gravity="center|start"
-            android:padding="@dimen/space_medium"
-            tools:text="@tools:sample/cities"
-            tools:textColor="@color/black_900" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lbl_option_b"
-            style="@style/AppWidget.ItemChoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/space_medium"
-            tools:text="@tools:sample/cities"
-            tools:textColor="@color/black_900" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lbl_option_c"
-            style="@style/AppWidget.ItemChoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/space_medium"
-            tools:text="@tools:sample/cities"
-            tools:textColor="@color/black_900" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lbl_option_d"
-            style="@style/AppWidget.ItemChoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/space_medium"
-            tools:text="@tools:sample/cities"
-            tools:textColor="@color/black_900" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_question_choice" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

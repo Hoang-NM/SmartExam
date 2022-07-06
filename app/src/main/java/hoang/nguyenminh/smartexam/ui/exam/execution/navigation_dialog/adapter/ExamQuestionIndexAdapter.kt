@@ -14,7 +14,7 @@ class ExamQuestionIndexAdapter(val listener: (QuestionIndex) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position, listener)
+        holder.bind(item, listener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -23,7 +23,7 @@ class ExamQuestionIndexAdapter(val listener: (QuestionIndex) -> Unit) :
     class ViewHolder private constructor(val binding: ItemQuestionIndexBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: QuestionIndex, position: Int, clickListener: (QuestionIndex) -> Unit) {
+        fun bind(item: QuestionIndex, clickListener: (QuestionIndex) -> Unit) {
             binding.apply {
                 lblContent.text = item.index.toString()
                 lblContent.viewCompatSelected(item.isSelected)

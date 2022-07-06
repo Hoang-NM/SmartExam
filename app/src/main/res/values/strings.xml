@@ -30,4 +30,6 @@
     <string name="lbl_exam_image">Exam Image</string>
     <string name="description_action_capture_image">Capture exam image</string>
     <string name="description_action_send_image">Send exam image</string>
+    <string name="format_question_content">Question %d: %s</string>
+    <string name="format_choice_content">%1$s. %2$s</string>
 </resources>

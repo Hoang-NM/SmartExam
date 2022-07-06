@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
+import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.Question
+import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -17,18 +19,26 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     SmartExamViewModel(application) {
 
     @Inject
+    lateinit var configurationManager: ConfigurationManager
+
+    @Inject
     lateinit var useCase: GetQuestionListUseCase
 
-    val flowOfQuestions = MutableStateFlow<List<Question>?>(null)
+    val flowOfExam = MutableStateFlow<ExamModel?>(null)
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
         args?.let {
             ExamExecutionFragmentArgs.fromBundle(it)
         }?.let {
-            flowOfQuestions.value ?: viewModelScope.launch(Dispatchers.IO) {
-                flowOfQuestions.value = useCase(coroutineContext, it.id)
+            flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
+                val questions = useCase(coroutineContext, it.id).map(Question::toQuestionModel)
+                flowOfExam.value = ExamModel(it.id, questions)
             }
         }
+    }
+
+    fun clearSavedExamProgress() {
+        configurationManager.clearFinishedExam()
     }
 }

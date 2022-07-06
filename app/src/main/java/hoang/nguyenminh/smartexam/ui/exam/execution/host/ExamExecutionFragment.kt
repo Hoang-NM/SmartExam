@@ -63,14 +63,15 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
             }
 
             btnFinish.setOnClickListener {
+                viewModel.clearSavedExamProgress()
                 Toast.makeText(requireContext(), "Finish exam", Toast.LENGTH_SHORT).show()
                 activity?.onBackPressed()
             }
 
-            viewModel.flowOfQuestions.collectLatestOnLifecycle(viewLifecycleOwner) {
+            viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
-                pagerAdapter?.listOfQuestions = it
-                vpQuestion.offscreenPageLimit = it.size
+                pagerAdapter?.listOfQuestions = it.questions
+                vpQuestion.offscreenPageLimit = it.questions.size
             }
 
             setFragmentResultListener(KEY_QUESTION_INDEX) { key, bundle ->

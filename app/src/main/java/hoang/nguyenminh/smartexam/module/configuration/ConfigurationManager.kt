@@ -1,12 +1,15 @@
 package hoang.nguyenminh.smartexam.module.configuration
 
-import hoang.nguyenminh.smartexam.model.exam.Exam
+import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 
 interface ConfigurationManager {
 
-    fun saveCurrentExam(exam: String)
+    fun saveCurrentExam(exam: ExamModel)
 
-    fun saveCurrentAnswer()
+    fun saveCurrentAnswer(question: QuestionModel)
 
-    fun getUnfinishedExam(): String?
+    fun getUnfinishedExam(): ExamModel?
+
+    fun clearFinishedExam()
 }
