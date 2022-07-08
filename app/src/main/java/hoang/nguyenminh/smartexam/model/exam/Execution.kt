@@ -3,19 +3,24 @@ package hoang.nguyenminh.smartexam.model.exam
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import hoang.nguyenminh.base.util.DateTimeXs
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 data class Exam(
     @SerializedName("id") @Expose val id: Int,
-    @SerializedName("time") @Expose val timeLimit: Long? = null,
+    @SerializedName("time") @Expose val timeLimit: Long = 60 * DateTimeXs.MINUTE,
     @SerializedName("name") @Expose val name: String = "",
     @SerializedName("subject") @Expose val subject: String? = null,
     @SerializedName("status") @Expose val status: String? = null,
     @SerializedName("createdAt") @Expose val createdAt: String? = null,
     @SerializedName("result") @Expose val result: String = "50/50",
     val questions: List<Question> = listOf()
-)
+) {
+
+    fun toExamModel(): ExamModel =
+        ExamModel(id, timeLimit, questions.map(Question::toQuestionModel))
+}
 
 data class SubmitExamRequest(
     @SerializedName("id") @Expose val id: Int,
@@ -24,6 +29,7 @@ data class SubmitExamRequest(
 
 data class ExamModel(
     val id: Int,
+    var timeLimit: Long,
     val questions: List<QuestionModel> = listOf()
 )
 

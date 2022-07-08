@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
@@ -33,7 +34,7 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         }?.let {
             flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
                 val questions = useCase(coroutineContext, it.id).map(Question::toQuestionModel)
-                flowOfExam.value = ExamModel(it.id, questions)
+                flowOfExam.value = ExamModel(it.id, 10 * DateTimeXs.MINUTE, questions)
             }
         }
     }

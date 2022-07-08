@@ -1,8 +1,12 @@
 package hoang.nguyenminh.smartexam.ui.exam.execution.host
 
 import android.annotation.SuppressLint
+import android.os.CountDownTimer
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -10,9 +14,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
+import hoang.nguyenminh.base.util.DateTimeXs
+import hoang.nguyenminh.base.util.DateTimeXs.toTimeString
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
+import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamExecutionBinding
 import hoang.nguyenminh.smartexam.ui.exam.execution.host.adapter.ExamExecutionPagerAdapter
@@ -29,6 +36,7 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
     ): FragmentExamExecutionBinding =
         FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
             binding = this
+            setHasOptionsMenu(true)
             vpQuestion.apply {
                 adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
                     pagerAdapter = it
@@ -78,6 +86,35 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
                 vpQuestion.currentItem = bundle.getInt(key) - 1
             }
         }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_exam_execution, menu)
+
+        menu.findItem(R.id.exam_timer).apply {
+            val itemView = actionView as TextView
+            itemView.apply {
+                setPadding(10, 0, 10, 0)
+                setTextAppearance(R.style.AppTextAppearance_ToolbarContent)
+            }
+            itemView.startCountDownTimer(
+                (viewModel.flowOfExam.value?.timeLimit ?: 0).plus(DateTimeXs.SECOND),
+                DateTimeXs.SECOND
+            )
+        }
+    }
+
+    private fun TextView.startCountDownTimer(duration: Long, interval: Long) {
+        object : CountDownTimer(duration, interval) {
+            override fun onTick(millisUntilFinished: Long) {
+                text = millisUntilFinished.toTimeString(DateTimeXs.FORMAT_COUNT_DOWN_TIME)
+            }
+
+            override fun onFinish() {
+                binding?.btnFinish?.callOnClick()
+            }
+        }.start()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

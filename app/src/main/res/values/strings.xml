@@ -32,4 +32,5 @@
     <string name="description_action_send_image">Send exam image</string>
     <string name="format_question_content">Question %d: %s</string>
     <string name="format_choice_content">%1$s. %2$s</string>
+    <string name="lbl_exam_timer">Exam timer</string>
 </resources>
