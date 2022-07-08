@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/fragment_exam"
-        android:name="hoang.nguyenminh.smartexam.ui.exam.host.ExamFragment"
+        android:id="@+id/fragment_exam_menu"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.menu.ExamFragment"
         android:label="@string/label_menu_exam"
         tools:layout="@layout/fragment_exam" />
 
@@ -60,6 +60,10 @@
         <argument
             android:name="id"
             app:argType="integer" />
+
+        <argument
+            android:name="action"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -74,8 +78,8 @@
 
         <action
             android:id="@+id/pop_to_exam_menu"
-            app:destination="@id/fragment_exam"
-            app:popUpTo="@id/fragment_exam"
+            app:destination="@id/fragment_exam_menu"
+            app:popUpTo="@id/fragment_exam_menu"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -99,8 +103,8 @@
         app:destination="@id/fragment_home" />
 
     <action
-        android:id="@+id/to_exam"
-        app:destination="@id/fragment_exam" />
+        android:id="@+id/to_exam_menu"
+        app:destination="@id/fragment_exam_menu" />
 
     <action
         android:id="@+id/to_profile"

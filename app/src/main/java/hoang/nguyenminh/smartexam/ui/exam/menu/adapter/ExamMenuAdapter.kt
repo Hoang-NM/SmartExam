@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.host.adapter
+package hoang.nguyenminh.smartexam.ui.exam.menu.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

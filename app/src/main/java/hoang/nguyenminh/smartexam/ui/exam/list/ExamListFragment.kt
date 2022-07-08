@@ -10,7 +10,7 @@ import hoang.nguyenminh.base.util.collectLatestOnLifecycle
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamListBinding
-import hoang.nguyenminh.smartexam.ui.exam.host.ExamAction
+import hoang.nguyenminh.smartexam.ui.exam.menu.ExamAction
 import hoang.nguyenminh.smartexam.ui.exam.list.adapter.ExamListAdapter
 
 @AndroidEntryPoint
@@ -29,13 +29,7 @@ class ExamListFragment : SmartExamFragment<FragmentExamListBinding>() {
         FragmentExamListBinding.inflate(inflater, container, false).apply {
             binding = this
             recHistory.adapter = ExamListAdapter { id ->
-                findNavController().navigate(
-                    when (args.action) {
-                        ExamAction.EXECUTION -> NavigationMainDirections.toExamExecution(id)
-                        ExamAction.VIEW_RESULT -> NavigationMainDirections.toExamDetail(id)
-                        else -> throw IllegalArgumentException("Cannot navigate to ExamAction undefined")
-                    }
-                )
+                findNavController().navigate(NavigationMainDirections.toExamDetail(id, args.action))
             }.also {
                 adapter = it
             }

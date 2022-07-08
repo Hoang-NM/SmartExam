@@ -7,7 +7,7 @@
         android:title="@string/label_menu_home" />
 
     <item
-        android:id="@+id/fragment_exam"
+        android:id="@+id/fragment_exam_menu"
         android:icon="@drawable/ic_exam"
         android:title="@string/label_menu_exam" />
 

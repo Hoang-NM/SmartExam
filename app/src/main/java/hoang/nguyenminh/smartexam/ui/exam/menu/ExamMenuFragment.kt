@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.host
+package hoang.nguyenminh.smartexam.ui.exam.menu
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,12 +10,12 @@ import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
-import hoang.nguyenminh.smartexam.ui.exam.host.adapter.ExamMenuAdapter
+import hoang.nguyenminh.smartexam.ui.exam.menu.adapter.ExamMenuAdapter
 
 @AndroidEntryPoint
 class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
 
-    override val viewModel: ExamViewModel by viewModels()
+    override val viewModel: ExamMenuViewModel by viewModels()
 
     private var adapter: ExamMenuAdapter? = null
 

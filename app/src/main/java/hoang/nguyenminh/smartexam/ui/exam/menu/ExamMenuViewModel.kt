@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.host
+package hoang.nguyenminh.smartexam.ui.exam.menu
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExamViewModel @Inject constructor(application: Application) :
+class ExamMenuViewModel @Inject constructor(application: Application) :
     SmartExamViewModel(application) {
 
     @Inject

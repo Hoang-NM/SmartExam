@@ -20,7 +20,7 @@ class MainActivity : SmartExamActivity<ActivityMainBinding>() {
             binding = this
 
             val primaryDestination =
-                listOf(R.id.fragment_home, R.id.fragment_exam, R.id.fragment_profile)
+                listOf(R.id.fragment_home, R.id.fragment_exam_menu, R.id.fragment_profile)
 
             appbar.apply {
                 val navHostFragment =
