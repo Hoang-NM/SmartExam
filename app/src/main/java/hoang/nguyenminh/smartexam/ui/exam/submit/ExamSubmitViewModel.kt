@@ -2,10 +2,8 @@ package hoang.nguyenminh.smartexam.ui.exam.submit
 
 import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
-import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
 import hoang.nguyenminh.smartexam.interactor.exam.SubmitExamUseCase
 import hoang.nguyenminh.smartexam.model.exam.AnswerModel
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
@@ -13,10 +11,8 @@ import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,10 +26,7 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
     lateinit var configurationManager: ConfigurationManager
 
     @Inject
-    lateinit var useCase: GetQuestionListUseCase
-
-    @Inject
-    lateinit var submitUseCase: SubmitExamUseCase
+    lateinit var useCase: SubmitExamUseCase
 
     private val request by lazy {
         SubmitExamRequest()
@@ -59,8 +52,9 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
 
     fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
 
-    fun submitExam() = viewModelScope.launch(Dispatchers.IO) {
-        submitUseCase(coroutineContext, request)
-        configurationManager.clearFinishedExam()
+    fun submitExam() {
+        execute(useCase, request, onSuccess = {
+            configurationManager.clearFinishedExam()
+        })
     }
 }

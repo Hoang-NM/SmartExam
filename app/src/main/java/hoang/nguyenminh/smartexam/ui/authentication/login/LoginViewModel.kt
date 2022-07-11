@@ -6,12 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.authentiaction.LoginUseCase
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,9 +36,8 @@ class LoginViewModel @Inject constructor(application: Application) :
 
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
-    fun login() = viewModelScope.launch(Dispatchers.IO) {
-        request.username = flowOfUserName.value
-        request.password = flowOfPassword.value
-        useCase(coroutineContext, request)
+    fun login() {
+        execute(useCase, request, onSuccess = {
+        })
     }
 }

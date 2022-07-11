@@ -24,8 +24,8 @@ interface SmartExamCloudService {
     suspend fun getQuestionList(@Query("id") id: Int): BaseResponse<List<Question>>
 
     @POST("upload")
-    suspend fun sendExamImage(@Body image: MultipartBody)
+    suspend fun sendExamImage(@Body image: MultipartBody): BaseResponse<Unit>
 
     @PUT("save-exam")
-    suspend fun submitExam(@Body request: SubmitExamRequest)
+    suspend fun submitExam(@Body request: SubmitExamRequest): BaseResponse<Unit>
 }

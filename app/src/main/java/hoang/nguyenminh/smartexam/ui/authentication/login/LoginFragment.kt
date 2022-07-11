@@ -28,7 +28,7 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
 
     private fun login() {
         runBlocking {
-            viewModel.login().join()
+            viewModel.login()
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()

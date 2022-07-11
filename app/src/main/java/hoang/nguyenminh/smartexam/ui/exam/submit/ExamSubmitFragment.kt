@@ -27,7 +27,7 @@ class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
         }
 
     private fun submitExam() = runBlocking {
-        viewModel.submitExam().join()
+        viewModel.submitExam()
         findNavController().navigate(NavigationMainDirections.popToExamMenu())
     }
 }
