@@ -71,9 +71,11 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
             }
 
             btnFinish.setOnClickListener {
-                viewModel.clearSavedExamProgress()
-                Toast.makeText(requireContext(), "Finish exam", Toast.LENGTH_SHORT).show()
-                activity?.onBackPressed()
+                viewModel.flowOfExam.value?.let {
+                    viewModel.clearSavedExamProgress()
+                    Toast.makeText(requireContext(), "Finish exam", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(NavigationMainDirections.toExamSubmit(it))
+                }
             }
 
             viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {

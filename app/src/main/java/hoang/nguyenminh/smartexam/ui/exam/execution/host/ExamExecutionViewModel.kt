@@ -34,7 +34,8 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         }?.let {
             flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
                 val questions = useCase(coroutineContext, it.id).map(Question::toQuestionModel)
-                flowOfExam.value = ExamModel(it.id, 10 * DateTimeXs.MINUTE, questions)
+                flowOfExam.value =
+                    ExamModel(it.id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions)
             }
         }
     }

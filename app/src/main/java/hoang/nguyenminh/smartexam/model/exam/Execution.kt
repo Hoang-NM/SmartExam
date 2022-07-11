@@ -19,7 +19,7 @@ data class Exam(
 ) {
 
     fun toExamModel(): ExamModel =
-        ExamModel(id, timeLimit, questions.map(Question::toQuestionModel))
+        ExamModel(id, timeLimit = timeLimit, questions = questions.map(Question::toQuestionModel))
 }
 
 data class SubmitExamRequest(
@@ -27,11 +27,13 @@ data class SubmitExamRequest(
     @SerializedName("answers") @Expose val answers: List<Answer>
 )
 
+@Parcelize
 data class ExamModel(
     val id: Int,
+    val name: String = "",
     var timeLimit: Long,
     val questions: List<QuestionModel> = listOf()
-)
+) : Parcelable
 
 @Parcelize
 data class Question(

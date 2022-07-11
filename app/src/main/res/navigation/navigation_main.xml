@@ -75,13 +75,13 @@
         <argument
             android:name="path"
             app:argType="string" />
-
-        <action
-            android:id="@+id/pop_to_exam_menu"
-            app:destination="@id/fragment_exam_menu"
-            app:popUpTo="@id/fragment_exam_menu"
-            app:popUpToInclusive="true" />
     </fragment>
+
+    <action
+        android:id="@+id/pop_to_exam_menu"
+        app:destination="@id/fragment_exam_menu"
+        app:popUpTo="@id/fragment_exam_menu"
+        app:popUpToInclusive="true" />
 
     <dialog
         android:id="@+id/dialog_question_navigation"
@@ -97,6 +97,16 @@
             android:name="index"
             app:argType="integer" />
     </dialog>
+
+    <fragment
+        android:id="@+id/fragment_exam_submit"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.submit.ExamSubmitFragment"
+        android:label="@string/lbl_exam_submit">
+
+        <argument
+            android:name="exam"
+            app:argType="hoang.nguyenminh.smartexam.model.exam.ExamModel" />
+    </fragment>
 
     <action
         android:id="@+id/to_home"
@@ -133,6 +143,10 @@
     <action
         android:id="@+id/to_question_navigation"
         app:destination="@id/dialog_question_navigation" />
+
+    <action
+        android:id="@+id/to_exam_submit"
+        app:destination="@id/fragment_exam_submit" />
 
     <fragment
         android:id="@+id/users_list"

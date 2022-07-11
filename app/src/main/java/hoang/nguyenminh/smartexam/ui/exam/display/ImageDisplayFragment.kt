@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.postImageRotate
 import hoang.nguyenminh.base.util.rotate
 import hoang.nguyenminh.base.util.setOnSafeClickListener
+import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentImageDisplayBinding
 
@@ -35,7 +36,7 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
             }
             btnSend.setOnSafeClickListener {
                 viewModel.sendExamImage(navArgs.path)
-                findNavController().navigate(ImageDisplayFragmentDirections.popToExamMenu())
+                findNavController().navigate(NavigationMainDirections.popToExamMenu())
             }
         }
 }
