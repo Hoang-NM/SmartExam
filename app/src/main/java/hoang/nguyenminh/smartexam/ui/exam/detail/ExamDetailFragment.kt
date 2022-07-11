@@ -11,7 +11,8 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamDetailBinding
-import hoang.nguyenminh.smartexam.ui.exam.menu.ExamAction
+import hoang.nguyenminh.smartexam.model.exam.ExamAction
+import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
 
 @AndroidEntryPoint
 class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
@@ -25,11 +26,12 @@ class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
         container: ViewGroup?
     ): FragmentExamDetailBinding =
         FragmentExamDetailBinding.inflate(inflater, container, false).apply {
-            binding = this
             lblResult.viewCompatVisibility(args.action == ExamAction.VIEW_RESULT)
             btnEnterExam.viewCompatVisibility(args.action == ExamAction.EXECUTION)
             btnEnterExam.setOnSafeClickListener {
-                findNavController().navigate(NavigationMainDirections.toExamExecution(id))
+                findNavController().navigate(
+                    NavigationMainDirections.toExamExecution(id, ExamExecutionStatus.INITIALIZE)
+                )
             }
         }
 }

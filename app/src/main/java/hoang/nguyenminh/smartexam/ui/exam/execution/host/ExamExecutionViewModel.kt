@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
+import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
@@ -29,13 +30,26 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
-        args?.let {
-            ExamExecutionFragmentArgs.fromBundle(it)
-        }?.let {
-            flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-                val questions = useCase(coroutineContext, it.id).map(Question::toQuestionModel)
-                flowOfExam.value =
-                    ExamModel(it.id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions)
+        args ?: return
+        ExamExecutionFragmentArgs.fromBundle(args).apply {
+            when (status) {
+                ExamExecutionStatus.INITIALIZE -> {
+                    flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
+                        val questions = useCase(coroutineContext, id).map(Question::toQuestionModel)
+                        flowOfExam.value =
+                            ExamModel(
+                                id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions
+                            ).also {
+                                configurationManager.saveCurrentExam(it)
+                            }
+                    }
+                }
+                ExamExecutionStatus.IN_PROGRESS -> {
+                    flowOfExam.value ?: run {
+                        flowOfExam.value = configurationManager.getUnfinishedExam()
+                    }
+                }
+                else -> return
             }
         }
     }

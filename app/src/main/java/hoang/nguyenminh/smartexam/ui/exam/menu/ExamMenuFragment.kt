@@ -10,10 +10,16 @@ import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
+import hoang.nguyenminh.smartexam.model.exam.ExamAction
+import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import hoang.nguyenminh.smartexam.ui.exam.menu.adapter.ExamMenuAdapter
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
+
+    @Inject
+    lateinit var configurationManager: ConfigurationManager
 
     override val viewModel: ExamMenuViewModel by viewModels()
 
@@ -25,9 +31,15 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
         binding = this
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
-                AppNavigator.MENU_EXAM_EXECUTION -> findNavController().navigate(
-                    NavigationMainDirections.toExamList(ExamAction.EXECUTION)
-                )
+                AppNavigator.MENU_EXAM_EXECUTION -> {
+                    configurationManager.getUnfinishedExam()?.let {
+                        findNavController().navigate(
+                            NavigationMainDirections.toExamExecution(it.id, ExamAction.EXECUTION)
+                        )
+                    } ?: findNavController().navigate(
+                        NavigationMainDirections.toExamList(ExamAction.EXECUTION)
+                    )
+                }
                 AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
                     NavigationMainDirections.toPhotoOption()
                 )
@@ -50,9 +62,4 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
         super.onDestroyView()
         adapter = null
     }
-}
-
-object ExamAction {
-    const val EXECUTION = 0
-    const val VIEW_RESULT = 1
 }

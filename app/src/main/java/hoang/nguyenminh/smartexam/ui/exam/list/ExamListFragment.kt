@@ -10,7 +10,6 @@ import hoang.nguyenminh.base.util.collectLatestOnLifecycle
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamListBinding
-import hoang.nguyenminh.smartexam.ui.exam.menu.ExamAction
 import hoang.nguyenminh.smartexam.ui.exam.list.adapter.ExamListAdapter
 
 @AndroidEntryPoint
