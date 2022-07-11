@@ -1,12 +1,8 @@
-package hoang.nguyenminh.smartexam.ui.exam.capture
+package hoang.nguyenminh.smartexam.ui.exam.photo.capture
 
-import android.Manifest
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
@@ -16,11 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.R
-import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.base.util.FileXs
-import hoang.nguyenminh.base.util.buildAlertDialog
-import hoang.nguyenminh.base.util.isAllPermissionsGranted
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamCaptureBinding
@@ -33,62 +25,19 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
     override val viewModel: ExamCaptureViewModel by viewModels()
 
-    private var permissionLauncher: ActivityResultLauncher<String>? = null
-
     private val imageCapture by lazy {
         ImageCapture.Builder().build()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        permissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it) {
-                    startCamera()
-                } else {
-                    ConfirmRequest(
-                        message = "Please allow application access the required permissions to continue",
-                        positive = getString(R.string.agree),
-                        onPositiveSelected = {
-                            requestPermission()
-                        },
-                        negative = getString(R.string.cancel),
-                        onNegativeSelected = {
-                            requireActivity().onBackPressed()
-                        }).buildAlertDialog(requireContext())
-                }
-            }
     }
 
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamCaptureBinding =
         FragmentExamCaptureBinding.inflate(inflater, container, false).apply {
-            binding = this
-
-            if (requireContext().isAllPermissionsGranted(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            ) {
-                startCamera()
-            } else {
-                requestPermission()
-            }
-
             btnCapture.setOnClickListener {
                 capture(requireContext())
             }
+            startCamera()
         }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    private fun requestPermission() {
-        permissionLauncher?.launch(Manifest.permission.CAMERA)
-    }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.capture
+package hoang.nguyenminh.smartexam.ui.exam.photo.capture
 
 import android.app.Application
 import dagger.hilt.android.lifecycle.HiltViewModel

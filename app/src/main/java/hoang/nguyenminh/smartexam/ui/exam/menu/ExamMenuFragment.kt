@@ -29,7 +29,7 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
                     NavigationMainDirections.toExamList(ExamAction.EXECUTION)
                 )
                 AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
-                    NavigationMainDirections.toExamCapture()
+                    NavigationMainDirections.toPhotoOption()
                 )
                 AppNavigator.MENU_EXAM_HISTORY -> findNavController().navigate(
                     NavigationMainDirections.toExamList(ExamAction.VIEW_RESULT)

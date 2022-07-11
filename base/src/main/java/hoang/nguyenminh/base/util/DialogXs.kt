@@ -1,9 +1,12 @@
 package hoang.nguyenminh.base.util
 
+import android.app.Activity
 import android.content.Context
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import hoang.nguyenminh.base.R
 import hoang.nguyenminh.base.appInstance
 import java.io.Serializable
 
@@ -50,3 +53,27 @@ fun ConfirmRequest.buildAlertDialog(context: Context, @StyleRes style: Int = 0):
                 }
             }
         }.create()
+
+fun Fragment.createConfirmDialog(
+    message: String,
+    onPositiveSelected: () -> Unit,
+    onNegativeSelected: () -> Unit,
+) = ConfirmRequest(
+    message = message,
+    positive = getString(R.string.agree),
+    onPositiveSelected = onPositiveSelected,
+    negative = getString(R.string.cancel),
+    onNegativeSelected = onNegativeSelected
+).buildAlertDialog(requireContext())
+
+fun Activity.createConfirmDialog(
+    message: String,
+    onPositiveSelected: () -> Unit,
+    onNegativeSelected: () -> Unit,
+) = ConfirmRequest(
+    message = message,
+    positive = getString(R.string.agree),
+    onPositiveSelected = onPositiveSelected,
+    negative = getString(R.string.cancel),
+    onNegativeSelected = onNegativeSelected
+).buildAlertDialog(this)

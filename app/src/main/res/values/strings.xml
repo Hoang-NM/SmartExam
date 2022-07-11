@@ -35,4 +35,6 @@
     <string name="format_choice_content">%1$s. %2$s</string>
     <string name="lbl_exam_timer">Exam timer</string>
     <string name="lbl_enter_exam">Take the exam</string>
+    <string name="lbl_open_camera">Open camera</string>
+    <string name="lbl_choose_from_library">Choose from library</string>
 </resources>

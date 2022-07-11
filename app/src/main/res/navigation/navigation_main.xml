@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/fragment_exam_capture"
-        android:name="hoang.nguyenminh.smartexam.ui.exam.capture.ExamCaptureFragment"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.photo.capture.ExamCaptureFragment"
         android:label="@string/lbl_exam_capture"
         tools:layout="@layout/fragment_exam_capture" />
 
@@ -83,6 +83,17 @@
         app:popUpTo="@id/fragment_exam_menu"
         app:popUpToInclusive="true" />
 
+    <fragment
+        android:id="@+id/fragment_exam_submit"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.submit.ExamSubmitFragment"
+        android:label="@string/lbl_exam_submit"
+        tools:layout="@layout/fragment_exam_submit">
+
+        <argument
+            android:name="exam"
+            app:argType="hoang.nguyenminh.smartexam.model.exam.ExamModel" />
+    </fragment>
+
     <dialog
         android:id="@+id/dialog_question_navigation"
         android:name="hoang.nguyenminh.smartexam.ui.exam.execution.navigation_dialog.ExamQuestionNavigationDialog"
@@ -98,15 +109,10 @@
             app:argType="integer" />
     </dialog>
 
-    <fragment
-        android:id="@+id/fragment_exam_submit"
-        android:name="hoang.nguyenminh.smartexam.ui.exam.submit.ExamSubmitFragment"
-        android:label="@string/lbl_exam_submit">
-
-        <argument
-            android:name="exam"
-            app:argType="hoang.nguyenminh.smartexam.model.exam.ExamModel" />
-    </fragment>
+    <dialog
+        android:id="@+id/dialog_photo_option"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.photo.option.ExamPhotoOptionDialog"
+        tools:layout="@layout/dialog_photo_option" />
 
     <action
         android:id="@+id/to_home"
@@ -147,6 +153,10 @@
     <action
         android:id="@+id/to_exam_submit"
         app:destination="@id/fragment_exam_submit" />
+
+    <action
+        android:id="@+id/to_photo_option"
+        app:destination="@id/dialog_photo_option" />
 
     <fragment
         android:id="@+id/users_list"

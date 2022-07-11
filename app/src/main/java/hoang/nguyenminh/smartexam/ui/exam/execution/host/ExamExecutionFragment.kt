@@ -97,7 +97,7 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
             val itemView = actionView as TextView
             itemView.apply {
                 setPadding(10, 0, 10, 0)
-                setTextAppearance(R.style.AppTextAppearance_ToolbarContent)
+                setTextAppearance(R.style.AppTextAppearance_StrongTitle)
             }
             itemView.startCountDownTimer(
                 (viewModel.flowOfExam.value?.timeLimit ?: 0).plus(DateTimeXs.SECOND),

@@ -79,6 +79,10 @@
         <item name="maxImageSize">@dimen/margin_horizontal_xlarge</item>
     </style>
 
+    <style name="AppBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
     <style name="AppBottomSheetCardShapeAppearance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">@dimen/radius_large</item>

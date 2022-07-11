@@ -41,9 +41,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AppTextAppearance.ToolbarContent" parent="AppTextAppearance">
+    <style name="AppTextAppearance.StrongTitle" parent="AppTextAppearance">
         <item name="android:textColor">@color/black_900</item>
         <item name="android:textSize">@dimen/font_xmedium</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
     </style>
 </resources>
