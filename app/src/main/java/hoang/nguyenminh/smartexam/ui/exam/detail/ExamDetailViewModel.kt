@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamDetailUseCase
-import hoang.nguyenminh.smartexam.model.exam.Exam
+import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +20,7 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
     @Inject
     lateinit var useCase: GetExamDetailUseCase
 
-    private val flowOfDetail = MutableStateFlow<Exam?>(null)
+    val flowOfDetail = MutableStateFlow<ExamModel?>(null)
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
@@ -28,10 +28,10 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
             ExamDetailFragmentArgs.fromBundle(it)
         }?.let {
             flowOfDetail.value ?: viewModelScope.launch(Dispatchers.IO) {
-                flowOfDetail.value = useCase(coroutineContext, it.id)
+                flowOfDetail.value = useCase(coroutineContext, it.id).toExamModel()
             }
         }
     }
 
-    fun getDetail(): StateFlow<Exam?> = flowOfDetail
+    fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
 }

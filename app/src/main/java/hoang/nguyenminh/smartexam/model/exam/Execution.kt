@@ -19,7 +19,7 @@ data class Exam(
 ) {
 
     fun toExamModel(): ExamModel =
-        ExamModel(id, timeLimit = timeLimit, questions = questions.map(Question::toQuestionModel))
+        ExamModel(id, name, timeLimit, questions.map(Question::toQuestionModel), createdAt, result)
 }
 
 data class SubmitExamRequest(
@@ -32,7 +32,9 @@ data class ExamModel(
     val id: Int,
     val name: String = "",
     var timeLimit: Long,
-    val questions: List<QuestionModel> = listOf()
+    val questions: List<QuestionModel> = listOf(),
+    val creationDate: String? = null,
+    val result: String = "50/50",
 ) : Parcelable
 
 @Parcelize
@@ -68,7 +70,10 @@ data class QuestionModel(
     val id: Int,
     val content: String,
     var choices: List<Choice> = listOf()
-) : Parcelable
+) : Parcelable {
+
+    fun toAnswer(): Answer = Answer(id, choices)
+}
 
 data class QuestionIndex(
     val index: Int,
@@ -77,8 +82,8 @@ data class QuestionIndex(
 )
 
 data class Answer(
-    @SerializedName("id") @Expose val id: Int,
-    @SerializedName("answer") @Expose val answer: Int
+    val id: Int,
+    val choices: List<Choice> = listOf()
 )
 
 @Parcelize
