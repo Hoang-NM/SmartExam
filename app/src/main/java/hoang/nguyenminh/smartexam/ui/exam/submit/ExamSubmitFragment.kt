@@ -9,6 +9,7 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamSubmitBinding
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
@@ -21,8 +22,12 @@ class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
     ): FragmentExamSubmitBinding =
         FragmentExamSubmitBinding.inflate(inflater, container, false).apply {
             btnSubmit.setOnSafeClickListener {
-                viewModel.submitExam()
-                findNavController().navigate(NavigationMainDirections.popToExamMenu())
+                submitExam()
             }
         }
+
+    private fun submitExam() = runBlocking {
+        viewModel.submitExam().join()
+        findNavController().navigate(NavigationMainDirections.popToExamMenu())
+    }
 }

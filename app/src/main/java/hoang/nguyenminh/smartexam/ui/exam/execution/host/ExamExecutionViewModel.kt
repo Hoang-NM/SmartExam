@@ -53,8 +53,4 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
             }
         }
     }
-
-    fun clearSavedExamProgress() {
-        configurationManager.clearFinishedExam()
-    }
 }

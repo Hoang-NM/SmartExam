@@ -5,11 +5,9 @@ import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
+import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
 import okhttp3.MultipartBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface SmartExamCloudService {
 
@@ -27,4 +25,7 @@ interface SmartExamCloudService {
 
     @POST("upload")
     suspend fun sendExamImage(@Body image: MultipartBody)
+
+    @PUT("save-exam")
+    suspend fun submitExam(@Body request: SubmitExamRequest)
 }

@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -72,8 +71,6 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
 
             btnFinish.setOnClickListener {
                 viewModel.flowOfExam.value?.let {
-                    viewModel.clearSavedExamProgress()
-                    Toast.makeText(requireContext(), "Finish exam", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(NavigationMainDirections.toExamSubmit(it))
                 }
             }

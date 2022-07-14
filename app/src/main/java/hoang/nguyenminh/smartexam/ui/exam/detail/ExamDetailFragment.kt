@@ -45,7 +45,7 @@ class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
                 }
                 viewModel.flowOfDetail.collectLatestOnLifecycle(lifecycleOwner()) {
                     it ?: return@collectLatestOnLifecycle
-                    adapter?.submitList(it.questions.map(QuestionModel::toAnswer))
+                    adapter?.submitList(it.questions.map(QuestionModel::toAnswerModel))
                 }
             }
         }

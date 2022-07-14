@@ -22,21 +22,6 @@ data class Exam(
         ExamModel(id, name, timeLimit, questions.map(Question::toQuestionModel), createdAt, result)
 }
 
-data class SubmitExamRequest(
-    @SerializedName("id") @Expose val id: Int,
-    @SerializedName("answers") @Expose val answers: List<Answer>
-)
-
-@Parcelize
-data class ExamModel(
-    val id: Int,
-    val name: String = "",
-    var timeLimit: Long,
-    val questions: List<QuestionModel> = listOf(),
-    val creationDate: String? = null,
-    val result: String = "50/50",
-) : Parcelable
-
 @Parcelize
 data class Question(
     @SerializedName("id") @Expose val id: Int,
@@ -65,41 +50,20 @@ data class Question(
     fun toQuestionModel(): QuestionModel = QuestionModel(id, content, choices)
 }
 
-@Parcelize
-data class QuestionModel(
-    val id: Int,
-    val content: String,
-    var choices: List<Choice> = listOf()
-) : Parcelable {
-
-    fun toAnswer(): Answer = Answer(id, choices)
-}
-
-data class QuestionIndex(
-    val index: Int,
-    val isSelected: Boolean = false,
-    val isAnswered: Boolean = false
+data class SubmitExamRequest(
+    @SerializedName("answers") @Expose var answers: List<Answer> = emptyList()
 )
 
 data class Answer(
-    val id: Int,
-    val choices: List<Choice> = listOf()
-)
+    @SerializedName("studentAnswer") @Expose var answer: String = "",
+    @SerializedName("questionId") @Expose var questionId: Int = 0,
+    @SerializedName("studentId") @Expose var studentId: Int = 0,
+    @SerializedName("examId") @Expose var examId: Int = 0,
+) {
 
-@Parcelize
-data class Choice(
-    @SerializedName("index") @Expose val index: ChoiceIndex,
-    @SerializedName("content") @Expose val content: String,
-    var isSelected: Boolean = false
-) : Parcelable
-
-enum class ChoiceIndex(val identity: String) {
-    A("A"), B("B"), C("C"), D("D");
-
-    companion object {
-        fun fromStringConstant(identity: String): ChoiceIndex? = values().firstOrNull {
-            it.identity == identity
-        }
+    fun fromAnswerModel(answer: AnswerModel): Answer {
+        val studentAnswer = answer.choices.joinToString { it.index.identity }
+        return Answer(questionId = answer.id, answer = studentAnswer)
     }
 }
 

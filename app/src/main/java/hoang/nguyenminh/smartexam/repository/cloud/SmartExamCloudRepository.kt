@@ -4,6 +4,7 @@ import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
+import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
 import okhttp3.MultipartBody
 
 interface SmartExamCloudRepository {
@@ -17,4 +18,6 @@ interface SmartExamCloudRepository {
     suspend fun getQuestionList(id: Int): List<Question>
 
     suspend fun sendExamImage(image: MultipartBody)
+
+    suspend fun submitExam(param: SubmitExamRequest)
 }
