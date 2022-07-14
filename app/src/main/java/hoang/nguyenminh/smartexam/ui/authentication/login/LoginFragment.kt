@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
 import hoang.nguyenminh.smartexam.ui.main.MainActivity
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
@@ -19,13 +20,18 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
         binding = this
-        btnLogin.setOnClickListener {
+        btnLogin.setOnClickListener { login() }
+        lblCreateAccount.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.toRegister())
+        }
+    }
+
+    private fun login() {
+        runBlocking {
+            viewModel.login().join()
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
-        }
-        lblCreateAccount.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.toRegister())
         }
     }
 }

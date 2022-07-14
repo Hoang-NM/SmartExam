@@ -1,6 +1,8 @@
 package hoang.nguyenminh.smartexam.repository.cloud
 
 import hoang.nguyenminh.smartexam.model.BaseResponse
+import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
+import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
@@ -12,6 +14,8 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 ) : SmartExamCloudRepository {
 
     private fun <T> BaseResponse<T>.unwrap(): T = data
+
+    override suspend fun login(param: LoginRequest): UserInfo = service.login(param).unwrap()
 
     override suspend fun getExam(id: Int): Exam = service.getExam(id).unwrap()
 
