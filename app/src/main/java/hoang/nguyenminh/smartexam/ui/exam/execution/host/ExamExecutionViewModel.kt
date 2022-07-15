@@ -35,13 +35,7 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
             when (status) {
                 ExamExecutionStatus.INITIALIZE -> {
                     flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-                        val questions = useCase(coroutineContext, id).map(Question::toQuestionModel)
-                        flowOfExam.value =
-                            ExamModel(
-                                id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions
-                            ).also {
-                                configurationManager.saveCurrentExam(it)
-                            }
+                        fetchData(this@apply.id)
                     }
                 }
                 ExamExecutionStatus.IN_PROGRESS -> {
@@ -52,5 +46,17 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
                 else -> return
             }
         }
+    }
+
+    private fun fetchData(id: Int) {
+        execute(useCase, id, onSuccess = {
+            val questions = it.map(Question::toQuestionModel)
+            flowOfExam.value =
+                ExamModel(
+                    id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions
+                ).also {
+                    configurationManager.saveCurrentExam(it)
+                }
+        })
     }
 }

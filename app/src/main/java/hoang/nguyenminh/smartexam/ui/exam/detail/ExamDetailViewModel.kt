@@ -2,15 +2,12 @@ package hoang.nguyenminh.smartexam.ui.exam.detail
 
 import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamDetailUseCase
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,9 +24,9 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
         args?.let {
             ExamDetailFragmentArgs.fromBundle(it)
         }?.let {
-            flowOfDetail.value ?: viewModelScope.launch(Dispatchers.IO) {
-                flowOfDetail.value = useCase(coroutineContext, it.id).toExamModel()
-            }
+            flowOfDetail.value ?: execute(useCase, it.id, onSuccess = {
+                flowOfDetail.value = it.toExamModel()
+            })
         }
     }
 
