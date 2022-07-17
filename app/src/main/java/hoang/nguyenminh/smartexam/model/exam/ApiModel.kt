@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 import hoang.nguyenminh.base.util.DateTimeXs
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
+import okhttp3.MultipartBody
 
 data class Exam(
     @SerializedName("id") @Expose val id: Int,
@@ -67,6 +68,12 @@ data class Answer(
     }
 }
 
+data class ExamInfo(
+    @SerializedName("studentId") @Expose var studentId: Int = 0,
+    @SerializedName("examId") @Expose var examId: Int = 1,
+)
+
 data class SubmitExamImageRequest(
+    val body: ExamInfo,
     val path: String
 )

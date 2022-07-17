@@ -14,6 +14,7 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentImageDisplayBinding
+import kotlinx.coroutines.runBlocking
 
 
 @AndroidEntryPoint
@@ -35,8 +36,10 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
                 image.setImageBitmap(bitmap.rotate(matrix))
             }
             btnSend.setOnSafeClickListener {
-                viewModel.sendExamImage(navArgs.path)
-                findNavController().navigate(NavigationMainDirections.popToExamMenu())
+                runBlocking {
+                    viewModel.sendExamImage(navArgs.path).join()
+                    findNavController().navigate(NavigationMainDirections.popToExamMenu())
+                }
             }
         }
 }

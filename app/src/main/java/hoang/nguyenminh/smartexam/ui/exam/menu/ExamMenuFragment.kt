@@ -28,7 +28,6 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamBinding = FragmentExamBinding.inflate(inflater, container, false).apply {
-        binding = this
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
                 AppNavigator.MENU_EXAM_EXECUTION -> {

@@ -16,6 +16,7 @@
     <string name="lbl_create_account">Don\'t have an account? Create now.</string>
     <string name="lbl_already_have_account">Already have an account? Login now.</string>
     <string name="confirm_exit_app">Press again to exit</string>
+    <string name="lbl_logout">Logout</string>
 
     <!-- Main -->
     <string name="label_menu_home">Home</string>

@@ -10,6 +10,7 @@ import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
 import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.Question
+import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +28,8 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     lateinit var useCase: GetQuestionListUseCase
 
     val flowOfExam = MutableStateFlow<ExamModel?>(null)
+
+    var originalQuestionList = listOf<QuestionModel>()
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
@@ -50,11 +53,10 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
 
     private fun fetchData(id: Int) {
         execute(useCase, id, onSuccess = {
-            val questions = it.map(Question::toQuestionModel)
+            originalQuestionList = it.map(Question::toQuestionModel)
+            val questions = originalQuestionList.shuffled()
             flowOfExam.value =
-                ExamModel(
-                    id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions
-                ).also {
+                ExamModel(id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions).also {
                     configurationManager.saveCurrentExam(it)
                 }
         })

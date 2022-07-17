@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import hoang.nguyenminh.smartexam.exception.ErrorResponseException
 
 object ResponseCode {
-    const val OK = 200
+    const val OK = 0
 }
 
 data class BaseResponse<T>(

@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(application: Application) :
         LoginRequest()
     }
 
-    private val flowOfUserName = MutableStateFlow("hoang")
+    private val flowOfUserName = MutableStateFlow("student1@gmail.com")
 
     private val flowOfPassword = MutableStateFlow("123456")
 
@@ -37,6 +37,10 @@ class LoginViewModel @Inject constructor(application: Application) :
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
     fun login() {
+        request.apply {
+            username = flowOfUserName.value
+            password = flowOfPassword.value
+        }
         execute(useCase, request, onSuccess = {
         })
     }

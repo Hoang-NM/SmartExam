@@ -5,6 +5,7 @@ import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.Question
+import hoang.nguyenminh.smartexam.model.exam.ExamInfo
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -23,8 +24,13 @@ interface SmartExamCloudService {
     @GET("get-question")
     suspend fun getQuestionList(@Query("id") id: Int): BaseResponse<List<Question>>
 
-    @POST("upload")
-    suspend fun sendExamImage(@Body image: MultipartBody): BaseResponse<Unit>
+    @POST("upload-img")
+    @Multipart
+    suspend fun sendExamImage(
+        @Part files: MultipartBody.Part,
+        @Query("examId") examId: Int,
+        @Query("studentId") studentId: Int
+    ): BaseResponse<Unit>
 
     @PUT("save-exam")
     suspend fun submitExam(@Body request: SubmitExamRequest): BaseResponse<Unit>
