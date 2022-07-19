@@ -23,7 +23,7 @@
             android:text="@{vm.detail.name}"
             android:textAppearance="@style/AppTextAppearance.Content"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/date/ddmmyy" />
+            tools:text="@tools:sample/lorem" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_questions"
@@ -36,11 +36,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit"
             style="@style/AppWidget.Button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_large"
             android:text="@string/submit"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

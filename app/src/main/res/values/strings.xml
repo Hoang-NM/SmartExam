@@ -26,7 +26,7 @@
     <!-- Exam Execution -->
     <string name="lbl_exam_execution">Exam Execution</string>
     <string name="lbl_exam_capture">Exam Capture</string>
-    <string name="lbl_exam_history">Exam History</string>
+    <string name="lbl_exam_list">Exam List</string>
     <string name="lbl_exam_detail">Exam Detail</string>
     <string name="lbl_exam_image">Exam Image</string>
     <string name="lbl_exam_submit">Submit Exam</string>

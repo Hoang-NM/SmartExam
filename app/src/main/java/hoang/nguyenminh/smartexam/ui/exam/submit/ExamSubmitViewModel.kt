@@ -2,6 +2,7 @@ package hoang.nguyenminh.smartexam.ui.exam.submit
 
 import android.app.Application
 import android.os.Bundle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.SubmitExamUseCase
@@ -13,6 +14,7 @@ import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,16 +45,17 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
             val answers = arguments.exam.questions.map(QuestionModel::toAnswerModel)
             val userId = credentialManager.getAuthenticationInfo()?.userId ?: 0
 
-            request.answers = answers.map(AnswerModel::toAnswer).onEach {
-                it.studentId = userId
-                it.examId = arguments.exam.id
+            request.apply {
+                studentId = userId
+                examId = arguments.exam.id
+                this.answers = answers.map(AnswerModel::toAnswer)
             }
         }
     }
 
     fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
 
-    fun submitExam() {
+    fun submitExam() = viewModelScope.launch {
         execute(useCase, request, onSuccess = {
             configurationManager.clearFinishedExam()
         })

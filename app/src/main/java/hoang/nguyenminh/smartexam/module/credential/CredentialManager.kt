@@ -12,4 +12,5 @@ interface CredentialManager {
 
     fun getToken(): String?
 
+    fun clearAuthenticationInfo()
 }

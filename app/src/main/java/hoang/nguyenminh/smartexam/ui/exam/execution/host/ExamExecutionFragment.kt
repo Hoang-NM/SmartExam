@@ -16,6 +16,7 @@ import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.base.util.DateTimeXs.toTimeString
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
+import hoang.nguyenminh.base.util.createConfirmDialog
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.R
@@ -34,7 +35,6 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamExecutionBinding =
         FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
-            binding = this
             setHasOptionsMenu(true)
             vpQuestion.apply {
                 adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
@@ -77,6 +77,12 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
 
             viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
+                if (it.questions.isEmpty()) {
+                    createConfirmDialog("This exam doesn't have any questions. Please select another.",
+                        onPositiveSelected = { activity?.onBackPressed() },
+                        onNegativeSelected = { activity?.onBackPressed() })
+                    return@collectLatestOnLifecycle
+                }
                 pagerAdapter?.listOfQuestions = it.questions
                 vpQuestion.offscreenPageLimit = it.questions.size
             }

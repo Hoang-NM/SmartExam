@@ -3,10 +3,7 @@ package hoang.nguyenminh.smartexam.repository.cloud
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
-import hoang.nguyenminh.smartexam.model.exam.Exam
-import hoang.nguyenminh.smartexam.model.exam.Question
-import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
-import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
+import hoang.nguyenminh.smartexam.model.exam.*
 import okhttp3.MultipartBody
 
 interface SmartExamCloudRepository {
@@ -22,4 +19,6 @@ interface SmartExamCloudRepository {
     suspend fun sendExamImage(params: SubmitExamImageRequest): ResultWrapper<Unit>
 
     suspend fun submitExam(param: SubmitExamRequest): ResultWrapper<Unit>
+
+    suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer>
 }

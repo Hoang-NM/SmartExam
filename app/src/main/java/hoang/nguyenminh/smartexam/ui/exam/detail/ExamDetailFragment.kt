@@ -36,7 +36,7 @@ class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
             btnEnterExam.viewCompatVisibility(args.action == ExamAction.EXECUTION)
             btnEnterExam.setOnSafeClickListener {
                 findNavController().navigate(
-                    NavigationMainDirections.toExamExecution(id, ExamExecutionStatus.INITIALIZE)
+                    NavigationMainDirections.toExamExecution(args.exam.id, ExamExecutionStatus.INITIALIZE)
                 )
             }
             if (args.action == ExamAction.VIEW_RESULT) {

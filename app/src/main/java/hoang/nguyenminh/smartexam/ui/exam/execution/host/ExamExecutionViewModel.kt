@@ -34,11 +34,11 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     override fun onBind(args: Bundle?) {
         super.onBind(args)
         args ?: return
-        ExamExecutionFragmentArgs.fromBundle(args).apply {
-            when (status) {
+        ExamExecutionFragmentArgs.fromBundle(args).let { args ->
+            when (args.status) {
                 ExamExecutionStatus.INITIALIZE -> {
                     flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-                        fetchData(this@apply.id)
+                        fetchData(args.id)
                     }
                 }
                 ExamExecutionStatus.IN_PROGRESS -> {
@@ -51,12 +51,12 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         }
     }
 
-    private fun fetchData(id: Int) {
+    private fun fetchData(id: Int) = viewModelScope.launch {
         execute(useCase, id, onSuccess = {
             originalQuestionList = it.map(Question::toQuestionModel)
             val questions = originalQuestionList.shuffled()
             flowOfExam.value =
-                ExamModel(id, timeLimit = 10 * DateTimeXs.MINUTE, questions = questions).also {
+                ExamModel(id, questions = questions).also {
                     configurationManager.saveCurrentExam(it)
                 }
         })

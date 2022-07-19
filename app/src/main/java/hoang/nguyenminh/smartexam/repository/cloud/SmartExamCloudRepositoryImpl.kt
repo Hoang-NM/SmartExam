@@ -9,10 +9,7 @@ import hoang.nguyenminh.smartexam.model.ErrorResponse
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
-import hoang.nguyenminh.smartexam.model.exam.Exam
-import hoang.nguyenminh.smartexam.model.exam.Question
-import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
-import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
+import hoang.nguyenminh.smartexam.model.exam.*
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -69,12 +66,15 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
         run {
             val file = prepareImageFileForUpload(File(params.path), IMAGE_SIZE_LIMIT)
             val body = file.asRequestBody(file.getMimeType("image/jpeg").toMediaTypeOrNull())
-            val image = MultipartBody.Part.createFormData("images", file.name, body)
+            val image = MultipartBody.Part.createFormData("image", file.name, body)
             safeApiCall {
-                service.sendExamImage(image, params.body.examId, params.body.studentId).data
+                service.sendExamImage(image, params.query.examId, params.query.studentId).data
             }
         }
 
     override suspend fun submitExam(param: SubmitExamRequest) =
         safeApiCall { service.submitExam(param).data }
+
+    override suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
+        safeApiCall { service.getExamAnswer(param.build()).data }
 }

@@ -12,24 +12,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/space_medium">
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="?colorPrimary"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_curve"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_curve"
+            app:layout_constraintTop_toBottomOf="@id/view_top" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_header"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:padding="@dimen/space_large"
             android:src="@drawable/ic_faze"
+            app:layout_constraintBottom_toBottomOf="@id/view_curve"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintTop_toTopOf="@id/view_top" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_large"
+            android:layout_marginTop="@dimen/space_medium"
             android:text="@string/lbl_username"
             app:boxCornerRadiusTopEnd="@dimen/radius_medium"
             app:boxCornerRadiusTopStart="@dimen/space_medium"
@@ -51,6 +67,7 @@
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_large"
             android:layout_marginTop="@dimen/space_large"
             android:text="@string/lbl_password"
             app:boxCornerRadiusTopEnd="@dimen/radius_medium"
@@ -75,6 +92,7 @@
             style="@style/AppWidget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/space_large"
             android:layout_marginTop="@dimen/space_large"
             android:text="@string/lbl_login"
             app:layout_constraintTop_toBottomOf="@id/edt_password"

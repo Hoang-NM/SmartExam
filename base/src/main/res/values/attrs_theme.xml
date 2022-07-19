@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorShadow" format="color" />
+    <attr name="colorStrokeBorder" format="color" />
+</resources>

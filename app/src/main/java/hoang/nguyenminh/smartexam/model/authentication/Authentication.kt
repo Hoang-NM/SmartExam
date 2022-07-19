@@ -20,8 +20,13 @@ data class LoginRequest(
 
 data class UserInfo(
     @SerializedName("id") @Expose val userId: Int,
-    @SerializedName("email") @Expose val email: Int,
+    @SerializedName("email") @Expose val email: String,
+    @SerializedName("firstName") @Expose val firstName: String? = null,
+    @SerializedName("lastName") @Expose val lastName: String? = null,
+    @SerializedName("class") @Expose val className: String? = null,
     @SerializedName("roleId") @Expose val roleId: Int,
 ) {
+    fun getName() = "$firstName $lastName"
+
     fun getRole(): Role = Role.fromIntConstant(roleId) ?: Role.UNKNOWN
 }

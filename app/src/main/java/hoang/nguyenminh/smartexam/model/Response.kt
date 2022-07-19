@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 object ResponseCode {
-    const val OK = 0
+    const val OK = 200
 }
 
 data class BaseResponse<T>(

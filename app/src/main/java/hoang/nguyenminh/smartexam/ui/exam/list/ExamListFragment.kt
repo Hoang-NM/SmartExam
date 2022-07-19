@@ -27,8 +27,8 @@ class ExamListFragment : SmartExamFragment<FragmentExamListBinding>() {
     ): FragmentExamListBinding =
         FragmentExamListBinding.inflate(inflater, container, false).apply {
             binding = this
-            recHistory.adapter = ExamListAdapter { id ->
-                findNavController().navigate(NavigationMainDirections.toExamDetail(id, args.action))
+            recHistory.adapter = ExamListAdapter {
+                findNavController().navigate(NavigationMainDirections.toExamDetail(it, args.action))
             }.also {
                 adapter = it
             }

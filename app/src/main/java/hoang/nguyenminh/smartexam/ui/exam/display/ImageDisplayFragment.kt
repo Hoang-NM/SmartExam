@@ -37,7 +37,7 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
             }
             btnSend.setOnSafeClickListener {
                 runBlocking {
-                    viewModel.sendExamImage(navArgs.path).join()
+                    viewModel.sendExamImage().join()
                     findNavController().navigate(NavigationMainDirections.popToExamMenu())
                 }
             }

@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/fragment_exam_list"
         android:name="hoang.nguyenminh.smartexam.ui.exam.list.ExamListFragment"
-        android:label="@string/lbl_exam_history"
+        android:label="@string/lbl_exam_list"
         tools:layout="@layout/fragment_exam_list">
 
         <argument
@@ -62,8 +62,8 @@
         tools:layout="@layout/fragment_exam_detail">
 
         <argument
-            android:name="id"
-            app:argType="integer" />
+            android:name="exam"
+            app:argType="hoang.nguyenminh.smartexam.model.exam.ExamModel" />
 
         <argument
             android:name="action"

@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.databinding.ItemExamListBinding
 import hoang.nguyenminh.smartexam.model.exam.Exam
+import hoang.nguyenminh.smartexam.model.exam.ExamModel
 
-class ExamListAdapter(private val onItemClick: (Int) -> Unit) :
-    ListAdapter<Exam, ExamListAdapter.ViewHolder>(ExamListDiffCallback()) {
+class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
+    ListAdapter<ExamModel, ExamListAdapter.ViewHolder>(ExamListDiffCallback()) {
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder = ViewHolder.from(parent)
@@ -23,12 +24,12 @@ class ExamListAdapter(private val onItemClick: (Int) -> Unit) :
     class ViewHolder private constructor(val binding: ItemExamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Exam, onItemClick: (Int) -> Unit) {
+        fun bind(item: ExamModel, onItemClick: (ExamModel) -> Unit) {
             binding.apply {
                 lblName.text = item.name
-                lblDate.text = item.createdAt
+                lblDate.text = item.creationDate
                 root.setOnSafeClickListener {
-                    onItemClick(item.id)
+                    onItemClick(item)
                 }
                 executePendingBindings()
             }
@@ -44,11 +45,11 @@ class ExamListAdapter(private val onItemClick: (Int) -> Unit) :
     }
 }
 
-class ExamListDiffCallback : DiffUtil.ItemCallback<Exam>() {
+class ExamListDiffCallback : DiffUtil.ItemCallback<ExamModel>() {
 
-    override fun areItemsTheSame(oldItem: Exam, newItem: Exam): Boolean =
+    override fun areItemsTheSame(oldItem: ExamModel, newItem: ExamModel): Boolean =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Exam, newItem: Exam): Boolean =
+    override fun areContentsTheSame(oldItem: ExamModel, newItem: ExamModel): Boolean =
         oldItem == newItem
 }

@@ -41,4 +41,9 @@ class CredentialManagerImpl @Inject constructor(
     }
 
     override fun getToken(): String? = prefOfToken
+
+    override fun clearAuthenticationInfo() {
+        prefOfToken = null
+        prefOfAuthenticationInfo = null
+    }
 }

@@ -24,7 +24,6 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamQuestionBinding =
         FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
-            binding = this
             val question: QuestionModel = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
             lblQuestion.text =
                 getString(R.string.format_question_content, question.id, question.content)

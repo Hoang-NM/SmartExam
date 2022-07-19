@@ -7,6 +7,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import hoang.nguyenminh.base.util.ConfirmRequest
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -31,23 +32,28 @@ interface IViewModel {
 abstract class BaseAndroidViewModel(application: Application) : AndroidViewModel(application),
     IViewModel {
 
-    lateinit var sceneRef: WeakReference<Scene>
+    protected var sceneRef = WeakReference<Scene>(null)
+        private set
 
-    lateinit var flowOfConfirmEvent: MutableSharedFlow<ConfirmRequest>
+    private val flowOfConfirmEvent = MutableSharedFlow<ConfirmRequest>(
+        extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
-    lateinit var flowOfToast: MutableSharedFlow<String>
+    private val flowOfToast = MutableSharedFlow<String>(
+        extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     override fun onBind(args: Bundle?) {}
 
     override fun onAttachScene(scene: Scene) {
-        sceneRef.get() ?: scene.also {
-            sceneRef = WeakReference(it)
-        }
+        sceneRef = WeakReference(scene)
     }
 
     override fun onReady() {}
 
-    override fun onDetachScene(scene: Scene) {}
+    override fun onDetachScene(scene: Scene) {
+        sceneRef = WeakReference(null)
+    }
 
     override fun onUnBind() {}
 

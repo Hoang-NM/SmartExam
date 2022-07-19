@@ -61,7 +61,7 @@
         <item name="android:layout_marginStart">?actionBarSize</item>
         <item name="android:layout_marginEnd">?actionBarSize</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">?colorOnSurface</item>
+        <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:textSize">@dimen/font_xxxmedium</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
@@ -87,5 +87,16 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">@dimen/radius_large</item>
         <item name="cornerSizeTopLeft">@dimen/radius_large</item>
+    </style>
+
+    <style name="ProfileLabel">
+        <item name="android:textAppearance">@style/AppTextAppearance.Label</item>
+        <item name="android:paddingTop">@dimen/space_medium</item>
+        <item name="android:paddingBottom">@dimen/space_medium</item>
+        <item name="android:drawablePadding">@dimen/space_medium</item>
+        <item name="android:lines">1</item>
+        <item name="drawableTint">?colorOnSurface</item>
+        <item name="android:textColor">?colorOnSurface</item>
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>

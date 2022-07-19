@@ -4,8 +4,12 @@ import android.app.Application
 import android.os.Bundle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
+import hoang.nguyenminh.smartexam.interactor.exam.GetExamAnswerUseCase
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamDetailUseCase
+import hoang.nguyenminh.smartexam.model.exam.ExamAction
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.model.exam.GetExamAnswerRequest
+import hoang.nguyenminh.smartexam.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -15,7 +19,17 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
     SmartExamViewModel(application) {
 
     @Inject
+    lateinit var credentialManager: CredentialManager
+
+    @Inject
     lateinit var useCase: GetExamDetailUseCase
+
+    @Inject
+    lateinit var resultUseCase: GetExamAnswerUseCase
+
+    val request by lazy {
+        GetExamAnswerRequest()
+    }
 
     val flowOfDetail = MutableStateFlow<ExamModel?>(null)
 
@@ -24,11 +38,23 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
         args?.let {
             ExamDetailFragmentArgs.fromBundle(it)
         }?.let {
-            flowOfDetail.value ?: execute(useCase, it.id, onSuccess = {
-                flowOfDetail.value = it.toExamModel()
-            })
+            if (it.action == ExamAction.VIEW_RESULT) {
+                request.apply {
+                    examId = it.exam.id
+                    studentId = credentialManager.getAuthenticationInfo()?.userId ?: 0
+                }
+                getExamResult()
+                return@let
+            }
+            flowOfDetail.value = it.exam
         }
     }
 
     fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
+
+    fun getExamResult() {
+        execute(resultUseCase, request, onSuccess = {
+            flowOfDetail.value = it.toExamModel()
+        })
+    }
 }
