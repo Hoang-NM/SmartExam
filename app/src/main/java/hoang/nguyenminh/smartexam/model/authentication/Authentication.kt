@@ -25,6 +25,7 @@ data class UserInfo(
     @SerializedName("lastName") @Expose val lastName: String? = null,
     @SerializedName("class") @Expose val className: String? = null,
     @SerializedName("roleId") @Expose val roleId: Int,
+    @SerializedName("classId") @Expose val classId: Int? = 0,
 ) {
     fun getName() = "$firstName $lastName"
 

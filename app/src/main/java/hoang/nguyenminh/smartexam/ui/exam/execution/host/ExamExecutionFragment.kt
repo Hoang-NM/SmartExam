@@ -97,15 +97,15 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
         inflater.inflate(R.menu.menu_exam_execution, menu)
 
         menu.findItem(R.id.exam_timer).apply {
-            val itemView = actionView as TextView
-            itemView.apply {
-                setPadding(10, 0, 10, 0)
-                setTextAppearance(R.style.AppTextAppearance_StrongTitle)
+            val item = actionView as TextView
+            item.apply {
+                setPadding(20, 0, 20, 0)
+                setTextAppearance(R.style.AppTextAppearance_AppbarTitle)
             }
-            itemView.startCountDownTimer(
-                (viewModel.flowOfExam.value?.timeLimit ?: 0).plus(DateTimeXs.SECOND),
-                DateTimeXs.SECOND
-            )
+            viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
+                it ?: return@collectLatestOnLifecycle
+                item.startCountDownTimer((it.timeLimit).plus(DateTimeXs.SECOND), DateTimeXs.SECOND)
+            }
         }
     }
 

@@ -19,10 +19,11 @@
             style="@style/AppWidget.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:minLines="3"
             android:padding="@dimen/space_medium"
             android:scrollbars="vertical"
             app:movementMethod="@{ScrollingMovementMethod.getInstance()}"
-            tools:lines="5"
             tools:text="@tools:sample/lorem/random" />
 
         <androidx.recyclerview.widget.RecyclerView

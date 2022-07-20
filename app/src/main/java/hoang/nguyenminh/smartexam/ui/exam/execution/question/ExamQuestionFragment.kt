@@ -14,6 +14,7 @@ import hoang.nguyenminh.smartexam.ui.exam.execution.question.adapter.QuestionCho
 @AndroidEntryPoint
 class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
 
+    private val KEY_INDEX = "index"
     private val KEY_QUESTION = "question"
 
     override val viewModel: ExamQuestionViewModel by viewModels()
@@ -24,9 +25,10 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamQuestionBinding =
         FragmentExamQuestionBinding.inflate(inflater, container, false).apply {
+            val index: Int = arguments?.getInt(KEY_INDEX) ?: return@apply
             val question: QuestionModel = arguments?.getParcelable(KEY_QUESTION) ?: return@apply
             lblQuestion.text =
-                getString(R.string.format_question_content, question.id, question.content)
+                getString(R.string.format_question_content, index, question.content)
             recChoices.adapter = QuestionChoiceAdapter { pos, model ->
                 saveSelectedChoice(pos, question)
             }.also {
@@ -41,7 +43,7 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
     }
 
     companion object {
-        fun newInstance(question: QuestionModel): ExamQuestionFragment =
+        fun newInstance(index: Int, question: QuestionModel): ExamQuestionFragment =
             ExamQuestionFragment().apply {
                 arguments = bundleOf(KEY_QUESTION to question)
             }

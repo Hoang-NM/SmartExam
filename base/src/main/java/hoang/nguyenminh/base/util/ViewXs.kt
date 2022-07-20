@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.FloatRange
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -28,4 +29,8 @@ fun BottomSheetDialogFragment.setupPercentage(
             }
         }
     }
+}
+
+fun RecyclerView.removeAllItemDecorations() {
+    (0 until itemDecorationCount).forEach { removeItemDecorationAt(it) }
 }

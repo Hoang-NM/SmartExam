@@ -12,7 +12,7 @@ class ExamExecutionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragm
     override fun getItemCount(): Int = listOfQuestions.size
 
     override fun createFragment(position: Int): Fragment =
-        ExamQuestionFragment.newInstance(listOfQuestions[position])
+        ExamQuestionFragment.newInstance(position + 1, listOfQuestions[position])
 
     fun isLastPage(currentPagePosition: Int) = currentPagePosition == listOfQuestions.size - 1
 }

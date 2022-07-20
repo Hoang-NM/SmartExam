@@ -39,4 +39,5 @@
     <string name="lbl_open_camera">Open camera</string>
     <string name="lbl_choose_from_library">Choose from library</string>
     <string name="format_question_index">Question %d</string>
+    <string name="message_confirm_submit_exam">Do you confirm to submit exam?</string>
 </resources>

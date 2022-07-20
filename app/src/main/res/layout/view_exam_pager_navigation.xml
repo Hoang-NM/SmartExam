@@ -11,6 +11,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="?actionBarSize"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -18,7 +19,8 @@
                 style="@style/ClickableIcon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="@dimen/space_xmedium"
+                android:layout_gravity="center"
+                android:padding="@dimen/space_medium"
                 android:src="@drawable/ic_back" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -35,7 +37,8 @@
                 style="@style/ClickableIcon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="@dimen/space_xmedium"
+                android:layout_gravity="center"
+                android:padding="@dimen/space_medium"
                 android:src="@drawable/ic_next" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

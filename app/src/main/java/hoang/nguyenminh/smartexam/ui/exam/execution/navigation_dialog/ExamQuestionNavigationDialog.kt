@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.R
+import hoang.nguyenminh.base.ui.GridSpacingDecoration
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
+import hoang.nguyenminh.base.util.removeAllItemDecorations
 import hoang.nguyenminh.base.util.setupPercentage
 import hoang.nguyenminh.smartexam.base.SmartExamBottomSheetDialog
 import hoang.nguyenminh.smartexam.databinding.DialogQuestionNavigationBinding
@@ -31,9 +35,13 @@ class ExamQuestionNavigationDialog : SmartExamBottomSheetDialog<DialogQuestionNa
     ): DialogQuestionNavigationBinding =
         DialogQuestionNavigationBinding.inflate(inflater, container, false).apply {
             binding = this
+            recQuestions.setupRecyclerView()
             recQuestions.adapter = ExamQuestionIndexAdapter { question ->
                 activity?.onBackPressed()
-                setFragmentResult(KEY_QUESTION_INDEX, bundleOf(KEY_QUESTION_INDEX to question.index))
+                setFragmentResult(
+                    KEY_QUESTION_INDEX,
+                    bundleOf(KEY_QUESTION_INDEX to question.index)
+                )
             }.apply {
                 adapter = this
             }
@@ -46,5 +54,11 @@ class ExamQuestionNavigationDialog : SmartExamBottomSheetDialog<DialogQuestionNa
     override fun onDestroyView() {
         super.onDestroyView()
         adapter = null
+    }
+
+    private fun RecyclerView.setupRecyclerView() {
+        removeAllItemDecorations()
+        val spacing = resources.getDimensionPixelOffset(R.dimen.space_medium)
+        addItemDecoration(GridSpacingDecoration(spacing))
     }
 }
