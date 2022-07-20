@@ -36,14 +36,15 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
             when (throwable) {
                 is IOException -> ResultWrapper.NetworkError
                 is HttpException -> {
-                    try {
-                        val code = throwable.code()
-                        val errorResponse = throwable.unsafeDeserialize<ErrorResponse>(serializer)
-                        ResultWrapper.Error(code, errorResponse, throwable)
-                    } catch (exception: Exception) {
-                        Timber.e(exception)
-                        ResultWrapper.ParserError
-                    }
+                    serializer.runCatching { throwable.unsafeDeserialize<ErrorResponse>(this) }
+                        .fold(
+                            onSuccess = {
+                                ResultWrapper.Error(throwable.code(), it, throwable)
+                            }, onFailure = {
+                                Timber.e(it)
+                                ResultWrapper.ParserError
+                            }
+                        )
                 }
                 else -> {
                     ResultWrapper.Error(null, null, throwable)

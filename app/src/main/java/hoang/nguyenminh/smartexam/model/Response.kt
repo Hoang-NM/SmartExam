@@ -2,7 +2,6 @@ package hoang.nguyenminh.smartexam.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import hoang.nguyenminh.smartexam.exception.ErrorResponseException
 
 object ResponseCode {
     const val OK = 0
@@ -12,18 +11,7 @@ data class BaseResponse<T>(
     @SerializedName("errCode") @Expose val code: Int,
     @SerializedName("errMessage") @Expose val message: String,
     @SerializedName("data") @Expose val data: T
-) {
-    fun isSuccessful(): Boolean = ResponseCode.OK == code
-
-    fun successOrThrows() {
-        if (!isSuccessful()) {
-            failure()
-        }
-    }
-
-    fun failure(): Nothing =
-        throw ErrorResponseException(message, null, null, ErrorResponse(this))
-}
+)
 
 sealed class ResultWrapper<out T> {
 

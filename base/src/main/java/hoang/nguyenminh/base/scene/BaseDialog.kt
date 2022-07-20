@@ -1,5 +1,6 @@
 package hoang.nguyenminh.base.scene
 
+import android.app.Dialog
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import hoang.nguyenminh.base.util.ConfirmRequest
+import hoang.nguyenminh.base.util.buildAlertDialog
 import hoang.nguyenminh.base.util.collectOnLifecycle
 import java.lang.ref.WeakReference
 
-abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
+abstract class BaseDialog<T : ViewDataBinding> : DialogFragment(), Scene {
 
     protected var binding: T? = null
 
@@ -31,7 +34,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
         super.onCreate(savedInstanceState)
         viewModel.run {
             onBind(arguments)
-            onAttachScene(this@BaseFragment)
+            onAttachScene(this@BaseDialog)
             onViewModelCreated()
             onReady()
         }
@@ -63,7 +66,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.run {
-            onDetachScene(this@BaseFragment)
+            onDetachScene(this@BaseDialog)
             onUnBind()
         }
     }
@@ -84,5 +87,19 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
 
     override fun toast(message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+}
+
+class ConfirmDialog(private val confirmRequest: ConfirmRequest) : DialogFragment() {
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        confirmRequest.buildAlertDialog(requireContext())
+}
+
+fun FragmentActivity.dismissDialogFragmentByTag(tag: String?) {
+    supportFragmentManager.findFragmentByTag(tag)?.run {
+        when (this) {
+            is DialogFragment -> if (isAdded) dismissAllowingStateLoss()
+        }
     }
 }

@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.util.createConfirmDialog
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
 import hoang.nguyenminh.smartexam.ui.main.MainActivity
-import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
@@ -27,8 +27,7 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
     }
 
     private fun login() {
-        runBlocking {
-            viewModel.login()
+        viewModel.login(onError = { createConfirmDialog(message = it.message ?: "") }) {
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()

@@ -56,24 +56,24 @@ fun ConfirmRequest.buildAlertDialog(context: Context, @StyleRes style: Int = 0):
 
 fun Fragment.createConfirmDialog(
     message: String,
-    onPositiveSelected: () -> Unit,
-    onNegativeSelected: () -> Unit,
+    onPositiveSelected: () -> Unit = {},
+    onNegativeSelected: () -> Unit = {},
 ) = ConfirmRequest(
     message = message,
     positive = getString(R.string.agree),
     onPositiveSelected = onPositiveSelected,
     negative = getString(R.string.cancel),
     onNegativeSelected = onNegativeSelected
-).buildAlertDialog(requireContext())
+).buildAlertDialog(requireContext()).show()
 
 fun Activity.createConfirmDialog(
     message: String,
-    onPositiveSelected: () -> Unit,
-    onNegativeSelected: () -> Unit,
+    onPositiveSelected: () -> Unit = {},
+    onNegativeSelected: () -> Unit = {},
 ) = ConfirmRequest(
     message = message,
     positive = getString(R.string.agree),
     onPositiveSelected = onPositiveSelected,
     negative = getString(R.string.cancel),
     onNegativeSelected = onNegativeSelected
-).buildAlertDialog(this)
+).buildAlertDialog(this).show()

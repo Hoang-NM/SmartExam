@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import hoang.nguyenminh.base.util.ConfirmRequest
+import hoang.nguyenminh.base.util.collectOnLifecycle
+import java.lang.ref.WeakReference
 
 abstract class BaseBottomSheetDialog<T : ViewDataBinding> : BottomSheetDialogFragment(), Scene {
 
@@ -15,12 +19,30 @@ abstract class BaseBottomSheetDialog<T : ViewDataBinding> : BottomSheetDialogFra
 
     protected abstract val viewModel: BaseAndroidViewModel
 
+    private var baseActivityWeakReference: WeakReference<BaseActivity<*>?>? = null
+
+    protected fun getBaseActivity(): BaseActivity<*>? {
+        return baseActivityWeakReference?.get() ?: (activity as? BaseActivity<*>)?.also {
+            baseActivityWeakReference = WeakReference(it)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.run {
             onBind(arguments)
             onAttachScene(this@BaseBottomSheetDialog)
+            onViewModelCreated()
             onReady()
+        }
+    }
+
+    protected fun onViewModelCreated() {
+        viewModel.getConfirmEvent().collectOnLifecycle(this) {
+            showMessage(it)
+        }
+        viewModel.getToastEvent().collectOnLifecycle(this) {
+            toast(it)
         }
     }
 
@@ -55,4 +77,12 @@ abstract class BaseBottomSheetDialog<T : ViewDataBinding> : BottomSheetDialogFra
     override fun getSceneResource(): Resources = resources
 
     override fun lifecycleOwner(): LifecycleOwner = this
+
+    override fun showMessage(request: ConfirmRequest) {
+        getBaseActivity()?.showMessage(request)
+    }
+
+    override fun toast(message: String?) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
 }

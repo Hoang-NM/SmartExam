@@ -9,6 +9,7 @@ import hoang.nguyenminh.base.scene.BaseAndroidViewModel
 import hoang.nguyenminh.base.scene.BaseBottomSheetDialog
 import hoang.nguyenminh.base.scene.BaseFragment
 import hoang.nguyenminh.base.usecase.CoroutinesUseCase
+import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.model.ResultWrapper
@@ -61,4 +62,8 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
     fun onNetworkError() {
         Timber.e("Network error")
     }
+
+    fun notifyMessage(message: String) = requestConfirm(
+        ConfirmRequest(message = message)
+    )
 }
