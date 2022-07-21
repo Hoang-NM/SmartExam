@@ -5,8 +5,8 @@ object ExamAction {
     const val VIEW_RESULT = 1
 }
 
-object ExamExecutionStatus {
-    const val INITIALIZE = 0
-    const val IN_PROGRESS = 1
-    const val FINISHED = 2
+enum class ExamStatus(val value: String) {
+    INITIALIZE("INITIALIZE"),
+    IN_PROGRESS("IN_PROGRESS"),
+    DONE("DONE")
 }

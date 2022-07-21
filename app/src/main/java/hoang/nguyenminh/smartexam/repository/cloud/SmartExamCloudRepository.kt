@@ -4,7 +4,6 @@ import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.*
-import okhttp3.MultipartBody
 
 interface SmartExamCloudRepository {
 
@@ -12,7 +11,7 @@ interface SmartExamCloudRepository {
 
     suspend fun getExam(id: Int): ResultWrapper<Exam>
 
-    suspend fun getExamList(): ResultWrapper<List<Exam>>
+    suspend fun getExamList(param: GetExamListRequest): ResultWrapper<List<Exam>>
 
     suspend fun getQuestionList(id: Int): ResultWrapper<List<Question>>
 

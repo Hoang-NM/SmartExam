@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import hoang.nguyenminh.base.util.DateTimeXs
+import hoang.nguyenminh.smartexam.model.IQueryMapParam
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -63,13 +64,7 @@ data class SubmitExamRequest(
 data class Answer(
     @SerializedName("questionId") @Expose var questionId: Int = 0,
     @SerializedName("studentAnswer") @Expose var answer: String = ""
-) {
-
-    fun fromAnswerModel(answer: AnswerModel): Answer {
-        val studentAnswer = answer.choices.joinToString { it.index.identity }
-        return Answer(questionId = answer.id, answer = studentAnswer)
-    }
-}
+)
 
 data class ExamImageQuery(
     @SerializedName("studentId") @Expose var studentId: Int = 0,
@@ -84,16 +79,25 @@ data class SubmitExamImageRequest(
 data class GetExamAnswerRequest(
     var examId: Int = 0,
     var studentId: Int = 0
-) {
+) : IQueryMapParam {
 
-    fun build() = hashMapOf<String, String>().also {
-        this.putQueries(it)
-    }
-
-    fun putQueries(map: MutableMap<String, String>) {
+    override fun putQueries(map: MutableMap<String, String>) {
         map.apply {
             put("examId", examId.toString())
             put("studentId", studentId.toString())
+        }
+    }
+}
+
+data class GetExamListRequest(
+    var userId: Int = 0,
+    var status: String = ExamStatus.DONE.value
+) : IQueryMapParam {
+
+    override fun putQueries(map: MutableMap<String, String>) {
+        map.apply {
+            put("userId", userId.toString())
+            put("status", status)
         }
     }
 }

@@ -18,8 +18,8 @@ interface SmartExamCloudService {
     @GET("get-exam")
     suspend fun getExam(@Query("id") id: Int): BaseResponse<Exam>
 
-    @GET("get-exam?id=ALL")
-    suspend fun getExamList(): BaseResponse<List<Exam>>
+    @GET("get-exam")
+    suspend fun getExamList(@QueryMap params: Map<String, String>): BaseResponse<List<Exam>>
 
     @GET("get-question")
     suspend fun getQuestionList(@Query("id") id: Int): BaseResponse<List<Question>>

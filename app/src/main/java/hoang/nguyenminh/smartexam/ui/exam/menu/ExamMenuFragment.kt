@@ -11,7 +11,6 @@ import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamBinding
 import hoang.nguyenminh.smartexam.model.AppNavigator
 import hoang.nguyenminh.smartexam.model.exam.ExamAction
-import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import hoang.nguyenminh.smartexam.ui.exam.menu.adapter.ExamMenuAdapter
 import javax.inject.Inject
@@ -37,7 +36,7 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
 //                            NavigationMainDirections.toExamExecution(it.id, ExamAction.EXECUTION)
 //                        )
 //                    } ?: findNavController().navigate(
-//                        NavigationMainDirections.toExamList(ExamExecutionStatus.IN_PROGRESS)
+//                        NavigationMainDirections.toExamList(ExamStatus.IN_PROGRESS)
 //                    )
                     findNavController().navigate(
                         NavigationMainDirections.toExamList(ExamAction.EXECUTION)

@@ -4,11 +4,10 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
-import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
@@ -36,12 +35,12 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         args ?: return
         ExamExecutionFragmentArgs.fromBundle(args).let { args ->
             when (args.status) {
-                ExamExecutionStatus.INITIALIZE -> {
+                ExamStatus.INITIALIZE -> {
                     flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
                         fetchData(args.id)
                     }
                 }
-                ExamExecutionStatus.IN_PROGRESS -> {
+                ExamStatus.IN_PROGRESS -> {
                     flowOfExam.value ?: run {
                         flowOfExam.value = configurationManager.getUnfinishedExam()
                     }

@@ -13,7 +13,7 @@ import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentExamDetailBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamAction
-import hoang.nguyenminh.smartexam.model.exam.ExamExecutionStatus
+import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.ui.exam.detail.adapter.QuestionAnswerAdapter
 
@@ -36,7 +36,7 @@ class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
             btnEnterExam.viewCompatVisibility(args.action == ExamAction.EXECUTION)
             btnEnterExam.setOnSafeClickListener {
                 findNavController().navigate(
-                    NavigationMainDirections.toExamExecution(args.exam.id, ExamExecutionStatus.INITIALIZE)
+                    NavigationMainDirections.toExamExecution(args.exam.id, ExamStatus.INITIALIZE)
                 )
             }
             if (args.action == ExamAction.VIEW_RESULT) {

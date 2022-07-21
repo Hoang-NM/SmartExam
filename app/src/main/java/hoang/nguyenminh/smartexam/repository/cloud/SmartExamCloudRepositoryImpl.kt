@@ -56,8 +56,8 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
     override suspend fun getExam(id: Int): ResultWrapper<Exam> =
         safeApiCall { service.getExam(id).data }
 
-    override suspend fun getExamList(): ResultWrapper<List<Exam>> =
-        safeApiCall { service.getExamList().data }
+    override suspend fun getExamList(param: GetExamListRequest): ResultWrapper<List<Exam>> =
+        safeApiCall { service.getExamList(param.build()).data }
 
     override suspend fun getQuestionList(id: Int): ResultWrapper<List<Question>> =
         safeApiCall { service.getQuestionList(id).data }

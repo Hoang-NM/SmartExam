@@ -35,7 +35,7 @@
 
         <argument
             android:name="status"
-            app:argType="integer" />
+            app:argType="hoang.nguyenminh.smartexam.model.exam.ExamStatus" />
     </fragment>
 
     <fragment
