@@ -24,6 +24,15 @@
         <item name="backgroundTint">@color/bg_button_state_list</item>
     </style>
 
+    <style name="AppWidget.Button.Border" parent="AppWidget.Button">
+        <item name="android:background">@drawable/shape_button_border</item>
+        <item name="android:backgroundTint">@null</item>
+        <item name="background">@drawable/shape_button_border</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.Button.Border</item>
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
     <style name="AppWidget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
         <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>

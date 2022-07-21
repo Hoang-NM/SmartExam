@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
+        <item name="hintTextColor">@color/black</item>
     </style>
 
     <style name="Theme.SmartExam.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
@@ -28,6 +29,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
+        <item name="hintTextColor">@color/black_200</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="request"
+            type="hoang.nguyenminh.base.util.ConfirmRequest" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_button"
+        android:backgroundTint="@android:color/white"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:elevation="@dimen/elevation_medium"
+        android:paddingHorizontal="@dimen/space_xxmedium"
+        tools:layout_gravity="center"
+        tools:layout_margin="@dimen/margin_horizontal_large"
+        tools:theme="@style/Theme.SmartExam">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_medium"
+            android:gravity="start"
+            android:paddingVertical="@dimen/space_medium"
+            android:text="@{request.title}"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/font_xxmedium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewCompatVisibility="@{!TextUtils.isEmpty(request.title)}"
+            tools:text="@tools:sample/lorem"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="10"
+            android:paddingVertical="@dimen/space_medium"
+            android:text="@{request.message}"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/font_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lbl_title"
+            app:layout_goneMarginTop="@dimen/space_medium"
+            tools:lines="5"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_negative"
+            style="@style/AppWidget.Button.Border"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/space_medium"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_xmedium"
+            android:text="@{request.negative}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_positive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lbl_message"
+            app:layout_constraintWidth_percent="0.4"
+            app:viewCompatVisibility="@{!TextUtils.isEmpty(request.negative)}"
+            tools:text="Cancel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_positive"
+            style="@style/AppWidget.Button"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_xmedium"
+            android:text="@{request.positive}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_negative"
+            app:layout_constraintTop_toBottomOf="@id/lbl_message"
+            app:layout_constraintWidth_percent="0.4"
+            app:viewCompatVisibility="@{!TextUtils.isEmpty(request.positive)}"
+            tools:text="OK" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
