@@ -41,7 +41,7 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
             if (it.action == ExamAction.VIEW_RESULT) {
                 request.apply {
                     examId = it.exam.id
-                    studentId = credentialManager.getAuthenticationInfo()?.userId ?: 0
+                    studentId = credentialManager.getAuthenticationInfo()?.id ?: 0
                 }
                 getExamResult()
                 return@let

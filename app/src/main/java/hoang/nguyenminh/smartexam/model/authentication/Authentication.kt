@@ -19,7 +19,7 @@ data class LoginRequest(
 )
 
 data class UserInfo(
-    @SerializedName("id") @Expose val userId: Int,
+    @SerializedName("id") @Expose val id: Int,
     @SerializedName("email") @Expose val email: String,
     @SerializedName("firstName") @Expose val firstName: String? = null,
     @SerializedName("lastName") @Expose val lastName: String? = null,

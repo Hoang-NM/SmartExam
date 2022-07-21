@@ -10,6 +10,7 @@ import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.*
+import hoang.nguyenminh.smartexam.model.main.HomeInfo
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -52,6 +53,9 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 
     override suspend fun login(param: LoginRequest): ResultWrapper<UserInfo> =
         safeApiCall { service.login(param).data }
+
+    override suspend fun getHomeInfo(param: Int): ResultWrapper<HomeInfo> =
+        safeApiCall { service.getHomeInfo(param).data }
 
     override suspend fun getExam(id: Int): ResultWrapper<Exam> =
         safeApiCall { service.getExam(id).data }

@@ -27,7 +27,7 @@ class QuestionAnswerAdapter :
 
         fun bind(item: AnswerModel) {
             binding.apply {
-                label.text = itemView.context.getString(R.string.format_question_index, item.id)
+                label.text = itemView.context.getString(R.string.format_question_index, layoutPosition + 1)
                 recChoices.adapter = adapter
                 adapter.submitList(item.choices)
                 executePendingBindings()

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.SendExamImageUseCase
-import hoang.nguyenminh.smartexam.model.exam.ExamImageQuery
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +31,7 @@ class ImageDisplayViewModel @Inject constructor(application: Application) :
         args?.let {
             ImageDisplayFragmentArgs.fromBundle(it)
         }?.let { args ->
-            val studentId = credentialManager.getAuthenticationInfo()?.userId ?: 0
+            val studentId = credentialManager.getAuthenticationInfo()?.id ?: 0
             request.apply {
                 path = args.path
                 request.query.studentId = studentId

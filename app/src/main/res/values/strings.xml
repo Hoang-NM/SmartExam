@@ -23,6 +23,11 @@
     <string name="label_menu_exam">Exam</string>
     <string name="label_menu_profile">Profile</string>
 
+    <!-- Home -->
+    <string name="format_total_exam_count">Total Exams: %d</string>
+    <string name="format_completed_exam_count">Completed Exams: %d</string>
+    <string name="format_todo_exam_count">Todo Exams: %d</string>
+
     <!-- Exam Execution -->
     <string name="lbl_exam_execution">Exam Execution</string>
     <string name="lbl_exam_capture">Exam Capture</string>

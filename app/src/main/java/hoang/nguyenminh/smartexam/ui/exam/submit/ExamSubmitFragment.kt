@@ -31,8 +31,9 @@ class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
             recQuestions.adapter = QuestionAnswerAdapter().also {
                 adapter = it
             }
-            viewModel.getDetail().collectLatestOnLifecycle(viewLifecycleOwner) {
+            viewModel.flowOfDetail.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
+                lblName.text = it.name
                 it.questions.map(QuestionModel::toAnswerModel).let { adapter?.submitList(it) }
             }
             btnSubmit.setOnSafeClickListener {

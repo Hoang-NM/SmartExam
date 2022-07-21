@@ -7,6 +7,7 @@ import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.ExamAnswer
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
+import hoang.nguyenminh.smartexam.model.main.HomeInfo
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -14,6 +15,9 @@ interface SmartExamCloudService {
 
     @POST("login")
     suspend fun login(@Body request: LoginRequest): BaseResponse<UserInfo>
+
+    @GET("get-student")
+    suspend fun getHomeInfo(@Query("userId") userId: Int): BaseResponse<HomeInfo>
 
     @GET("get-exam")
     suspend fun getExam(@Query("id") id: Int): BaseResponse<Exam>

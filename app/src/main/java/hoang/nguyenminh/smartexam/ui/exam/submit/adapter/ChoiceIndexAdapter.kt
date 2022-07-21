@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
 import hoang.nguyenminh.smartexam.databinding.ItemQuestionIndexBinding
 import hoang.nguyenminh.smartexam.model.exam.Choice
 
@@ -25,6 +26,7 @@ class ChoiceIndexAdapter :
         fun bind(item: Choice) {
             binding.apply {
                 lblContent.text = item.index.identity
+                lblContent.viewCompatSelected(item.isSelected)
                 executePendingBindings()
             }
         }

@@ -4,10 +4,13 @@ import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.*
+import hoang.nguyenminh.smartexam.model.main.HomeInfo
 
 interface SmartExamCloudRepository {
 
     suspend fun login(param: LoginRequest): ResultWrapper<UserInfo>
+
+    suspend fun getHomeInfo(param: Int): ResultWrapper<HomeInfo>
 
     suspend fun getExam(id: Int): ResultWrapper<Exam>
 

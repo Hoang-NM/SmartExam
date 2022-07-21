@@ -4,8 +4,6 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.base.util.ConfirmRequest
-import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.SubmitExamUseCase
 import hoang.nguyenminh.smartexam.model.exam.AnswerModel
@@ -36,7 +34,7 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
         SubmitExamRequest()
     }
 
-    private val flowOfDetail = MutableStateFlow<ExamModel?>(null)
+    val flowOfDetail = MutableStateFlow<ExamModel?>(null)
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
@@ -45,7 +43,7 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
         }?.let { arguments ->
             flowOfDetail.value = arguments.exam
             val answers = arguments.exam.questions.map(QuestionModel::toAnswerModel)
-            val userId = credentialManager.getAuthenticationInfo()?.userId ?: 0
+            val userId = credentialManager.getAuthenticationInfo()?.id ?: 0
 
             request.apply {
                 studentId = userId
@@ -54,8 +52,6 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
             }
         }
     }
-
-    fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
 
     fun submitExam() = viewModelScope.launch {
         execute(useCase, request, onSuccess = {

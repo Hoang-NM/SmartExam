@@ -45,7 +45,7 @@ class ExamQuestionFragment : SmartExamFragment<FragmentExamQuestionBinding>() {
     companion object {
         fun newInstance(index: Int, question: QuestionModel): ExamQuestionFragment =
             ExamQuestionFragment().apply {
-                arguments = bundleOf(KEY_QUESTION to question)
+                arguments = bundleOf(KEY_INDEX to index, KEY_QUESTION to question)
             }
     }
 

@@ -32,7 +32,7 @@ class ExamListViewModel @Inject constructor(application: Application) :
             ExamListFragmentArgs.fromBundle(it)
         }?.let {
             request.apply {
-                userId = credentialManager.getAuthenticationInfo()?.userId ?: 0
+                userId = credentialManager.getAuthenticationInfo()?.id ?: 0
                 status = when (it.action) {
                     ExamAction.EXECUTION -> ExamStatus.INITIALIZE.value
                     ExamAction.VIEW_RESULT -> ExamStatus.DONE.value
