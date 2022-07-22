@@ -36,11 +36,11 @@ class LoginViewModel @Inject constructor(application: Application) :
 
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
-    fun login(onError: (Throwable) -> Unit, onSuccess: () -> Unit) {
+    fun login(onSuccess: () -> Unit) {
         request.apply {
             username = flowOfUserName.value
             password = flowOfPassword.value
         }
-        execute(useCase, request, onSuccess = { onSuccess() }, onError = { onError(it) })
+        execute(useCase, request, onSuccess = { onSuccess() })
     }
 }

@@ -16,7 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.util.createConfirmDialog
+import hoang.nguyenminh.base.R
+import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.base.util.isAllPermissionsGranted
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
@@ -42,9 +43,14 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
                 if (it) {
                     binding?.tvCapture?.callOnClick()
                 } else {
-                    createConfirmDialog(message = "Please allow application to access the camera to continue",
-                        onPositiveSelected = { requestCameraPermission() },
-                        onNegativeSelected = { requireActivity().onBackPressed() })
+                    showMessage(
+                        ConfirmRequest(
+                            message = "Please allow application to access the camera to continue",
+                            positive = getString(R.string.confirm),
+                            negative = getString(R.string.cancel),
+                            onPositiveSelected = { requestCameraPermission() },
+                            onNegativeSelected = { requireActivity().onBackPressed() })
+                    )
                 }
             }
 
@@ -53,9 +59,14 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
                 if (it) {
                     binding?.tvPhotoPicker?.callOnClick()
                 } else {
-                    createConfirmDialog(message = "Please allow application access the external storage to continue",
-                        onPositiveSelected = { requestStoragePermission() },
-                        onNegativeSelected = { requireActivity().onBackPressed() })
+                    showMessage(
+                        ConfirmRequest(
+                            message = "Please allow application access the external storage to continue",
+                            positive = getString(R.string.confirm),
+                            negative = getString(R.string.cancel),
+                            onPositiveSelected = { requestStoragePermission() },
+                            onNegativeSelected = { requireActivity().onBackPressed() })
+                    )
                 }
             }
     }

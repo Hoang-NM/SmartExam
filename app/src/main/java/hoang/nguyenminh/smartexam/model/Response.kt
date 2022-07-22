@@ -28,6 +28,4 @@ sealed class ResultWrapper<out T> {
 data class ErrorResponse(
     @SerializedName("errCode") @Expose val code: Int,
     @SerializedName("errMessage") @Expose val message: String
-) {
-    constructor(response: BaseResponse<*>) : this(response.code, response.message)
-}
+)

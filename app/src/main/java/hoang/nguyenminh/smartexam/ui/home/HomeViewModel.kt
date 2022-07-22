@@ -24,8 +24,8 @@ class HomeViewModel @Inject constructor(application: Application) :
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
-        val user = credentialManager.getAuthenticationInfo() ?: return
-        execute(useCase, user.id, onSuccess = {
+        val userId = credentialManager.getAuthenticationInfo()?.id ?: 0
+        execute(useCase, userId, onSuccess = {
             flowOfHomeContent.value = it
         })
     }

@@ -33,11 +33,11 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     override fun onBind(args: Bundle?) {
         super.onBind(args)
         args ?: return
-        ExamExecutionFragmentArgs.fromBundle(args).let { args ->
-            when (args.status) {
+        ExamExecutionFragmentArgs.fromBundle(args).let {
+            when (it.status) {
                 ExamStatus.INITIALIZE -> {
                     flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-                        fetchData(args.id)
+                        fetchData(it.id)
                     }
                 }
                 ExamStatus.IN_PROGRESS -> {

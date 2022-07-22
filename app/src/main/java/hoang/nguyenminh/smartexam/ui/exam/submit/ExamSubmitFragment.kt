@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
-import hoang.nguyenminh.base.util.createConfirmDialog
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.R
@@ -15,6 +15,7 @@ import hoang.nguyenminh.smartexam.databinding.FragmentExamSubmitBinding
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.ui.exam.submit.adapter.QuestionAnswerAdapter
 import kotlinx.coroutines.runBlocking
+import hoang.nguyenminh.base.R as baseR
 
 @AndroidEntryPoint
 class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
@@ -37,10 +38,15 @@ class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
                 it.questions.map(QuestionModel::toAnswerModel).let { adapter?.submitList(it) }
             }
             btnSubmit.setOnSafeClickListener {
-                createConfirmDialog(message = getString(R.string.message_confirm_submit_exam),
-                    onPositiveSelected = {
-                        submitExam()
-                    }
+                showMessage(
+                    ConfirmRequest(
+                        message = getString(R.string.message_confirm_submit_exam),
+                        positive = getString(baseR.string.confirm),
+                        negative = getString(baseR.string.cancel),
+                        onPositiveSelected = {
+                            submitExam()
+                        }
+                    )
                 )
             }
         }

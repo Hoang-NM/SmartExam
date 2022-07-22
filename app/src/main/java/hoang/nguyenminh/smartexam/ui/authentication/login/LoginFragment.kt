@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import hoang.nguyenminh.base.util.createConfirmDialog
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
 import hoang.nguyenminh.smartexam.ui.main.MainActivity
@@ -20,17 +19,15 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
         binding = this
-        btnLogin.setOnClickListener { login() }
+        btnLogin.setOnClickListener {
+            viewModel.login {
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
         lblCreateAccount.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.toRegister())
-        }
-    }
-
-    private fun login() {
-        viewModel.login(onError = { createConfirmDialog(message = it.message ?: "") }) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
         }
     }
 }

@@ -1,16 +1,17 @@
-package hoang.nguyenminh.smartexam.ui.exam.list.adapter
+package hoang.nguyenminh.smartexam.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.setOnSafeClickListener
-import hoang.nguyenminh.smartexam.databinding.ItemExamListBinding
+import hoang.nguyenminh.smartexam.databinding.ItemCardMenuBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.ui.exam.list.adapter.ExamModelDiffCallback
 
-class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
-    ListAdapter<ExamModel, ExamListAdapter.ViewHolder>(ExamModelDiffCallback()) {
+class TodoExamAdapter(private val onItemClick: (ExamModel) -> Unit) :
+    ListAdapter<ExamModel, TodoExamAdapter.ViewHolder>(ExamModelDiffCallback()) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ViewHolder = ViewHolder.from(parent)
@@ -20,13 +21,12 @@ class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
         holder.bind(item, onItemClick)
     }
 
-    class ViewHolder private constructor(val binding: ItemExamListBinding) :
+    class ViewHolder private constructor(val binding: ItemCardMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ExamModel, onItemClick: (ExamModel) -> Unit) {
             binding.apply {
-                lblName.text = item.name
-                lblDate.text = item.creationDate
+                label.text = item.name
                 root.setOnSafeClickListener {
                     onItemClick(item)
                 }
@@ -37,18 +37,9 @@ class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemExamListBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemCardMenuBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
-}
-
-class ExamModelDiffCallback : DiffUtil.ItemCallback<ExamModel>() {
-
-    override fun areItemsTheSame(oldItem: ExamModel, newItem: ExamModel): Boolean =
-        oldItem.id == newItem.id
-
-    override fun areContentsTheSame(oldItem: ExamModel, newItem: ExamModel): Boolean =
-        oldItem == newItem
 }

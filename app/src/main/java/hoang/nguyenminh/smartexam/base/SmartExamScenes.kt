@@ -2,6 +2,8 @@ package hoang.nguyenminh.smartexam.base
 
 import android.app.Application
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +26,6 @@ import hoang.nguyenminh.smartexam.databinding.DialogConfirmBinding
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import hoang.nguyenminh.base.R as baseR
 
 abstract class SmartExamActivity<T : ViewDataBinding> : BaseActivity<T>() {
@@ -85,6 +86,17 @@ class SmartExamConfirmDialog : DialogFragment() {
         }
     }.root
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.run {
+            val params = attributes
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            params.width = (resources.displayMetrics.widthPixels * 4) / 5
+            attributes = params
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+    }
+
     companion object {
         fun newInstance(request: ConfirmRequest): SmartExamConfirmDialog =
             SmartExamConfirmDialog().apply {
@@ -100,24 +112,34 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
         useCase: CoroutinesUseCase<ResultWrapper<R>, P>,
         params: P,
         crossinline onSuccess: (R) -> Unit,
-        crossinline onError: (Throwable) -> Unit = {}
+        crossinline onError: (Throwable) -> Boolean = { false }
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase(coroutineContext, params)) {
                 is ResultWrapper.Success -> onSuccess.invoke(response.value)
-                is ResultWrapper.Error -> onError.invoke(response.throwable)
+                is ResultWrapper.Error -> {
+                    if (!onError(response.throwable)) {
+                        onErrorResponse(response.throwable)
+                    } else onError(response.throwable)
+                }
                 is ResultWrapper.ParserError -> onParserError()
                 is ResultWrapper.NetworkError -> onNetworkError()
             }
         }
     }
 
+    fun onErrorResponse(throwable: Throwable) {
+        val message =
+            throwable.localizedMessage ?: resource.getString(R.string.message_unhandled_error)
+        notifyError(message = message, cancelable = true)
+    }
+
     fun onParserError() {
-        // Not yet implemented
+        notifyError(message = R.string.message_unhandled_error, cancelable = true)
     }
 
     fun onNetworkError() {
-        Timber.e("Network error")
+        notifyError(message = R.string.message_network_error, cancelable = true)
     }
 
     protected fun notifyError(

@@ -17,8 +17,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_button"
         android:backgroundTint="@android:color/white"
-        android:clipChildren="true"
-        android:clipToPadding="true"
         android:elevation="@dimen/elevation_medium"
         android:paddingHorizontal="@dimen/space_xxmedium"
         tools:layout_gravity="center"

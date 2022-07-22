@@ -13,10 +13,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
+import hoang.nguyenminh.base.util.ConfirmRequest
 import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.base.util.DateTimeXs.toTimeString
 import hoang.nguyenminh.base.util.collectLatestOnLifecycle
-import hoang.nguyenminh.base.util.createConfirmDialog
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.R
@@ -78,9 +78,12 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
             viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
                 if (it.questions.isEmpty()) {
-                    createConfirmDialog("This exam doesn't have any questions. Please select another.",
-                        onPositiveSelected = { activity?.onBackPressed() },
-                        onNegativeSelected = { activity?.onBackPressed() })
+                    showMessage(
+                        ConfirmRequest(
+                            message = getString(R.string.message_empty_questions),
+                            onPositiveSelected = { activity?.onBackPressed() },
+                            onNegativeSelected = { activity?.onBackPressed() })
+                    )
                     return@collectLatestOnLifecycle
                 }
                 pagerAdapter?.listOfQuestions = it.questions

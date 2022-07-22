@@ -91,13 +91,13 @@ data class GetExamAnswerRequest(
 
 data class GetExamListRequest(
     var userId: Int = 0,
-    var status: String = ExamStatus.DONE.value
+    var status: Int = ExamStatus.DONE.value
 ) : IQueryMapParam {
 
     override fun putQueries(map: MutableMap<String, String>) {
         map.apply {
             put("userId", userId.toString())
-            put("status", status)
+            put("status", status.toString())
         }
     }
 }

@@ -4,6 +4,10 @@
     <string name="default_notification_channel_id" translatable="false">hoang.nguyenminh.smartexam</string>
     <string name="default_notification_channel_description" translatable="false">Smart Exam Notification Channel</string>
 
+    <!-- Common message -->
+    <string name="message_unhandled_error">Oops! Something went wrong. Please try again.</string>
+    <string name="message_network_error">Cannot connect to server. Please try again later.</string>
+
     <!-- Authentication -->
     <string name="lbl_login">Login</string>
     <string name="lbl_register">Register</string>
@@ -27,6 +31,7 @@
     <string name="format_total_exam_count">Total Exams: %d</string>
     <string name="format_completed_exam_count">Completed Exams: %d</string>
     <string name="format_todo_exam_count">Todo Exams: %d</string>
+    <string name="dashboard_dot">&#x2022;&#160;&#160;</string>
 
     <!-- Exam Execution -->
     <string name="lbl_exam_execution">Exam Execution</string>
@@ -45,4 +50,7 @@
     <string name="lbl_choose_from_library">Choose from library</string>
     <string name="format_question_index">Question %d</string>
     <string name="message_confirm_submit_exam">Do you confirm to submit exam?</string>
+    <string name="message_empty_questions">This exam doesn\'t have any questions. Please select another.</string>
+    <string name="chart">Chart</string>
+    <string name="label_todo_exams">Todo Exams</string>
 </resources>

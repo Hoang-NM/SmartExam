@@ -34,7 +34,7 @@ class ExamListViewModel @Inject constructor(application: Application) :
             request.apply {
                 userId = credentialManager.getAuthenticationInfo()?.id ?: 0
                 status = when (it.action) {
-                    ExamAction.EXECUTION -> ExamStatus.INITIALIZE.value
+                    ExamAction.EXECUTION -> ExamStatus.IN_PROGRESS.value
                     ExamAction.VIEW_RESULT -> ExamStatus.DONE.value
                     else -> return@apply
                 }

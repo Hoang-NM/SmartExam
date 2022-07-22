@@ -32,14 +32,17 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
         } catch (throwable: Throwable) {
             Timber.e(throwable)
             when (throwable) {
-                is IOException -> ResultWrapper.NetworkError
+                is IOException -> {
+                    Timber.e(throwable.localizedMessage)
+                    ResultWrapper.NetworkError
+                }
                 is HttpException -> {
                     serializer.runCatching { throwable.unsafeDeserialize<ErrorResponse>(this) }
                         .fold(
                             onSuccess = {
                                 ResultWrapper.Error(throwable.code(), it, throwable)
                             }, onFailure = {
-                                Timber.e(it)
+                                Timber.e(it.localizedMessage)
                                 ResultWrapper.ParserError
                             }
                         )

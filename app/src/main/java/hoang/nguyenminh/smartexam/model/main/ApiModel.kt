@@ -8,8 +8,11 @@ data class HomeInfo(
     @SerializedName("allExam") @Expose val totalExams: Int,
     @SerializedName("completed") @Expose val completedExams: Int,
     @SerializedName("unCompleted") @Expose val todoExams: List<Exam>? = null,
-    @SerializedName("resultExam") @Expose val examResults: List<ExamResult>
-)
+    @SerializedName("resultExam") @Expose val examResults: List<ExamResult>? = null
+) {
+
+    fun getTodoExamsCount() = examResults?.size ?: 0
+}
 
 data class ExamResult(
     @SerializedName("examId") @Expose val examId: Int,
