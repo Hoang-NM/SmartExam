@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.databinding.ItemExamListBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
+import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 
 class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
     ListAdapter<ExamModel, ExamListAdapter.ViewHolder>(ExamModelDiffCallback()) {
@@ -27,6 +29,10 @@ class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
             binding.apply {
                 lblName.text = item.name
                 lblDate.text = item.creationDate
+                lblResult.apply {
+                    viewCompatSelected(item.status == ExamStatus.DONE)
+                    text = item.result
+                }
                 root.setOnSafeClickListener {
                     onItemClick(item)
                 }

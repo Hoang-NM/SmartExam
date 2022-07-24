@@ -14,12 +14,18 @@ data class Exam(
     @SerializedName("time") @Expose val timeLimit: Long = 60 * DateTimeXs.MINUTE,
     @SerializedName("name") @Expose val name: String = "",
     @SerializedName("subject") @Expose val subject: String? = null,
-    @SerializedName("status") @Expose val status: String? = null,
+    @SerializedName("status") @Expose val status: Int? = 0,
     @SerializedName("createdAt") @Expose val createdAt: String? = null,
     @SerializedName("result") @Expose val result: String? = null
 ) : Parcelable {
 
-    fun toExamModel(): ExamModel = ExamModel(id, name, timeLimit, creationDate = createdAt)
+    fun toExamModel(): ExamModel = ExamModel(
+        id,
+        name,
+        timeLimit,
+        creationDate = createdAt,
+        status = ExamStatus.fromIntConstant(status) ?: ExamStatus.INITIALIZE
+    )
 }
 
 @Parcelize
@@ -111,6 +117,12 @@ data class ExamAnswer(
     @SerializedName("ansList") @Expose var ansList: List<Answer>
 ) {
     fun toExamModel(): ExamModel {
-        return ExamModel(examId, name, subject = subject ?: "", result = result)
+        return ExamModel(
+            examId,
+            name,
+            subject = subject ?: "",
+            status = ExamStatus.DONE,
+            result = result
+        )
     }
 }

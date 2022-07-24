@@ -14,6 +14,7 @@ data class ExamModel(
     val questions: List<QuestionModel> = listOf(),
     val creationDate: String? = null,
     val subject: String = "",
+    val status: ExamStatus = ExamStatus.INITIALIZE,
     val result: String = "50/50",
 ) : Parcelable
 

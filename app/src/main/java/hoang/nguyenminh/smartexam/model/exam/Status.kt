@@ -8,5 +8,12 @@ object ExamAction {
 enum class ExamStatus(val value: Int) {
     INITIALIZE(0),
     IN_PROGRESS(1),
-    DONE(2)
+    DONE(2);
+
+    companion object {
+
+        fun fromIntConstant(value: Int?): ExamStatus? = values().firstOrNull {
+            it.value == value
+        }
+    }
 }

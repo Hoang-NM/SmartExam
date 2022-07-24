@@ -25,7 +25,7 @@ class GetExamMenuUseCase @Inject constructor(private val repository: SmartExamCl
         ),
         MenuItem(
             AppNavigator.MENU_EXAM_HISTORY,
-            R.drawable.ic_history,
+            R.drawable.ic_exam_history,
             R.string.lbl_exam_list
         )
     )
