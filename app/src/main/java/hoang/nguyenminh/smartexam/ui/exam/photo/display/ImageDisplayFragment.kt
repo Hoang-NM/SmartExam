@@ -31,7 +31,6 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
         container: ViewGroup?
     ): FragmentImageDisplayBinding =
         FragmentImageDisplayBinding.inflate(inflater, container, false).apply {
-            binding = this
             navArgs.path.let {
                 val matrix = Matrix().apply { postImageRotate(it) }
                 val bitmap = BitmapFactory.decodeFile(it)

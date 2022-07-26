@@ -19,7 +19,6 @@ class RegisterFragment : SmartExamFragment<FragmentRegisterBinding>() {
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentRegisterBinding = FragmentRegisterBinding.inflate(inflater, container, false).apply {
-        binding = this
         btnRegister.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)

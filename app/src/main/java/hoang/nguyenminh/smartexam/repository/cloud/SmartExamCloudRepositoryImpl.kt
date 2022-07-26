@@ -8,6 +8,7 @@ import hoang.nguyenminh.base.util.prepareImageFileForUpload
 import hoang.nguyenminh.smartexam.model.ErrorResponse
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
+import hoang.nguyenminh.smartexam.model.authentication.UpdateUserInfoRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.*
 import hoang.nguyenminh.smartexam.model.main.HomeInfo
@@ -74,9 +75,12 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun submitExam(param: SubmitExamRequest) =
+    override suspend fun submitExam(param: SubmitExamRequest): ResultWrapper<Unit> =
         safeApiCall { service.submitExam(param).data }
 
     override suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
         safeApiCall { service.getExamAnswer(param.build()).data }
+
+    override suspend fun updateUserInfo(params: UpdateUserInfoRequest): ResultWrapper<Unit> =
+        safeApiCall { service.updateUserInfo(params).data }
 }

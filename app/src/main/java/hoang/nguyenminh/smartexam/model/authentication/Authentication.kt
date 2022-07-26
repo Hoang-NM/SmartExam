@@ -31,3 +31,24 @@ data class UserInfo(
 
     fun getRole(): Role = Role.fromIntConstant(roleId) ?: Role.UNKNOWN
 }
+
+data class UpdateUserInfoRequest(
+    @SerializedName("id") @Expose val id: Int,
+    @SerializedName("firstName") @Expose val firstName: String? = null,
+    @SerializedName("lastName") @Expose val lastName: String? = null,
+    @SerializedName("address") @Expose val address: String? = null,
+    @SerializedName("class") @Expose val className: String? = null,
+    @SerializedName("gender") @Expose val gender: Int? = Gender.MALE.value,
+    @SerializedName("dateOfBirth") @Expose val dob: String? = null,
+    @SerializedName("phoneNumber") @Expose val phoneNumber: String? = null,
+)
+
+enum class Gender(val value: Int) {
+    MALE(0), FEMALE(1), OTHER(2);
+
+    companion object {
+        fun fromIntConstant(value: Int): Gender? = values().firstOrNull {
+            it.value == value
+        }
+    }
+}

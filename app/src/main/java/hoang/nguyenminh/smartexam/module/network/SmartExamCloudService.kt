@@ -2,6 +2,7 @@ package hoang.nguyenminh.smartexam.module.network
 
 import hoang.nguyenminh.smartexam.model.BaseResponse
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
+import hoang.nguyenminh.smartexam.model.authentication.UpdateUserInfoRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.Exam
 import hoang.nguyenminh.smartexam.model.exam.ExamAnswer
@@ -41,4 +42,7 @@ interface SmartExamCloudService {
 
     @GET("get-exam-ans")
     suspend fun getExamAnswer(@QueryMap params: Map<String, String>): BaseResponse<ExamAnswer>
+
+    @PUT("edit-user")
+    suspend fun updateUserInfo(@Body request: UpdateUserInfoRequest): BaseResponse<Unit>
 }

@@ -34,7 +34,6 @@ class ExamQuestionNavigationDialog : SmartExamBottomSheetDialog<DialogQuestionNa
         container: ViewGroup?
     ): DialogQuestionNavigationBinding =
         DialogQuestionNavigationBinding.inflate(inflater, container, false).apply {
-            binding = this
             recQuestions.setupRecyclerView()
             recQuestions.adapter = ExamQuestionIndexAdapter { question ->
                 activity?.onBackPressed()

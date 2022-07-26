@@ -17,8 +17,6 @@ class MainActivity : SmartExamActivity<ActivityMainBinding>() {
 
     override fun onCreateViewDataBinding(): ActivityMainBinding =
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
-            binding = this
-
             val primaryDestination =
                 listOf(R.id.fragment_home, R.id.fragment_exam_menu, R.id.fragment_profile)
 

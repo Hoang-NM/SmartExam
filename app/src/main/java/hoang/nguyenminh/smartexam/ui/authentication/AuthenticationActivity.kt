@@ -1,6 +1,5 @@
 package hoang.nguyenminh.smartexam.ui.authentication
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -11,7 +10,6 @@ import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamActivity
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
-import hoang.nguyenminh.smartexam.ui.main.MainActivity
 
 @AndroidEntryPoint
 class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>() {
@@ -37,8 +35,6 @@ class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>(
         DataBindingUtil.setContentView<ActivityAuthenticationBinding>(
             this, R.layout.activity_authentication
         ).apply {
-            binding = this
-
             appbar.apply {
                 val navHostFragment =
                     supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

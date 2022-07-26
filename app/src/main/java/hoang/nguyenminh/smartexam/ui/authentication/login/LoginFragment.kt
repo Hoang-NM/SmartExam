@@ -18,7 +18,6 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
-        binding = this
         btnLogin.setOnClickListener {
             viewModel.login {
                 val intent = Intent(requireContext(), MainActivity::class.java)
