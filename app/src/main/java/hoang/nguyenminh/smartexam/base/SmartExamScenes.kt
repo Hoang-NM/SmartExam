@@ -23,6 +23,7 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.BR
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.DialogConfirmBinding
+import hoang.nguyenminh.smartexam.model.ErrorResponse
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -112,15 +113,19 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
         useCase: CoroutinesUseCase<ResultWrapper<R>, P>,
         params: P,
         crossinline onSuccess: (R) -> Unit,
-        crossinline onError: (Throwable) -> Boolean = { false }
+        crossinline onError: (Throwable, ErrorResponse?) -> Boolean = { _, _ -> false }
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase(coroutineContext, params)) {
                 is ResultWrapper.Success -> onSuccess.invoke(response.value)
                 is ResultWrapper.Error -> {
-                    if (!onError(response.throwable)) {
-                        onErrorResponse(response.throwable)
-                    } else onError(response.throwable)
+                    if (!onError(response.throwable, response.error)) {
+                        response.error?.let {
+                            onErrorResponse(response.error)
+                        } ?: run {
+                            onUnknownError(response.throwable)
+                        }
+                    } else onError(response.throwable, response.error)
                 }
                 is ResultWrapper.ParserError -> onParserError()
                 is ResultWrapper.NetworkError -> onNetworkError()
@@ -128,9 +133,8 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
         }
     }
 
-    fun onErrorResponse(throwable: Throwable) {
-        val message =
-            throwable.localizedMessage ?: resource.getString(R.string.message_unhandled_error)
+    fun onErrorResponse(error: ErrorResponse) {
+        val message = error.message ?: resource.getString(R.string.message_unhandled_error)
         notifyError(message = message, cancelable = true)
     }
 
@@ -140,6 +144,12 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
 
     fun onNetworkError() {
         notifyError(message = R.string.message_network_error, cancelable = true)
+    }
+
+    fun onUnknownError(throwable: Throwable) {
+        val message =
+            throwable.localizedMessage ?: resource.getString(R.string.message_unhandled_error)
+        notifyError(message = message, cancelable = true)
     }
 
     protected fun notifyError(

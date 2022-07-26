@@ -11,7 +11,7 @@ data class HomeInfo(
     @SerializedName("resultExam") @Expose val examResults: List<ExamResult>? = null
 ) {
 
-    fun getTodoExamsCount() = examResults?.size ?: 0
+    fun getTodoExamsCount() = todoExams?.size ?: 0
 }
 
 data class ExamResult(

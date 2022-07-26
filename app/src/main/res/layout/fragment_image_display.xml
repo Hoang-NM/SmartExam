@@ -13,12 +13,6 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/act_exam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_medium" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_send"
             style="@style/AppWidget.FloatingActionButton"

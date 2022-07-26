@@ -15,7 +15,7 @@ import hoang.nguyenminh.smartexam.databinding.FragmentExamDetailBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamAction
 import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
-import hoang.nguyenminh.smartexam.ui.exam.detail.adapter.QuestionAnswerAdapter
+import hoang.nguyenminh.smartexam.ui.exam.submit.adapter.QuestionAnswerAdapter
 
 @AndroidEntryPoint
 class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
@@ -33,20 +33,25 @@ class ExamDetailFragment : SmartExamFragment<FragmentExamDetailBinding>() {
         FragmentExamDetailBinding.inflate(inflater, container, false).apply {
             lblResult.viewCompatVisibility(args.action == ExamAction.VIEW_RESULT)
             recAnswers.viewCompatVisibility(args.action == ExamAction.VIEW_RESULT)
+
+            btnCaptureExam.viewCompatVisibility(args.action == ExamAction.EXECUTION)
+            btnCaptureExam.setOnSafeClickListener {
+                findNavController().navigate(NavigationMainDirections.toPhotoOption(args.exam.id))
+            }
+
             btnEnterExam.viewCompatVisibility(args.action == ExamAction.EXECUTION)
             btnEnterExam.setOnSafeClickListener {
                 findNavController().navigate(
                     NavigationMainDirections.toExamExecution(args.exam.id, ExamStatus.INITIALIZE)
                 )
             }
-            if (args.action == ExamAction.VIEW_RESULT) {
-                recAnswers.adapter = QuestionAnswerAdapter().also {
-                    adapter = it
-                }
-                viewModel.flowOfDetail.collectLatestOnLifecycle(lifecycleOwner()) {
-                    it ?: return@collectLatestOnLifecycle
-                    adapter?.submitList(it.questions.map(QuestionModel::toAnswerModel))
-                }
+
+            recAnswers.adapter = QuestionAnswerAdapter().also {
+                adapter = it
+            }
+            viewModel.flowOfDetail.collectLatestOnLifecycle(lifecycleOwner()) {
+                it ?: return@collectLatestOnLifecycle
+                it.questions.map(QuestionModel::toAnswerModel).let { adapter?.submitList(it) }
             }
         }
 

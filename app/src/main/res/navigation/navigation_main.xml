@@ -42,7 +42,12 @@
         android:id="@+id/fragment_exam_capture"
         android:name="hoang.nguyenminh.smartexam.ui.exam.photo.capture.ExamCaptureFragment"
         android:label="@string/lbl_exam_capture"
-        tools:layout="@layout/fragment_exam_capture" />
+        tools:layout="@layout/fragment_exam_capture">
+
+        <argument
+            android:name="examId"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_exam_list"
@@ -72,9 +77,13 @@
 
     <fragment
         android:id="@+id/fragment_image_display"
-        android:name="hoang.nguyenminh.smartexam.ui.exam.display.ImageDisplayFragment"
+        android:name="hoang.nguyenminh.smartexam.ui.exam.photo.display.ImageDisplayFragment"
         android:label="@string/lbl_exam_image"
         tools:layout="@layout/fragment_image_display">
+
+        <argument
+            android:name="examId"
+            app:argType="integer" />
 
         <argument
             android:name="path"
@@ -84,7 +93,7 @@
     <action
         android:id="@+id/pop_to_exam_menu"
         app:destination="@id/fragment_exam_menu"
-        app:popUpTo="@id/fragment_exam_menu"
+        app:popUpTo="@id/fragment_exam_list"
         app:popUpToInclusive="true" />
 
     <fragment
@@ -116,7 +125,12 @@
     <dialog
         android:id="@+id/dialog_photo_option"
         android:name="hoang.nguyenminh.smartexam.ui.exam.photo.option.ExamPhotoOptionDialog"
-        tools:layout="@layout/dialog_photo_option" />
+        tools:layout="@layout/dialog_photo_option">
+
+        <argument
+            android:name="examId"
+            app:argType="integer" />
+    </dialog>
 
     <action
         android:id="@+id/to_home"
@@ -161,24 +175,4 @@
     <action
         android:id="@+id/to_photo_option"
         app:destination="@id/dialog_photo_option" />
-
-    <fragment
-        android:id="@+id/users_list"
-        android:name="hoang.nguyenminh.smartexam.ui.sample.userList.UserListFragment"
-        tools:layout="@layout/fragment_user_list">
-
-        <action
-            android:id="@+id/action_users_list_to_user_details"
-            app:destination="@id/user_details" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/user_details"
-        android:name="hoang.nguyenminh.smartexam.ui.sample.userDetails.UserDetailsFragment"
-        tools:layout="@layout/fragment_user_details">
-
-        <argument
-            android:name="user"
-            app:argType="string" />
-    </fragment>
 </navigation>

@@ -58,6 +58,14 @@ class ExamSubmitFragment : SmartExamFragment<FragmentExamSubmitBinding>() {
 
     private fun submitExam() = runBlocking {
         viewModel.submitExam().join()
-        findNavController().navigate(NavigationMainDirections.popToExamMenu())
+        showMessage(
+            ConfirmRequest(
+                message = getString(R.string.message_submit_exam_successfully),
+                positive = getString(baseR.string.common_ok),
+                onPositiveSelected = {
+                    findNavController().navigate(NavigationMainDirections.popToExamMenu())
+                }
+            )
+        )
     }
 }

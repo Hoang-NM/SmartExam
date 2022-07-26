@@ -3,19 +3,17 @@ package hoang.nguyenminh.smartexam.model.exam
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import hoang.nguyenminh.base.util.DateTimeXs
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ExamModel(
     val id: Int,
     val name: String = "",
-    var timeLimit: Long = 10 * DateTimeXs.MINUTE,
+    var timeLimit: Long = 10,
     val questions: List<QuestionModel> = listOf(),
-    val creationDate: String? = null,
     val subject: String = "",
     val status: ExamStatus = ExamStatus.INITIALIZE,
-    val result: String = "50/50",
+    val result: String = "",
 ) : Parcelable
 
 @Parcelize
@@ -36,12 +34,14 @@ data class AnswerModel(
     fun toAnswer(): Answer = Answer(id,
         choices.filter { it.isSelected }.joinToString(separator = "") { it.index.identity }
     )
+
+    fun toQuestionModel() = QuestionModel(id, "", choices)
 }
 
 @Parcelize
 data class Choice(
     @SerializedName("index") @Expose val index: ChoiceIndex,
-    @SerializedName("content") @Expose val content: String,
+    @SerializedName("content") @Expose val content: String = "",
     var isSelected: Boolean = false
 ) : Parcelable
 

@@ -32,6 +32,8 @@ class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
 
     private var adapter: TodoExamAdapter? = null
 
+    private var colors = listOf(R.color.color_todo, R.color.color_achieve, R.color.color_total)
+
     override fun onCreateViewDataBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false).apply {
@@ -51,9 +53,9 @@ class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
                 adapter?.submitList(it.todoExams?.map(Exam::toExamModel))
                 setChartData(
                     listOf(
-                        it.totalExams.toFloat(),
+                        it.getTodoExamsCount().toFloat(),
                         it.completedExams.toFloat(),
-                        it.getTodoExamsCount().toFloat()
+                        it.totalExams.toFloat(),
                     )
                 )
             }
@@ -78,8 +80,10 @@ class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
                 anchor: MPPointF?,
                 angleDegrees: Float
             ) {
+                val colorIndex = formattedLabel?.toInt()?.minus(1) ?: -1
+                if (colorIndex !in colors.indices) return
                 mAxisLabelPaint.color =
-                    resources.getColor(R.color.color_achieve, requireContext().theme)
+                    resources.getColor(colors[colorIndex], requireContext().theme)
                 mAxisLabelPaint.textSize =
                     resources.getDimension(hoang.nguyenminh.base.R.dimen.font_xxxlarge)
                 super.drawLabel(

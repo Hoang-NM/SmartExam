@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.setOnSafeClickListener
+import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ItemCardMenuBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.ui.exam.list.adapter.ExamModelDiffCallback
@@ -27,6 +28,7 @@ class TodoExamAdapter(private val onItemClick: (ExamModel) -> Unit) :
         fun bind(item: ExamModel, onItemClick: (ExamModel) -> Unit) {
             binding.apply {
                 label.text = item.name
+                cardIcon.setImageResource(R.drawable.ic_goto)
                 root.setOnSafeClickListener {
                     onItemClick(item)
                 }

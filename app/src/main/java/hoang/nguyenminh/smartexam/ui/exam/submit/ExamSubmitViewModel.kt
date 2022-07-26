@@ -13,7 +13,6 @@ import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
 import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -56,6 +55,6 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
     fun submitExam() = viewModelScope.launch {
         execute(useCase, request, onSuccess = {
             configurationManager.clearFinishedExam()
-        })
+        }, onError = { _, _ -> true })
     }
 }

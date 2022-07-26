@@ -3,7 +3,6 @@ package hoang.nguyenminh.smartexam.model.exam
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.smartexam.model.IQueryMapParam
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -11,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Exam(
     @SerializedName("id") @Expose val id: Int,
-    @SerializedName("time") @Expose val timeLimit: Long = 60 * DateTimeXs.MINUTE,
+    @SerializedName("time") @Expose val timeLimit: Long,
     @SerializedName("name") @Expose val name: String = "",
     @SerializedName("subject") @Expose val subject: String? = null,
     @SerializedName("status") @Expose val status: Int? = 0,
@@ -23,7 +22,7 @@ data class Exam(
         id,
         name,
         timeLimit,
-        creationDate = createdAt,
+        result = result ?: "",
         status = ExamStatus.fromIntConstant(status) ?: ExamStatus.INITIALIZE
     )
 }
@@ -70,11 +69,23 @@ data class SubmitExamRequest(
 data class Answer(
     @SerializedName("questionId") @Expose var questionId: Int = 0,
     @SerializedName("studentAnswer") @Expose var answer: String = ""
-)
+) {
+
+    fun toAnswerModel(): AnswerModel {
+        val indexes = answer.split("", limit = 4)
+        val choices = listOf(
+            Choice(ChoiceIndex.A, "", indexes.firstOrNull { it == ChoiceIndex.A.name } != null),
+            Choice(ChoiceIndex.B, "", indexes.firstOrNull { it == ChoiceIndex.B.name } != null),
+            Choice(ChoiceIndex.C, "", indexes.firstOrNull { it == ChoiceIndex.C.name } != null),
+            Choice(ChoiceIndex.D, "", indexes.firstOrNull { it == ChoiceIndex.D.name } != null),
+        )
+        return AnswerModel(questionId, choices)
+    }
+}
 
 data class ExamImageQuery(
     @SerializedName("studentId") @Expose var studentId: Int = 0,
-    @SerializedName("examId") @Expose var examId: Int = 1,
+    @SerializedName("examId") @Expose var examId: Int = 0,
 )
 
 data class SubmitExamImageRequest(
@@ -111,6 +122,7 @@ data class GetExamListRequest(
 data class ExamAnswer(
     @SerializedName("examId") @Expose var examId: Int = 1,
     @SerializedName("studentId") @Expose var studentId: Int = 1,
+    @SerializedName("time") @Expose val timeLimit: Long,
     @SerializedName("name") @Expose val name: String = "",
     @SerializedName("subject") @Expose val subject: String? = null,
     @SerializedName("result") @Expose var result: String = "20/20",
@@ -120,6 +132,8 @@ data class ExamAnswer(
         return ExamModel(
             examId,
             name,
+            timeLimit,
+            ansList.map(Answer::toAnswerModel).map(AnswerModel::toQuestionModel),
             subject = subject ?: "",
             status = ExamStatus.DONE,
             result = result

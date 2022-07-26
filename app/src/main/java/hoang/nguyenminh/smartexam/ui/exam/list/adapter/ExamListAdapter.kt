@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hoang.nguyenminh.base.util.BindingAdapters.viewCompatSelected
+import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
+import hoang.nguyenminh.base.util.DateTimeXs
 import hoang.nguyenminh.base.util.setOnSafeClickListener
+import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.ItemExamListBinding
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
-import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 
 class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
     ListAdapter<ExamModel, ExamListAdapter.ViewHolder>(ExamModelDiffCallback()) {
@@ -28,9 +30,11 @@ class ExamListAdapter(private val onItemClick: (ExamModel) -> Unit) :
         fun bind(item: ExamModel, onItemClick: (ExamModel) -> Unit) {
             binding.apply {
                 lblName.text = item.name
-                lblDate.text = item.creationDate
+                lblDate.text = itemView.context.getString(
+                    R.string.format_exam_time_limit, item.timeLimit
+                )
                 lblResult.apply {
-                    viewCompatSelected(item.status == ExamStatus.DONE)
+                    viewCompatVisibility(item.result.isNotEmpty())
                     text = item.result
                 }
                 root.setOnSafeClickListener {

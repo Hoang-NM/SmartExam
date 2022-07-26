@@ -31,20 +31,10 @@ class ExamFragment : SmartExamFragment<FragmentExamBinding>() {
         recMenu.adapter = ExamMenuAdapter { _, model ->
             when (model.id) {
                 AppNavigator.MENU_EXAM_EXECUTION -> {
-//                    configurationManager.getUnfinishedExam()?.let {
-//                        findNavController().navigate(
-//                            NavigationMainDirections.toExamExecution(it.id, ExamAction.EXECUTION)
-//                        )
-//                    } ?: findNavController().navigate(
-//                        NavigationMainDirections.toExamList(ExamStatus.IN_PROGRESS)
-//                    )
                     findNavController().navigate(
                         NavigationMainDirections.toExamList(ExamAction.EXECUTION)
                     )
                 }
-                AppNavigator.MENU_EXAM_CAPTURE -> findNavController().navigate(
-                    NavigationMainDirections.toPhotoOption()
-                )
                 AppNavigator.MENU_EXAM_HISTORY -> findNavController().navigate(
                     NavigationMainDirections.toExamList(ExamAction.VIEW_RESULT)
                 )

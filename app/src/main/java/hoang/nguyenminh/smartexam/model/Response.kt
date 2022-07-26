@@ -27,5 +27,5 @@ sealed class ResultWrapper<out T> {
 
 data class ErrorResponse(
     @SerializedName("errCode") @Expose val code: Int,
-    @SerializedName("errMessage") @Expose val message: String
+    @SerializedName("errMessage") @Expose val message: String?
 )

@@ -52,7 +52,7 @@ class ExamDetailViewModel @Inject constructor(application: Application) :
 
     fun getDetail(): StateFlow<ExamModel?> = flowOfDetail
 
-    fun getExamResult() {
+    private fun getExamResult() {
         execute(resultUseCase, request, onSuccess = {
             flowOfDetail.value = it.toExamModel()
         })

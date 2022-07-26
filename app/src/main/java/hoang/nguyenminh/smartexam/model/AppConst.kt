@@ -6,6 +6,5 @@ object AppConst {
 
 object AppNavigator {
     const val MENU_EXAM_EXECUTION = "exam/execution"
-    const val MENU_EXAM_CAPTURE = "exam/capture"
     const val MENU_EXAM_HISTORY = "exam/history"
 }

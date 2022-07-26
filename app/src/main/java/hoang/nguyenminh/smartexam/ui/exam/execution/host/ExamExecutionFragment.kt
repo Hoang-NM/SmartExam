@@ -107,7 +107,10 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
             }
             viewModel.flowOfExam.collectLatestOnLifecycle(viewLifecycleOwner) {
                 it ?: return@collectLatestOnLifecycle
-                item.startCountDownTimer((it.timeLimit).plus(DateTimeXs.SECOND), DateTimeXs.SECOND)
+                item.startCountDownTimer(
+                    (it.timeLimit * DateTimeXs.MINUTE).plus(DateTimeXs.SECOND),
+                    DateTimeXs.SECOND
+                )
             }
         }
     }

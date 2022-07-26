@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.R
 import hoang.nguyenminh.base.util.ConfirmRequest
@@ -29,6 +30,8 @@ import hoang.nguyenminh.smartexam.databinding.DialogPhotoOptionBinding
 class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBinding>() {
 
     override val viewModel: ExamPhotoOptionViewModel by viewModels()
+
+    private val args by navArgs<ExamPhotoOptionDialogArgs>()
 
     private var cameraPermissionLauncher: ActivityResultLauncher<String>? = null
 
@@ -78,7 +81,7 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
         DialogPhotoOptionBinding.inflate(inflater, container, false).apply {
             tvCapture.setOnSafeClickListener {
                 if (requireContext().isAllPermissionsGranted(Manifest.permission.CAMERA)) {
-                    findNavController().navigate(NavigationMainDirections.toExamCapture())
+                    findNavController().navigate(NavigationMainDirections.toExamCapture(args.examId))
                 } else {
                     requestCameraPermission()
                 }
@@ -107,7 +110,7 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
         if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
             val path = data?.data?.getPath(requireContext())
             path?.let {
-                findNavController().navigate(NavigationMainDirections.toImageDisplay(it))
+                findNavController().navigate(NavigationMainDirections.toImageDisplay(args.examId, it))
             }
         }
     }

@@ -6,7 +6,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/space_large">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,30 +28,13 @@
                 app:layout_constraintTop_toBottomOf="@id/view_top" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lbl_chart"
+                android:id="@+id/lbl_todo_exams"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_medium"
-                android:text="@string/chart"
+                android:layout_margin="@dimen/space_large"
+                android:text="@string/label_todo_exams"
                 android:textAppearance="@style/AppTextAppearance.AppbarTitle"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <com.github.mikephil.charting.charts.HorizontalBarChart
-                android:id="@+id/chart"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_margin="@dimen/space_medium"
-                app:layout_constraintTop_toBottomOf="@id/lbl_chart" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lbl_todo_exams"
-                style="@style/AppTextAppearance.StrongTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_medium"
-                android:text="@string/label_todo_exams"
-                android:textAlignment="textStart"
-                app:layout_constraintTop_toBottomOf="@id/chart" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_todo_exams"
@@ -62,6 +46,49 @@
                 app:spanCount="2"
                 tools:itemCount="4"
                 tools:listitem="@layout/item_card_menu" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lbl_chart"
+                style="@style/AppTextAppearance.StrongTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_large"
+                android:text="@string/chart"
+                android:textAlignment="textStart"
+                app:layout_constraintTop_toBottomOf="@id/rec_todo_exams" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="@dimen/space_medium"
+                app:layout_constraintTop_toBottomOf="@id/lbl_chart" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/view_legend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_large"
+                android:layout_marginVertical="@dimen/space_medium"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/chart">
+
+                <include
+                    layout="@layout/item_dashboard_legend"
+                    app:color="@{@color/color_total}"
+                    app:label="@{@string/label_total_exams}" />
+
+                <include
+                    layout="@layout/item_dashboard_legend"
+                    app:color="@{@color/color_achieve}"
+                    app:label="@{@string/label_completed_exams}" />
+
+                <include
+                    layout="@layout/item_dashboard_legend"
+                    app:color="@{@color/color_todo}"
+                    app:label="@{@string/label_todo_exams}" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -11,6 +11,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.FileXs
 import hoang.nguyenminh.smartexam.NavigationMainDirections
@@ -24,6 +25,8 @@ import timber.log.Timber
 class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
 
     override val viewModel: ExamCaptureViewModel by viewModels()
+
+    private val args by navArgs<ExamCaptureFragmentArgs>()
 
     private val imageCapture by lazy {
         ImageCapture.Builder().build()
@@ -66,7 +69,10 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
                 override fun onCaptureSuccess(image: ImageProxy) {
                     super.onCaptureSuccess(image)
                     findNavController().navigate(
-                        NavigationMainDirections.toImageDisplay(createTempImagePath(image))
+                        NavigationMainDirections.toImageDisplay(
+                            args.examId,
+                            createTempImagePath(image)
+                        )
                     )
                 }
             })

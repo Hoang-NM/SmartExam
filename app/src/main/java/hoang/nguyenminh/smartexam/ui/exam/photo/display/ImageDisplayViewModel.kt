@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.ui.exam.display
+package hoang.nguyenminh.smartexam.ui.exam.photo.display
 
 import android.app.Application
 import android.os.Bundle
@@ -30,10 +30,11 @@ class ImageDisplayViewModel @Inject constructor(application: Application) :
         super.onBind(args)
         args?.let {
             ImageDisplayFragmentArgs.fromBundle(it)
-        }?.let { args ->
+        }?.let { arguments ->
             val studentId = credentialManager.getAuthenticationInfo()?.id ?: 0
             request.apply {
-                path = args.path
+                path = arguments.path
+                request.query.examId = arguments.examId
                 request.query.studentId = studentId
             }
         }

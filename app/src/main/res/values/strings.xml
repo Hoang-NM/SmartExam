@@ -21,6 +21,7 @@
     <string name="lbl_already_have_account">Already have an account? Login now.</string>
     <string name="confirm_exit_app">Press again to exit</string>
     <string name="lbl_logout">Logout</string>
+    <string name="message_confirm_logout">Do you confirm to logout?</string>
 
     <!-- Main -->
     <string name="label_menu_home">Home</string>
@@ -37,6 +38,7 @@
     <string name="lbl_exam_execution">Exam Execution</string>
     <string name="lbl_exam_capture">Exam Capture</string>
     <string name="lbl_exam_list">Exam List</string>
+    <string name="lbl_exam_history">Exam History</string>
     <string name="lbl_exam_detail">Exam Detail</string>
     <string name="lbl_exam_image">Exam Image</string>
     <string name="lbl_exam_submit">Submit Exam</string>
@@ -46,11 +48,17 @@
     <string name="format_choice_content">%1$s. %2$s</string>
     <string name="lbl_exam_timer">Exam timer</string>
     <string name="lbl_enter_exam">Take the exam</string>
+    <string name="lbl_capture_exam">Capture Exam</string>
     <string name="lbl_open_camera">Open camera</string>
     <string name="lbl_choose_from_library">Choose from library</string>
     <string name="format_question_index">Question %d</string>
     <string name="message_confirm_submit_exam">Do you confirm to submit exam?</string>
     <string name="message_empty_questions">This exam doesn\'t have any questions. Please select another.</string>
+    <string name="message_submit_exam_successfully">Submit exam successfully.</string>
+    <string name="message_submit_exam_image_successfully">Submit exam image successfully.</string>
     <string name="chart">Chart</string>
     <string name="label_todo_exams">Todo Exams</string>
+    <string name="label_total_exams">Total Exams</string>
+    <string name="label_completed_exams">Completed Exams</string>
+    <string name="format_exam_time_limit">%d minutes</string>
 </resources>
