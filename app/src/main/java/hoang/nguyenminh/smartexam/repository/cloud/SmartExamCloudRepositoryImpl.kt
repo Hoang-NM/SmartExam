@@ -13,6 +13,9 @@ import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.exam.*
 import hoang.nguyenminh.smartexam.model.main.HomeInfo
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -27,42 +30,65 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
     private val service: SmartExamCloudService
 ) : SmartExamCloudRepository {
 
-    private suspend fun <T> safeApiCall(call: suspend () -> T): ResultWrapper<T> =
-        call.runCatching { ResultWrapper.Success(call.invoke()) }.fold(
-            onSuccess = {
-                ResultWrapper.Success(call.invoke())
-            }, onFailure = { throwable ->
-                Timber.e(throwable)
-                when (throwable) {
-                    is IOException -> {
-                        Timber.e(throwable.localizedMessage)
-                        ResultWrapper.NetworkError
-                    }
-                    is HttpException -> {
-                        throwable.safeDeserialize<ErrorResponse>(serializer)?.let {
-                            ResultWrapper.Error(throwable.code(), it, throwable)
-                        } ?: ResultWrapper.ParserError
-                    }
-                    else -> {
-                        ResultWrapper.Error(null, null, throwable)
-                    }
-                }
+    private val defaultCoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Timber.e(throwable)
+        when (throwable) {
+            is IOException -> {
+                Timber.e(throwable.localizedMessage)
+                ResultWrapper.NetworkError
             }
-        )
+            is HttpException -> {
+                throwable.safeDeserialize<ErrorResponse>(serializer)?.let {
+                    ResultWrapper.Error(throwable.code(), it, throwable)
+                } ?: ResultWrapper.ParserError
+            }
+            else -> {
+                ResultWrapper.Error(null, null, throwable)
+            }
+        }
+    }
+
+    private suspend fun <T> safeApiCall(call: suspend () -> T) =
+        withContext(Dispatchers.IO + defaultCoroutineExceptionHandler) {
+            call()
+        }
+
+//    private suspend fun <T> safeApiCall(call: suspend () -> T): ResultWrapper<T> =
+//        call.runCatching { ResultWrapper.Success(call.invoke()) }.fold(
+//            onSuccess = {
+//                ResultWrapper.Success(call.invoke())
+//            }, onFailure = { throwable ->
+//                Timber.e(throwable)
+//                when (throwable) {
+//                    is IOException -> {
+//                        Timber.e(throwable.localizedMessage)
+//                        ResultWrapper.NetworkError
+//                    }
+//                    is HttpException -> {
+//                        throwable.safeDeserialize<ErrorResponse>(serializer)?.let {
+//                            ResultWrapper.Error(throwable.code(), it, throwable)
+//                        } ?: ResultWrapper.ParserError
+//                    }
+//                    else -> {
+//                        ResultWrapper.Error(null, null, throwable)
+//                    }
+//                }
+//            }
+//        )
 
     override suspend fun login(param: LoginRequest): ResultWrapper<UserInfo> =
         safeApiCall { service.login(param).data }
 
-    override suspend fun getHomeInfo(param: Int): ResultWrapper<HomeInfo> =
+    override suspend fun getHomeInfo(param: Int): HomeInfo =
         safeApiCall { service.getHomeInfo(param).data }
 
-    override suspend fun getExam(id: Int): ResultWrapper<Exam> =
+    override suspend fun getExam(id: Int): Exam =
         safeApiCall { service.getExam(id).data }
 
-    override suspend fun getExamList(param: GetExamListRequest): ResultWrapper<List<Exam>> =
+    override suspend fun getExamList(param: GetExamListRequest): List<Exam> =
         safeApiCall { service.getExamList(param.build()).data }
 
-    override suspend fun getQuestionList(id: Int): ResultWrapper<List<Question>> =
+    override suspend fun getQuestionList(id: Int): List<Question> =
         safeApiCall { service.getQuestionList(id).data }
 
     override suspend fun sendExamImage(params: SubmitExamImageRequest) =
@@ -75,12 +101,12 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun submitExam(param: SubmitExamRequest): ResultWrapper<Unit> =
+    override suspend fun submitExam(param: SubmitExamRequest) =
         safeApiCall { service.submitExam(param).data }
 
-    override suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
+    override suspend fun getExamAnswer(param: GetExamAnswerRequest): ExamAnswer =
         safeApiCall { service.getExamAnswer(param.build()).data }
 
-    override suspend fun updateUserInfo(params: UpdateUserInfoRequest): ResultWrapper<Unit> =
+    override suspend fun updateUserInfo(params: UpdateUserInfoRequest) =
         safeApiCall { service.updateUserInfo(params).data }
 }

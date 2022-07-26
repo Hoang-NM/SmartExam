@@ -8,7 +8,6 @@ import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.SendExamImageUseCase
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +39,7 @@ class ImageDisplayViewModel @Inject constructor(application: Application) :
         }
     }
 
-    fun sendExamImage() = viewModelScope.launch(Dispatchers.IO) {
+    fun sendExamImage() = viewModelScope.launch {
         useCase(coroutineContext, request)
     }
 }

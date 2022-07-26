@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
 import hoang.nguyenminh.smartexam.navigator.AppNavigator.toMain
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
@@ -18,7 +19,8 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
         btnLogin.setOnClickListener {
-            viewModel.login {
+            runBlocking {
+                viewModel.login()
                 requireActivity().toMain(true)
             }
         }

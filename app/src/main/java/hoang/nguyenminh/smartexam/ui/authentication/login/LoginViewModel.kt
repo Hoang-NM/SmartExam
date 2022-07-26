@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,11 +37,11 @@ class LoginViewModel @Inject constructor(application: Application) :
 
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
-    fun login(onSuccess: () -> Unit) {
+    fun login() = viewModelScope.launch {
         request.apply {
             username = flowOfUserName.value
             password = flowOfPassword.value
         }
-        execute(useCase, request, onSuccess = { onSuccess() })
+        execute(useCase, request)
     }
 }

@@ -25,8 +25,13 @@ import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.DialogConfirmBinding
 import hoang.nguyenminh.smartexam.model.ErrorResponse
 import hoang.nguyenminh.smartexam.model.ResultWrapper
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import timber.log.Timber
+import java.io.IOException
 import hoang.nguyenminh.base.R as baseR
 
 abstract class SmartExamActivity<T : ViewDataBinding> : BaseActivity<T>() {
@@ -108,6 +113,29 @@ class SmartExamConfirmDialog : DialogFragment() {
 }
 
 abstract class SmartExamViewModel(application: Application) : BaseAndroidViewModel(application) {
+
+    protected fun coroutineExceptionHandler(
+        handleNetworkError: () -> Unit = this::onNetworkError,
+        handleFailureResponse: (Throwable) -> Unit = this::onUnknownError,
+        lastStand: ((Throwable) -> Unit) = this::onUnknownError
+    ) = CoroutineExceptionHandler { _, throwable ->
+        Timber.e(throwable)
+        when (throwable) {
+            is IOException -> handleNetworkError()
+            is HttpException -> handleFailureResponse(throwable)
+            else -> lastStand(throwable)
+        }
+    }
+
+    protected val defaultCoroutineExceptionHandler = coroutineExceptionHandler()
+
+    protected suspend inline fun <R, P> execute(
+        useCase: CoroutinesUseCase<R, P>,
+        params: P,
+        exceptionHandler: CoroutineExceptionHandler = defaultCoroutineExceptionHandler
+    ) = withContext(Dispatchers.IO + exceptionHandler) {
+        useCase(coroutineContext, params)
+    }
 
     protected inline fun <R, P> execute(
         useCase: CoroutinesUseCase<ResultWrapper<R>, P>,

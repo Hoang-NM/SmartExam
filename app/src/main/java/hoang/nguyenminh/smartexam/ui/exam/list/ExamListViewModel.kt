@@ -2,12 +2,14 @@ package hoang.nguyenminh.smartexam.ui.exam.list
 
 import android.app.Application
 import android.os.Bundle
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamListUseCase
 import hoang.nguyenminh.smartexam.model.exam.*
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,8 +46,10 @@ class ExamListViewModel @Inject constructor(application: Application) :
 
     override fun onReady() {
         super.onReady()
-        flowOfExamList.value ?: execute(useCase, request, onSuccess = {
-            flowOfExamList.value = it.map(Exam::toExamModel)
-        })
+        flowOfExamList.value ?: viewModelScope.launch {
+            execute(useCase, request).apply {
+                flowOfExamList.value = map(Exam::toExamModel)
+            }
+        }
     }
 }

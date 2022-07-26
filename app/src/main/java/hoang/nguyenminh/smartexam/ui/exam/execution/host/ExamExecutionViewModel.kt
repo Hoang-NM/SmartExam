@@ -51,13 +51,13 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
     }
 
     private fun fetchData(id: Int) = viewModelScope.launch {
-        execute(useCase, id, onSuccess = {
-            originalQuestionList = it.map(Question::toQuestionModel)
+        execute(useCase, id).apply {
+            originalQuestionList = map(Question::toQuestionModel)
             val questions = originalQuestionList.shuffled()
             flowOfExam.value =
                 ExamModel(id, questions = questions).also {
                     configurationManager.saveCurrentExam(it)
                 }
-        })
+        }
     }
 }
