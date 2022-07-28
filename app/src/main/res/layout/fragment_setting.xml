@@ -29,63 +29,72 @@
             android:tint="?colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/view_top"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lbl_name"
-            style="@style/ProfileLabel"
-            android:layout_width="match_parent"
+            style="@style/SettingContent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space_large"
-            android:layout_marginTop="@dimen/space_medium"
-            android:drawableStart="@drawable/ic_person"
-            app:layout_constraintTop_toBottomOf="@id/view_curve"
+            app:layout_constraintBottom_toTopOf="@id/lbl_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_avatar"
+            app:layout_constraintTop_toTopOf="@id/img_avatar"
             tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lbl_email"
-            style="@style/ProfileLabel"
-            android:layout_width="match_parent"
+            style="@style/SettingContent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space_large"
-            android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="@dimen/space_medium"
+            app:layout_constraintBottom_toTopOf="@id/lbl_class"
+            app:layout_constraintEnd_toEndOf="@id/lbl_name"
+            app:layout_constraintStart_toStartOf="@id/lbl_name"
             app:layout_constraintTop_toBottomOf="@id/lbl_name"
             tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lbl_class"
-            style="@style/ProfileLabel"
-            android:layout_width="match_parent"
+            style="@style/SettingContent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/space_large"
-            android:drawableStart="@drawable/ic_class"
+            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+            app:layout_constraintEnd_toEndOf="@id/lbl_name"
+            app:layout_constraintStart_toStartOf="@id/lbl_name"
             app:layout_constraintTop_toBottomOf="@id/lbl_email"
             tools:text="@tools:sample/lorem" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_cancel"
-            style="@style/AppWidget.Button.Border"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_profile"
+            style="@style/SettingLabel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:layout_marginBottom="@dimen/space_medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_save"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.4" />
+            android:layout_marginTop="@dimen/space_medium"
+            android:drawableStart="@drawable/ic_profile"
+            android:text="@string/label_menu_profile"
+            app:layout_constraintTop_toBottomOf="@id/view_curve" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_save"
-            style="@style/AppWidget.Button"
-            android:layout_width="0dp"
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_line"
+            android:layout_marginHorizontal="@dimen/space_large"
+            android:background="@color/color_background_black"
+            app:layout_constraintTop_toBottomOf="@id/lbl_profile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_logout"
+            style="@style/SettingLabel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/submit"
             android:layout_marginBottom="@dimen/space_medium"
+            android:drawableStart="@drawable/ic_logout"
+            android:text="@string/lbl_logout"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_cancel"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintTop_toBottomOf="@id/view_divider"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

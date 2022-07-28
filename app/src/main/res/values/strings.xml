@@ -22,10 +22,12 @@
     <string name="confirm_exit_app">Press again to exit</string>
     <string name="lbl_logout">Logout</string>
     <string name="message_confirm_logout">Do you confirm to logout?</string>
+    <string name="message_update_user_info_successfully">Update user info successfully?</string>
 
     <!-- Main -->
     <string name="label_menu_home">Home</string>
     <string name="label_menu_exam">Exam</string>
+    <string name="label_menu_setting">Setting</string>
     <string name="label_menu_profile">Profile</string>
 
     <!-- Home -->

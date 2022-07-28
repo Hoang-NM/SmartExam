@@ -10,7 +10,6 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentProfileBinding
-import hoang.nguyenminh.smartexam.navigator.AppNavigator.toAuthentication
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -27,21 +26,22 @@ class ProfileFragment : SmartExamFragment<FragmentProfileBinding>() {
             lblEmail.text = it.email
             lblClass.text = it.className
         }
-
-        btnLogout.setOnSafeClickListener {
-            showMessage(
-                ConfirmRequest(
-                    message = getString(R.string.message_confirm_logout),
-                    positive = getString(hoang.nguyenminh.base.R.string.confirm),
-                    negative = getString(hoang.nguyenminh.base.R.string.cancel),
-                    onPositiveSelected = {
-                        runBlocking {
-                            viewModel.clearAuthenticationInfo().join()
-                            requireActivity().toAuthentication(true)
+        btnCancel.setOnSafeClickListener {
+            requireActivity().onBackPressed()
+        }
+        btnSave.setOnSafeClickListener {
+            runBlocking {
+                viewModel.saveUserInfo().join()
+                showMessage(
+                    ConfirmRequest(
+                        message = getString(R.string.message_update_user_info_successfully),
+                        positive = getString(hoang.nguyenminh.base.R.string.common_ok),
+                        onPositiveSelected = {
+                            requireActivity().onBackPressed()
                         }
-                    }
+                    )
                 )
-            )
+            }
         }
     }
 }

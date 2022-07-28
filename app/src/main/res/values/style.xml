@@ -99,7 +99,7 @@
     </style>
 
     <style name="ProfileLabel">
-        <item name="android:textAppearance">@style/AppTextAppearance.Label</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.Title</item>
         <item name="android:paddingTop">@dimen/space_medium</item>
         <item name="android:paddingBottom">@dimen/space_medium</item>
         <item name="android:drawablePadding">@dimen/space_medium</item>
@@ -107,5 +107,30 @@
         <item name="drawableTint">?colorOnSurface</item>
         <item name="android:textColor">?colorOnSurface</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SettingContent">
+        <item name="android:textAppearance">@style/AppTextAppearance.Label</item>
+        <item name="android:paddingStart">@dimen/space_medium</item>
+        <item name="android:paddingEnd">@dimen/space_medium</item>
+        <item name="android:paddingTop">@dimen/space_small</item>
+        <item name="android:paddingBottom">@dimen/space_small</item>
+        <item name="android:lines">1</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SettingLabel">
+        <item name="android:foreground">@drawable/ripple_fx</item>
+        <item name="android:textAppearance">@style/AppTextAppearance.Title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingStart">@dimen/space_large</item>
+        <item name="android:paddingEnd">@dimen/space_large</item>
+        <item name="android:paddingTop">@dimen/space_medium</item>
+        <item name="android:paddingBottom">@dimen/space_medium</item>
+        <item name="android:drawablePadding">@dimen/space_medium</item>
+        <item name="android:drawableEnd">@drawable/ic_next</item>
     </style>
 </resources>

@@ -12,7 +12,7 @@
         android:title="@string/label_menu_exam" />
 
     <item
-        android:id="@+id/fragment_profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/label_menu_profile" />
+        android:id="@+id/fragment_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/label_menu_setting" />
 </menu>
