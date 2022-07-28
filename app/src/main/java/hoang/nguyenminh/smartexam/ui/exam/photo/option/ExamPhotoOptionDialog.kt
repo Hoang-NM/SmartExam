@@ -8,6 +8,8 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamBottomSheetDialog
 import hoang.nguyenminh.smartexam.databinding.DialogPhotoOptionBinding
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -110,7 +113,10 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
         if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
             val path = data?.data?.getPath(requireContext())
             path?.let {
-                findNavController().navigate(NavigationMainDirections.toImageDisplay(args.examId, it))
+                Timber.e("ImageFilePath: $path")
+                findNavController().navigate(
+                    NavigationMainDirections.toImageDisplay(args.examId, it)
+                )
             }
         }
     }
@@ -125,11 +131,12 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
 
     @SuppressLint("Recycle")
     private fun Uri.getPath(context: Context): String? {
-        val cursor: Cursor? = context.contentResolver.query(this, null, null, null, null)
-        return cursor?.let {
-            cursor.moveToFirst()
-            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            cursor.getString(idx)
-        } ?: path
+        return if (DocumentsContract.isDocumentUri(context, this)) {
+            val docId = DocumentsContract.getDocumentId(this)
+            val split = docId.split(":")
+            Environment.getExternalStorageDirectory().absolutePath + "/" + split[1]
+        } else {
+            path
+        }
     }
 }

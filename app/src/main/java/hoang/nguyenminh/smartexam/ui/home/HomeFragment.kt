@@ -22,7 +22,7 @@ import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentHomeBinding
 import hoang.nguyenminh.smartexam.model.exam.Exam
-import hoang.nguyenminh.smartexam.model.exam.ExamStatus
+import hoang.nguyenminh.smartexam.model.exam.ExamAction
 import hoang.nguyenminh.smartexam.ui.home.adapter.TodoExamAdapter
 
 @AndroidEntryPoint
@@ -40,7 +40,7 @@ class HomeFragment : SmartExamFragment<FragmentHomeBinding>() {
         chart.create()
         recTodoExams.adapter = TodoExamAdapter {
             findNavController().navigate(
-                NavigationMainDirections.toExamExecution(it.id, ExamStatus.INITIALIZE)
+                NavigationMainDirections.toExamDetail(it, ExamAction.EXECUTION)
             )
         }.also { adapter = it }
     }

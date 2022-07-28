@@ -74,16 +74,16 @@ class CornerFocusZoneView : View {
 
         bottomStartRect.apply {
             left = cornerPadding
-            top = height / 2 - rectHeight - cornerPadding
+            top = height - rectHeight - cornerPadding
             right = rectWidth + cornerPadding
-            bottom = height / 2 - cornerPadding
+            bottom = height - cornerPadding
         }
 
         bottomEndRect.apply {
             left = width - cornerPadding
-            top = height / 2 - rectHeight - cornerPadding
+            top = height - rectHeight - cornerPadding
             right = width - rectWidth - cornerPadding
-            bottom = height / 2 - cornerPadding
+            bottom = height - cornerPadding
         }
 
         canvas.drawRect(topStartRect, paint)

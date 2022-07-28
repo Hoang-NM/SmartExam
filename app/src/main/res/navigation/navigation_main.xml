@@ -99,7 +99,7 @@
     <action
         android:id="@+id/pop_to_exam_menu"
         app:destination="@id/fragment_exam_menu"
-        app:popUpTo="@id/fragment_exam_list"
+        app:popUpTo="@id/fragment_exam_menu"
         app:popUpToInclusive="true" />
 
     <fragment
