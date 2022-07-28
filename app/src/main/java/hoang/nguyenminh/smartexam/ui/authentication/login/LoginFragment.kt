@@ -1,6 +1,5 @@
 package hoang.nguyenminh.smartexam.ui.authentication.login
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -8,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
-import hoang.nguyenminh.smartexam.ui.main.MainActivity
+import hoang.nguyenminh.smartexam.navigator.AppNavigator.toMain
 
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
@@ -20,9 +19,7 @@ class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
         btnLogin.setOnClickListener {
             viewModel.login {
-                val intent = Intent(requireContext(), MainActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+                requireActivity().toMain(true)
             }
         }
         lblCreateAccount.setOnClickListener {

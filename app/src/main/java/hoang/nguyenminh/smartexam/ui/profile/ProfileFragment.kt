@@ -1,6 +1,5 @@
 package hoang.nguyenminh.smartexam.ui.profile
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -11,7 +10,7 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentProfileBinding
-import hoang.nguyenminh.smartexam.ui.authentication.AuthenticationActivity
+import hoang.nguyenminh.smartexam.navigator.AppNavigator.toAuthentication
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -38,10 +37,7 @@ class ProfileFragment : SmartExamFragment<FragmentProfileBinding>() {
                     onPositiveSelected = {
                         runBlocking {
                             viewModel.clearAuthenticationInfo().join()
-                            val intent =
-                                Intent(requireContext(), AuthenticationActivity::class.java)
-                            startActivity(intent)
-                            requireActivity().finish()
+                            requireActivity().toAuthentication(true)
                         }
                     }
                 )

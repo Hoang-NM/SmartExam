@@ -10,24 +10,27 @@ import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamActivity
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
+import hoang.nguyenminh.smartexam.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.navigator.AppNavigator.toMain
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>() {
 
     override val viewModel: AuthenticationViewModel by viewModels()
 
+    @Inject
+    lateinit var credentialManager: CredentialManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                !viewModel.isLoading
+                !this@AuthenticationActivity::credentialManager.isInitialized
+            }
+            if (this@AuthenticationActivity::credentialManager.isInitialized) {
+                if (credentialManager.getAuthenticationInfo() != null) toMain(true)
             }
         }
-
-//        if (viewModel.flowOfAuthenticationInfo.value != null) {
-//            val intent = Intent(baseContext, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
         super.onCreate(savedInstanceState)
     }
 
