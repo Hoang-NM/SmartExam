@@ -1,8 +1,10 @@
 package hoang.nguyenminh.base.util
 
+import android.text.InputType
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE
@@ -48,5 +50,11 @@ object BindingAdapters {
     @JvmStatic
     fun View.viewCompatSelected(selected: Boolean) {
         isSelected = selected
+    }
+
+    @BindingAdapter("bindInputType")
+    @JvmStatic
+    fun AppCompatEditText.bindInputType(type: Int?) {
+        inputType = type ?: InputType.TYPE_CLASS_TEXT
     }
 }

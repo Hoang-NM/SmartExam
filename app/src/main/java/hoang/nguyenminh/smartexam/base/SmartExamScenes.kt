@@ -117,7 +117,7 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase(coroutineContext, params)) {
-                is ResultWrapper.Success -> onSuccess.invoke(response.value)
+                is ResultWrapper.Success -> onSuccess(response.value)
                 is ResultWrapper.Error -> {
                     if (!onError(response.throwable, response.error)) {
                         response.error?.let {

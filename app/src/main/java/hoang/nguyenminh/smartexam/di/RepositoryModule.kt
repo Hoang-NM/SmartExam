@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hoang.nguyenminh.base.serializer.Serializer
 import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepositoryImpl
+import hoang.nguyenminh.smartexam.repository.SmartExamCloudRepository
+import hoang.nguyenminh.smartexam.repository.SmartExamCloudRepositoryImpl
 import javax.inject.Singleton
 
 @Module

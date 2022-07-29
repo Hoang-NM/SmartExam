@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.repository.cloud
+package hoang.nguyenminh.smartexam.repository
 
 import hoang.nguyenminh.base.network.safeDeserialize
 import hoang.nguyenminh.base.serializer.Serializer
@@ -28,9 +28,9 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 ) : SmartExamCloudRepository {
 
     private suspend fun <T> safeApiCall(call: suspend () -> T): ResultWrapper<T> =
-        call.runCatching { ResultWrapper.Success(call.invoke()) }.fold(
+        call.runCatching { ResultWrapper.Success(call()) }.fold(
             onSuccess = {
-                ResultWrapper.Success(call.invoke())
+                ResultWrapper.Success(call())
             }, onFailure = { throwable ->
                 Timber.e(throwable)
                 when (throwable) {

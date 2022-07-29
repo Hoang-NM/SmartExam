@@ -4,7 +4,7 @@ import hoang.nguyenminh.base.usecase.CoroutinesUseCase
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.model.AppNavigator
 import hoang.nguyenminh.smartexam.model.main.MenuItem
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
+import hoang.nguyenminh.smartexam.repository.SmartExamCloudRepository
 import javax.inject.Inject
 
 class GetExamMenuUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :

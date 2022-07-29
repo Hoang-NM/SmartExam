@@ -5,7 +5,7 @@ import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.module.credential.CredentialManager
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
+import hoang.nguyenminh.smartexam.repository.SmartExamCloudRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val repository: SmartExamCloudRepository) :

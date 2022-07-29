@@ -63,4 +63,16 @@
     <string name="label_total_exams">Total Exams</string>
     <string name="label_completed_exams">Completed Exams</string>
     <string name="format_exam_time_limit">%d minutes</string>
+
+    <!-- Profile -->
+    <string name="lbl_first_name">First Name</string>
+    <string name="lbl_last_name">Last Name</string>
+    <string name="lbl_address">Address</string>
+    <string name="lbl_class">Class</string>
+    <string name="lbl_gender">Gender</string>
+    <string name="lbl_date_of_birth">Date of birth</string>
+    <string name="lbl_phone_number">Phone Number</string>
+    <string name="lbl_male">Male</string>
+    <string name="lbl_female">Female</string>
+    <string name="title_date_picker">Date picker</string>
 </resources>
