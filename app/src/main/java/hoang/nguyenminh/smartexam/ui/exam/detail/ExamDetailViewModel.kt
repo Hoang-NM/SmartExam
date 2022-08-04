@@ -9,7 +9,7 @@ import hoang.nguyenminh.smartexam.interactor.exam.GetExamDetailUseCase
 import hoang.nguyenminh.smartexam.model.exam.ExamAction
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.GetExamAnswerRequest
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

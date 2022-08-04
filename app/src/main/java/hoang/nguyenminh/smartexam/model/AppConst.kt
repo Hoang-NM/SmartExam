@@ -12,7 +12,7 @@ object AppNavigator {
     const val MENU_EXAM_HISTORY = "exam/history"
 }
 
-const val API_PATTERN_INSTANT = DateTimeXs.FORMAT_DATE_TIME_ISO
+const val API_PATTERN_INSTANT = DateTimeXs.FORMAT_DATE_STUPID
 
 internal const val POST_FIX_TIMEZONE_UTC = 'Z'
 

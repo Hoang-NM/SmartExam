@@ -1,6 +1,5 @@
 package hoang.nguyenminh.smartexam.di
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -8,12 +7,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hoang.nguyenminh.base.serializer.Serializer
 import hoang.nguyenminh.base.serializer.impl.GsonSerializer
-import hoang.nguyenminh.smartexam.SmartExamApplication
 import hoang.nguyenminh.smartexam.appInstance
-import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
-import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManagerImpl
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
-import hoang.nguyenminh.smartexam.module.credential.CredentialManagerImpl
+import hoang.nguyenminh.smartexam.util.module.configuration.ConfigurationManager
+import hoang.nguyenminh.smartexam.util.module.configuration.ConfigurationManagerImpl
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManagerImpl
 import javax.inject.Singleton
 
 @Module

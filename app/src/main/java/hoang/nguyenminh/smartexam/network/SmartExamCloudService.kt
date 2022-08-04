@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.module.network
+package hoang.nguyenminh.smartexam.network
 
 import hoang.nguyenminh.smartexam.model.BaseResponse
 import hoang.nguyenminh.smartexam.model.authentication.LoginRequest

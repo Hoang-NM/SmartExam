@@ -127,6 +127,7 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
                         }
                     } else onError(response.throwable, response.error)
                 }
+                is ResultWrapper.ServerError -> onServerError(response.message)
                 is ResultWrapper.ParserError -> onParserError()
                 is ResultWrapper.NetworkError -> onNetworkError()
             }
@@ -135,6 +136,11 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
 
     fun onErrorResponse(error: ErrorResponse) {
         val message = error.message ?: resource.getString(R.string.message_unhandled_error)
+        notifyError(message = message, cancelable = true)
+    }
+
+    fun onServerError(errMessage: String?) {
+        val message = errMessage ?: resource.getString(R.string.message_unhandled_error)
         notifyError(message = message, cancelable = true)
     }
 

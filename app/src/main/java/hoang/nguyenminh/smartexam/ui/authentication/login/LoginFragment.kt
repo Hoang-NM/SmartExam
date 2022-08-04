@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentLoginBinding
-import hoang.nguyenminh.smartexam.navigator.AppNavigator.toMain
+import hoang.nguyenminh.smartexam.util.navigator.AppNavigator.toMain
 
 @AndroidEntryPoint
 class LoginFragment : SmartExamFragment<FragmentLoginBinding>() {

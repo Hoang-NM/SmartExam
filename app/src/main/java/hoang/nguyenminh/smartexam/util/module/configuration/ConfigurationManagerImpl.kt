@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.module.configuration
+package hoang.nguyenminh.smartexam.util.module.configuration
 
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey

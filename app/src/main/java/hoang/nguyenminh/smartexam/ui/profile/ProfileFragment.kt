@@ -53,18 +53,28 @@ class ProfileFragment : SmartExamFragment<FragmentProfileBinding>() {
             requireActivity().onBackPressed()
         }
         btnSave.setOnSafeClickListener {
-            runBlocking {
-                viewModel.saveUserInfo().join()
-                showMessage(
-                    ConfirmRequest(
-                        message = getString(R.string.message_update_user_info_successfully),
-                        positive = getString(hoang.nguyenminh.base.R.string.common_ok),
-                        onPositiveSelected = {
-                            requireActivity().onBackPressed()
-                        }
-                    )
+            showMessage(
+                ConfirmRequest(
+                    message = getString(R.string.message_confirm_update_user_info),
+                    positive = getString(hoang.nguyenminh.base.R.string.common_ok),
+                    onPositiveSelected = {
+                        updateUserInfo()
+                    }
                 )
-            }
+            )
         }
+    }
+
+    private fun updateUserInfo() = runBlocking {
+        viewModel.saveUserInfo().join()
+        showMessage(
+            ConfirmRequest(
+                message = getString(R.string.message_update_user_info_successfully),
+                positive = getString(hoang.nguyenminh.base.R.string.common_ok),
+                onPositiveSelected = {
+                    requireActivity().onBackPressed()
+                }
+            )
+        )
     }
 }

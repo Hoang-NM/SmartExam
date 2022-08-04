@@ -18,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/space_large">
 
             <View
                 android:id="@+id/view_top"
@@ -61,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
                 app:hint="@{@string/lbl_last_name}"
                 app:inputText="@={vm.lastName}"
                 app:layout_constraintTop_toBottomOf="@id/view_firstname" />
@@ -72,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
                 app:hint="@{@string/lbl_address}"
                 app:inputText="@={vm.address}"
                 app:layout_constraintTop_toBottomOf="@id/view_lastname" />
@@ -83,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
+                app:enable="@{false}"
                 app:hint="@{@string/lbl_class}"
                 app:inputText="@{vm.className}"
                 app:layout_constraintTop_toBottomOf="@id/view_address" />
@@ -94,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
                 app:layout_constraintTop_toBottomOf="@id/view_class" />
 
             <include
@@ -103,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
                 app:hint="@{@string/lbl_date_of_birth}"
                 app:icon="@{@drawable/ic_calendar}"
                 app:layout_constraintTop_toBottomOf="@id/view_gender" />
@@ -114,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/space_large"
-                android:layout_marginTop="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
                 app:contentInputType="@{InputType.TYPE_CLASS_NUMBER}"
                 app:hint="@{@string/lbl_phone_number}"
                 app:inputText="@={vm.phoneNumber}"
@@ -125,24 +127,24 @@
                 style="@style/AppWidget.Button.Border"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/space_medium"
+                android:layout_marginHorizontal="@dimen/space_large"
+                android:layout_marginTop="@dimen/space_large"
                 android:text="@string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintTop_toBottomOf="@id/view_phone_number" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_save"
                 style="@style/AppWidget.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_large"
+                android:layout_marginEnd="@dimen/space_large"
                 android:text="@string/submit"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_cancel"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintTop_toBottomOf="@id/view_phone_number" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.module.configuration
+package hoang.nguyenminh.smartexam.util.module.configuration
 
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel

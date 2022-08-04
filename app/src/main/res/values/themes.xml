@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
         <item name="hintTextColor">@color/black_200</item>
+        <item name="colorStrokeBorder">#D8DFE9</item>
     </style>
 
     <style name="Theme.SmartExam.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
@@ -30,6 +31,7 @@
         <!-- Customize your theme here. -->
         <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
         <item name="hintTextColor">@color/black_200</item>
+        <item name="colorStrokeBorder">#D8DFE9</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

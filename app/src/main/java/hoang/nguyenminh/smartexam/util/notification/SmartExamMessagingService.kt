@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.service.notification
+package hoang.nguyenminh.smartexam.util.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

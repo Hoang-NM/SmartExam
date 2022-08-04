@@ -12,8 +12,9 @@ import hoang.nguyenminh.smartexam.model.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.model.apiTimeToLocalMillis
 import hoang.nguyenminh.smartexam.model.authentication.UpdateUserInfoRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,10 +52,10 @@ class ProfileViewModel @Inject constructor(application: Application) :
         super.onBind(args)
         flowOfUserInfo.value ?: run {
             flowOfUserInfo.value = credentialManager.getAuthenticationInfo()?.also {
-                request.fromUserInfo(it)
                 flowOfFirstName.value = it.firstName ?: ""
                 flowOfLastName.value = it.lastName ?: ""
                 flowOfAddress.value = it.address ?: ""
+                flowOfClass.value = it.className ?: ""
                 flowOfGender.value = it.gender ?: 0
                 flowOfDateOfBirth.value =
                     it.dob.apiTimeToLocalMillis() ?: System.currentTimeMillis()
@@ -65,6 +66,7 @@ class ProfileViewModel @Inject constructor(application: Application) :
 
     fun saveUserInfo() = viewModelScope.launch {
         request.apply {
+            id = flowOfUserInfo.value?.id ?: 0
             firstName = flowOfFirstName.value
             lastName = flowOfLastName.value
             address = flowOfAddress.value
