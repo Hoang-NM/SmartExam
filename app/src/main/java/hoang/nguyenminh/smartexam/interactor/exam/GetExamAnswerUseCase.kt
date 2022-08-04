@@ -1,6 +1,7 @@
 package hoang.nguyenminh.smartexam.interactor.exam
 
 import hoang.nguyenminh.base.usecase.CoroutinesUseCase
+import hoang.nguyenminh.smartexam.interactor.detailExamHistory
 import hoang.nguyenminh.smartexam.model.ResultWrapper
 import hoang.nguyenminh.smartexam.model.exam.ExamAnswer
 import hoang.nguyenminh.smartexam.model.exam.GetExamAnswerRequest
@@ -11,5 +12,5 @@ class GetExamAnswerUseCase @Inject constructor(private val repository: SmartExam
     CoroutinesUseCase<ResultWrapper<ExamAnswer>, GetExamAnswerRequest>() {
 
     override suspend fun run(params: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
-        repository.getExamAnswer(params)
+        ResultWrapper.Success(detailExamHistory())
 }

@@ -53,8 +53,7 @@ class ExamSubmitViewModel @Inject constructor(application: Application) :
     }
 
     fun submitExam() = viewModelScope.launch {
-        execute(useCase, request, onSuccess = {
-            configurationManager.clearFinishedExam()
-        }, onError = { _, _ -> true })
+        useCase(coroutineContext, request)
+        configurationManager.clearFinishedExam()
     }
 }

@@ -25,5 +25,5 @@ interface SmartExamCloudRepository {
 
     suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer>
 
-    suspend fun updateUserInfo(params: UpdateUserInfoRequest): ResultWrapper<Unit>
+    suspend fun updateUserInfo(params: UpdateUserInfoRequest)
 }

@@ -86,6 +86,8 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
     override suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
         safeApiCall { service.getExamAnswer(param.build()) }
 
-    override suspend fun updateUserInfo(params: UpdateUserInfoRequest) =
-        safeApiCall { service.updateUserInfo(params) }
+    override suspend fun updateUserInfo(params: UpdateUserInfoRequest) {
+        val json = serializer.toJsonTree(params)
+        Timber.e(json.toString())
+    }
 }

@@ -83,12 +83,11 @@ class ProfileViewModel @Inject constructor(application: Application) :
             dob = flowOfDateOfBirth.value.toApiInstantString()
             phoneNumber = flowOfPhoneNumber.value
         }
-        execute(useCase, request, onSuccess = {
-            flowOfUserInfo.value?.fromUpdateRequest(request)?.let {
-                credentialManager.saveAuthenticationInfo(it)
-                UpdateUserInfoEvent(it).postToBus()
-            }
-        })
+        useCase(coroutineContext, request)
+        flowOfUserInfo.value?.fromUpdateRequest(request)?.let {
+            credentialManager.saveAuthenticationInfo(it)
+            UpdateUserInfoEvent(it).postToBus()
+        }
     }
 
     fun getFirstName(): MutableStateFlow<String> = flowOfFirstName
