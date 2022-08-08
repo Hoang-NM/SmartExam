@@ -35,7 +35,7 @@ class ExamExecutionFragment : SmartExamFragment<FragmentExamExecutionBinding>() 
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentExamExecutionBinding =
         FragmentExamExecutionBinding.inflate(inflater, container, false).apply {
-            setHasOptionsMenu(true)
+//            setHasOptionsMenu(true)
             vpQuestion.apply {
                 adapter = ExamExecutionPagerAdapter(this@ExamExecutionFragment).also {
                     pagerAdapter = it

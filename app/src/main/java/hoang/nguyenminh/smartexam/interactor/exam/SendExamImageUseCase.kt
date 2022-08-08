@@ -2,7 +2,7 @@ package hoang.nguyenminh.smartexam.interactor.exam
 
 import hoang.nguyenminh.base.usecase.CoroutinesUseCase
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
-import hoang.nguyenminh.smartexam.repository.cloud.SmartExamCloudRepository
+import hoang.nguyenminh.smartexam.repository.SmartExamCloudRepository
 import javax.inject.Inject
 
 

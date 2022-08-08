@@ -10,8 +10,8 @@ import hoang.nguyenminh.base.util.BindingAdapters.viewCompatVisibility
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamActivity
 import hoang.nguyenminh.smartexam.databinding.ActivityAuthenticationBinding
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
-import hoang.nguyenminh.smartexam.navigator.AppNavigator.toMain
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.navigator.AppNavigator.toMain
 import javax.inject.Inject
 
 @AndroidEntryPoint

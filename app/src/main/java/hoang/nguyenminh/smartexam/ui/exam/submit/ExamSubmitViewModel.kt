@@ -10,8 +10,8 @@ import hoang.nguyenminh.smartexam.model.exam.AnswerModel
 import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamRequest
-import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.module.configuration.ConfigurationManager
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

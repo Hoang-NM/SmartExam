@@ -34,12 +34,18 @@
     </style>
 
     <style name="AppWidget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_medium</item>
         <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
         <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
         <item name="android:textAppearance">@style/AppTextAppearance.TextInputLayout.Label</item>
+        <item name="boxStrokeWidth">@dimen/space_line</item>
+        <item name="boxStrokeWidthFocused">@dimen/space_small</item>
+        <item name="boxStrokeColor">@color/box_stroke_color</item>
         <item name="hintEnabled">true</item>
-        <item name="hintAnimationEnabled">true</item>
-        <item name="expandedHintEnabled">true</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="android:textColorHint">?colorOnBackground</item>
     </style>
 
     <style name="AppWidget.TextView" parent="Widget.MaterialComponents.TextView">

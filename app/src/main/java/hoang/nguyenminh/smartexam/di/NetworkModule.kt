@@ -6,8 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hoang.nguyenminh.base.network.RetrofitXs
 import hoang.nguyenminh.smartexam.model.AppConst
-import hoang.nguyenminh.smartexam.module.network.SmartExamCloudService
-import hoang.nguyenminh.smartexam.module.network.SmartExamLocalService
+import hoang.nguyenminh.smartexam.network.SmartExamCloudService
 import retrofit2.create
 import javax.inject.Singleton
 
@@ -18,10 +17,5 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideCloudService(): SmartExamCloudService =
-        RetrofitXs.newInstance(AppConst.BASE_URL).create()
-
-    @Provides
-    @Singleton
-    fun provideLocalService(): SmartExamLocalService =
         RetrofitXs.newInstance(AppConst.BASE_URL).create()
 }

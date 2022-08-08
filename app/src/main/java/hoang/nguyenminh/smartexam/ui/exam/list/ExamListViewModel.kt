@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetExamListUseCase
 import hoang.nguyenminh.smartexam.model.exam.*
-import hoang.nguyenminh.smartexam.module.credential.CredentialManager
+import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 

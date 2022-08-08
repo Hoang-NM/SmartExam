@@ -12,7 +12,7 @@ import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.base.SmartExamFragment
 import hoang.nguyenminh.smartexam.databinding.FragmentSettingBinding
-import hoang.nguyenminh.smartexam.navigator.AppNavigator.toAuthentication
+import hoang.nguyenminh.smartexam.util.navigator.AppNavigator.toAuthentication
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint

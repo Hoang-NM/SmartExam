@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="hintContent"
+            type="String" />
+
+        <variable
+            name="inputText"
+            type="kotlinx.coroutines.flow.StateFlow&lt;String>" />
+
+        <variable
+            name="enable"
+            type="Boolean" />
+
+        <variable
+            name="contentInputType"
+            type="Integer" />
+    </data>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/AppWidget.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@{hint}"
+        tools:hint="Hint"
+        tools:text="@tools:sample/full_names">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/AppTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:inputType="text"
+            android:lines="1"
+            android:minHeight="@dimen/common_edittext_height"
+            android:text="@{inputText}"
+            android:hint="@{hintContent}"
+            app:bindInputType="@{contentInputType}"
+            app:viewCompatEnabled="@{enable ?? true}"
+            tools:text="@tools:sample/lorem" />
+    </com.google.android.material.textfield.TextInputLayout>
+</layout>

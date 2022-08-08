@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.exception
+package hoang.nguyenminh.smartexam.util.exception
 
 import androidx.annotation.StringRes
 import hoang.nguyenminh.smartexam.model.ErrorResponse

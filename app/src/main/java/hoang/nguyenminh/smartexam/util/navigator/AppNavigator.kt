@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.navigator
+package hoang.nguyenminh.smartexam.util.navigator
 
 import android.app.Activity
 import android.content.Intent

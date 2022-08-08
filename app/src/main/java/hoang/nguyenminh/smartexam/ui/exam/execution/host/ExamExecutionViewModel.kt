@@ -10,7 +10,7 @@ import hoang.nguyenminh.smartexam.model.exam.ExamModel
 import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
-import hoang.nguyenminh.smartexam.module.configuration.ConfigurationManager
+import hoang.nguyenminh.smartexam.util.module.configuration.ConfigurationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

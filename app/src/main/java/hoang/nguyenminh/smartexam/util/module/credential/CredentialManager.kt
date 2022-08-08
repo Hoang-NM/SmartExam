@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.module.credential
+package hoang.nguyenminh.smartexam.util.module.credential
 
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 

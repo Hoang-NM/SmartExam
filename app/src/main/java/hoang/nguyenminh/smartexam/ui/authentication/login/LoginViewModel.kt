@@ -36,6 +36,8 @@ class LoginViewModel @Inject constructor(application: Application) :
 
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
+    fun isEnabled() = flowOfEnabled
+
     fun login(onSuccess: () -> Unit) {
         request.apply {
             username = flowOfUserName.value

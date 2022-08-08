@@ -35,7 +35,7 @@
             android:theme="@style/Theme.SmartExam" />
 
         <service
-            android:name=".service.notification.SmartExamMessagingService"
+            android:name=".util.notification.SmartExamMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

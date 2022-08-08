@@ -21,11 +21,7 @@ data class UserInfo(
 ) {
     fun getName() = "$firstName $lastName"
 
-    fun toUpdateRequest(): UpdateUserInfoRequest = UpdateUserInfoRequest(
-        id, firstName, lastName, address, className, gender, dob, phoneNumber
-    )
-
-    fun fromUpdateRequest(request: UpdateUserInfoRequest): UserInfo = copy(
+    fun fromUpdateRequest(request: UpdateUserInfoRequest): UserInfo = UserInfo(
         id = request.id,
         email = email,
         firstName = request.firstName,
@@ -39,17 +35,15 @@ data class UserInfo(
 }
 
 data class UpdateUserInfoRequest(
-    @SerializedName("id") @Expose val id: Int = 0,
-    @SerializedName("firstName") @Expose val firstName: String? = null,
-    @SerializedName("lastName") @Expose val lastName: String? = null,
-    @SerializedName("address") @Expose val address: String? = null,
+    @SerializedName("id") @Expose var id: Int = 0,
+    @SerializedName("firstName") @Expose var firstName: String? = null,
+    @SerializedName("lastName") @Expose var lastName: String? = null,
+    @SerializedName("address") @Expose var address: String? = null,
     @SerializedName("class") @Expose val className: String? = null,
-    @SerializedName("gender") @Expose val gender: Int? = Gender.MALE.value,
-    @SerializedName("dateOfBirth") @Expose val dob: String? = null,
-    @SerializedName("phoneNumber") @Expose val phoneNumber: String? = null,
-) {
-    fun fromUserInfo(user: UserInfo): UpdateUserInfoRequest = user.toUpdateRequest()
-}
+    @SerializedName("gender") @Expose var gender: Int? = Gender.MALE.value,
+    @SerializedName("dateOfBirth") @Expose var dob: String? = null,
+    @SerializedName("phoneNumber") @Expose var phoneNumber: String? = null,
+)
 
 enum class Gender(val value: Int) {
     MALE(0), FEMALE(1), OTHER(2);
