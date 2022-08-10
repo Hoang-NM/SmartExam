@@ -8,13 +8,21 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LifecycleOwner
 import hoang.nguyenminh.base.util.ConfirmRequest
+import hoang.nguyenminh.base.util.CountDelegation
 import hoang.nguyenminh.base.util.collectOnLifecycle
+import hoang.nguyenminh.base.util.weakLazy
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
 
     companion object {
         private const val TAG_LOADING_DIALOG = "TAG_LOADING_DIALOG"
         private const val TAG_CONFIRM_DIALOG = "TAG_CONFIRM_DIALOG"
+    }
+
+    private val taskCount = CountDelegation()
+
+    private val loadingDialogWeakRef by weakLazy {
+        provideLoadingDialog()
     }
 
     protected var binding: T? = null
@@ -36,7 +44,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
         }
     }
 
-    protected fun onViewModelCreated() {
+    private fun onViewModelCreated() {
+        viewModel.getTaskCount().collectOnLifecycle(this) {
+            if (it == 0) dismissLoading()
+            else showLoading()
+        }
         viewModel.getConfirmEvent().collectOnLifecycle(this) {
             showMessage(it)
         }
@@ -56,6 +68,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
 
     protected abstract fun getViewModelVariableId(): Int
 
+    protected open fun provideLoadingDialog(): DialogFragment = DialogFragment()
+
     protected open fun provideConfirmDialog(confirmRequest: ConfirmRequest): DialogFragment =
         ConfirmDialog(confirmRequest)
 
@@ -64,6 +78,16 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(), Scene {
     override fun getSceneResource(): Resources = resources
 
     override fun lifecycleOwner(): LifecycleOwner = this
+
+    open fun showLoading() {
+        loadingDialogWeakRef.run {
+            show(supportFragmentManager, TAG_LOADING_DIALOG)
+        }
+    }
+
+    open fun dismissLoading() {
+        dismissDialogFragmentByTag(TAG_LOADING_DIALOG)
+    }
 
     override fun showMessage(request: ConfirmRequest) {
         dismissDialogFragmentByTag(TAG_CONFIRM_DIALOG)

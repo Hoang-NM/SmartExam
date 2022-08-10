@@ -7,9 +7,11 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import hoang.nguyenminh.base.util.ConfirmRequest
+import hoang.nguyenminh.base.util.CountDelegation
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
@@ -23,6 +25,8 @@ interface IViewModel {
     fun onDetachScene(scene: Scene)
 
     fun onUnBind()
+
+    fun getTaskCount(): StateFlow<Int>
 
     fun getConfirmEvent(): Flow<ConfirmRequest>
 
@@ -42,6 +46,8 @@ abstract class BaseAndroidViewModel(application: Application) : AndroidViewModel
     private val flowOfToast = MutableSharedFlow<String>(
         extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
+
+    private var taskCount = CountDelegation()
 
     override fun onBind(args: Bundle?) {}
 
@@ -77,6 +83,20 @@ abstract class BaseAndroidViewModel(application: Application) : AndroidViewModel
             flowOfToast.emit(text)
         }
     }
+
+    protected open fun notifyTaskStart() {
+        taskCount.increase()
+    }
+
+    protected open fun notifyTaskFinish() {
+        taskCount.decrease()
+    }
+
+    protected open fun notifyAllTaskCleared() {
+        taskCount.clear()
+    }
+
+    override fun getTaskCount(): StateFlow<Int> = taskCount.flowOfCount
 
     override fun getConfirmEvent(): Flow<ConfirmRequest> = flowOfConfirmEvent
 

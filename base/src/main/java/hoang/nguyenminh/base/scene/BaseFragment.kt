@@ -38,6 +38,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
     }
 
     protected fun onViewModelCreated() {
+        viewModel.getTaskCount().collectOnLifecycle(this) {
+            if (it == 0) getBaseActivity()?.dismissLoading()
+            else getBaseActivity()?.showLoading()
+        }
         viewModel.getConfirmEvent().collectOnLifecycle(this) {
             showMessage(it)
         }

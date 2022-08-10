@@ -25,6 +25,7 @@ import hoang.nguyenminh.smartexam.R
 import hoang.nguyenminh.smartexam.databinding.DialogConfirmBinding
 import hoang.nguyenminh.smartexam.model.ErrorResponse
 import hoang.nguyenminh.smartexam.model.ResultWrapper
+import hoang.nguyenminh.smartexam.ui.dialog.LoadingDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import hoang.nguyenminh.base.R as baseR
@@ -32,6 +33,8 @@ import hoang.nguyenminh.base.R as baseR
 abstract class SmartExamActivity<T : ViewDataBinding> : BaseActivity<T>() {
 
     override fun getViewModelVariableId(): Int = BR.vm
+
+    override fun provideLoadingDialog(): DialogFragment = LoadingDialog()
 
     override fun provideConfirmDialog(confirmRequest: ConfirmRequest): DialogFragment =
         SmartExamConfirmDialog.newInstance(confirmRequest)
@@ -115,6 +118,7 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
         crossinline onSuccess: (R) -> Unit,
         crossinline onError: (Throwable, ErrorResponse?) -> Boolean = { _, _ -> false }
     ) {
+        notifyTaskStart()
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase(coroutineContext, params)) {
                 is ResultWrapper.Success -> onSuccess(response.value)
@@ -131,6 +135,8 @@ abstract class SmartExamViewModel(application: Application) : BaseAndroidViewMod
                 is ResultWrapper.ParserError -> onParserError()
                 is ResultWrapper.NetworkError -> onNetworkError()
             }
+        }.invokeOnCompletion {
+            notifyTaskFinish()
         }
     }
 

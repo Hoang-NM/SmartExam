@@ -34,6 +34,23 @@
         <item name="colorStrokeBorder">#D8DFE9</item>
     </style>
 
+    <style name="Theme.SmartExam.LoadingDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryVariant">@color/blue_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/rose_200</item>
+        <item name="colorSecondaryVariant">@color/rose_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
+        <item name="hintTextColor">@color/black_200</item>
+        <item name="colorStrokeBorder">#D8DFE9</item>
+    </style>
+
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <!-- Set the splash screen background, animated icon, and animation duration. -->
         <item name="windowSplashScreenBackground">@color/white</item>

@@ -1,20 +1,19 @@
-package hoang.nguyenminh.base.dialog
+package hoang.nguyenminh.smartexam.ui.dialog
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
+import android.widget.FrameLayout
 import androidx.fragment.app.DialogFragment
-import hoang.nguyenminh.base.R
+import hoang.nguyenminh.smartexam.R
 
 class LoadingDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.Theme_SmartExam_LoadingDialog)
         isCancelable = false
     }
 
@@ -41,9 +40,11 @@ class LoadingDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.dialog_loading, container, false)
-
-    companion object {
-        val instance = LoadingDialog()
+    ): View {
+        val content: View = inflater.inflate(R.layout.dialog_loading, container, false)
+        val progress = content.findViewById<View>(R.id.progress)
+        val params = progress.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.CENTER
+        return content
     }
 }

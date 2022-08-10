@@ -10,7 +10,6 @@ object DateTimeXs {
     const val FORMAT_DATE = "dd/MM/yyyy"
     const val FORMAT_DATE_TIME_ISO = "yyyy-mm-dd'T'HH:mm:ss'Z'"
     const val FORMAT_COUNT_DOWN_TIME = "mm:ss"
-    const val FORMAT_DATE_STUPID = "dd-MM-yy"
 
     const val SECOND: Long = 1000
     const val MINUTE = SECOND * 60

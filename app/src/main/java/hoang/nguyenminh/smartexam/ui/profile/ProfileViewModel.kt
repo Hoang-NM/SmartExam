@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hoang.nguyenminh.base.util.DateTimeXs.toUtcInstantString
 import hoang.nguyenminh.base.util.postToBus
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.authentiaction.UpdateUserInfoUseCase
@@ -12,9 +11,9 @@ import hoang.nguyenminh.smartexam.model.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.model.apiTimeToLocalMillis
 import hoang.nguyenminh.smartexam.model.authentication.UpdateUserInfoRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
+import hoang.nguyenminh.smartexam.model.toApiInstantString
 import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -71,7 +70,7 @@ class ProfileViewModel @Inject constructor(application: Application) :
             lastName = flowOfLastName.value
             address = flowOfAddress.value
             gender = flowOfGender.value
-            dob = flowOfDateOfBirth.value.toUtcInstantString()
+            dob = flowOfDateOfBirth.value.toApiInstantString()
             phoneNumber = flowOfPhoneNumber.value
         }
         execute(useCase, request, onSuccess = {
