@@ -92,8 +92,8 @@
             app:argType="integer" />
 
         <argument
-            android:name="path"
-            app:argType="string" />
+            android:name="uri"
+            app:argType="android.net.Uri" />
     </fragment>
 
     <action

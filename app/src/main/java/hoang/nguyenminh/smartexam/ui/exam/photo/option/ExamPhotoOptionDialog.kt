@@ -1,16 +1,9 @@
 package hoang.nguyenminh.smartexam.ui.exam.photo.option
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.DocumentsContract
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
@@ -26,7 +19,6 @@ import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.base.SmartExamBottomSheetDialog
 import hoang.nguyenminh.smartexam.databinding.DialogPhotoOptionBinding
-import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -111,11 +103,9 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
-            val path = data?.data?.getPath(requireContext())
-            path?.let {
-                Timber.e("ImageFilePath: $path")
+            data?.data?.let { uri ->
                 findNavController().navigate(
-                    NavigationMainDirections.toImageDisplay(args.examId, it)
+                    NavigationMainDirections.toImageDisplay(args.examId, uri)
                 )
             }
         }
@@ -127,16 +117,5 @@ class ExamPhotoOptionDialog : SmartExamBottomSheetDialog<DialogPhotoOptionBindin
 
     private fun requestStoragePermission() {
         storagePermissionLauncher?.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-    }
-
-    @SuppressLint("Recycle")
-    private fun Uri.getPath(context: Context): String? {
-        return if (DocumentsContract.isDocumentUri(context, this)) {
-            val docId = DocumentsContract.getDocumentId(this)
-            val split = docId.split(":")
-            Environment.getExternalStorageDirectory().absolutePath + "/" + split[1]
-        } else {
-            path
-        }
     }
 }

@@ -2,7 +2,6 @@ package hoang.nguyenminh.smartexam.ui.exam.execution.host
 
 import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.GetQuestionListUseCase
@@ -11,9 +10,7 @@ import hoang.nguyenminh.smartexam.model.exam.ExamStatus
 import hoang.nguyenminh.smartexam.model.exam.Question
 import hoang.nguyenminh.smartexam.model.exam.QuestionModel
 import hoang.nguyenminh.smartexam.util.module.configuration.ConfigurationManager
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,9 +33,7 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         ExamExecutionFragmentArgs.fromBundle(args).let {
             when (it.status) {
                 ExamStatus.INITIALIZE -> {
-                    flowOfExam.value ?: viewModelScope.launch(Dispatchers.IO) {
-                        fetchData(it.id)
-                    }
+                    flowOfExam.value ?: fetchData(it.id)
                 }
                 ExamStatus.IN_PROGRESS -> {
                     flowOfExam.value ?: run {
@@ -50,7 +45,7 @@ class ExamExecutionViewModel @Inject constructor(application: Application) :
         }
     }
 
-    private fun fetchData(id: Int) = viewModelScope.launch {
+    private fun fetchData(id: Int) {
         execute(useCase, id, onSuccess = {
             originalQuestionList = it.map(Question::toQuestionModel)
             val questions = originalQuestionList.shuffled()

@@ -1,5 +1,6 @@
 package hoang.nguyenminh.smartexam.model.exam
 
+import android.net.Uri
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -90,7 +91,7 @@ data class ExamImageQuery(
 
 data class SubmitExamImageRequest(
     val query: ExamImageQuery = ExamImageQuery(),
-    var path: String = ""
+    var uri: Uri = Uri.EMPTY
 )
 
 data class GetExamAnswerRequest(

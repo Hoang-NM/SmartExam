@@ -2,14 +2,11 @@ package hoang.nguyenminh.smartexam.ui.exam.photo.display
 
 import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.exam.SendExamImageUseCase
 import hoang.nguyenminh.smartexam.model.exam.SubmitExamImageRequest
 import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,14 +30,12 @@ class ImageDisplayViewModel @Inject constructor(application: Application) :
         }?.let { arguments ->
             val studentId = credentialManager.getAuthenticationInfo()?.id ?: 0
             request.apply {
-                path = arguments.path
+                uri = arguments.uri
                 request.query.examId = arguments.examId
                 request.query.studentId = studentId
             }
         }
     }
 
-    fun sendExamImage() = viewModelScope.launch(Dispatchers.IO) {
-        useCase(coroutineContext, request)
-    }
+    fun sendExamImage(onSuccess: () -> Unit) = execute(useCase, request, onSuccess = { onSuccess })
 }

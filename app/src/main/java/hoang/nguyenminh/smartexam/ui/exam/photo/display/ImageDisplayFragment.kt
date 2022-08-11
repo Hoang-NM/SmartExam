@@ -1,7 +1,5 @@
 package hoang.nguyenminh.smartexam.ui.exam.photo.display
 
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -9,8 +7,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import hoang.nguyenminh.base.util.ConfirmRequest
-import hoang.nguyenminh.base.util.postImageRotate
-import hoang.nguyenminh.base.util.rotate
 import hoang.nguyenminh.base.util.setOnSafeClickListener
 import hoang.nguyenminh.smartexam.NavigationMainDirections
 import hoang.nguyenminh.smartexam.R
@@ -31,23 +27,22 @@ class ImageDisplayFragment : SmartExamFragment<FragmentImageDisplayBinding>() {
         container: ViewGroup?
     ): FragmentImageDisplayBinding =
         FragmentImageDisplayBinding.inflate(inflater, container, false).apply {
-            navArgs.path.let {
-                val matrix = Matrix().apply { postImageRotate(it) }
-                val bitmap = BitmapFactory.decodeFile(it)
-                image.setImageBitmap(bitmap.rotate(matrix))
+            navArgs.uri.let {
+                image.setImageURI(navArgs.uri)
             }
             btnSend.setOnSafeClickListener {
                 runBlocking {
-                    viewModel.sendExamImage().join()
-                    showMessage(
-                        ConfirmRequest(
-                            message = getString(R.string.message_submit_exam_image_successfully),
-                            positive = getString(hoang.nguyenminh.base.R.string.common_ok),
-                            onPositiveSelected = {
-                                findNavController().navigate(NavigationMainDirections.popToExamMenu())
-                            }
+                    viewModel.sendExamImage {
+                        showMessage(
+                            ConfirmRequest(
+                                message = getString(R.string.message_submit_exam_image_successfully),
+                                positive = getString(hoang.nguyenminh.base.R.string.common_ok),
+                                onPositiveSelected = {
+                                    findNavController().navigate(NavigationMainDirections.popToExamMenu())
+                                }
+                            )
                         )
-                    )
+                    }
                 }
             }
         }

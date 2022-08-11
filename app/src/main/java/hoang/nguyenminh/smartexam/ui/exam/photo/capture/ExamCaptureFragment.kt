@@ -1,6 +1,7 @@
 package hoang.nguyenminh.smartexam.ui.exam.photo.capture
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
@@ -71,14 +72,14 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
                     findNavController().navigate(
                         NavigationMainDirections.toImageDisplay(
                             args.examId,
-                            createTempImagePath(image)
+                            createTempImageUri(image)
                         )
                     )
                 }
             })
     }
 
-    private fun createTempImagePath(image: ImageProxy): String {
+    private fun createTempImageUri(image: ImageProxy): Uri {
         val tempFile = FileXs.createTempFile(
             requireContext(), "smart-exam-${System.currentTimeMillis()}", ".jpeg"
         )
@@ -87,6 +88,6 @@ class ExamCaptureFragment : SmartExamFragment<FragmentExamCaptureBinding>() {
             write(source)
             close()
         }
-        return tempFile.absolutePath
+        return Uri.fromFile(tempFile)
     }
 }

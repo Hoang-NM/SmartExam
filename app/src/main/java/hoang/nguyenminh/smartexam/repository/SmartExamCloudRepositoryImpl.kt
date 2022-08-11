@@ -1,5 +1,6 @@
 package hoang.nguyenminh.smartexam.repository
 
+import androidx.core.net.toFile
 import hoang.nguyenminh.base.network.safeDeserialize
 import hoang.nguyenminh.base.serializer.Serializer
 import hoang.nguyenminh.base.util.IMAGE_SIZE_LIMIT
@@ -19,7 +20,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 import timber.log.Timber
-import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
@@ -69,7 +69,7 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 
     override suspend fun sendExamImage(params: SubmitExamImageRequest) =
         run {
-            val file = prepareImageFileForUpload(File(params.path), IMAGE_SIZE_LIMIT)
+            val file = prepareImageFileForUpload(params.uri.toFile(), IMAGE_SIZE_LIMIT)
             val body = file.asRequestBody(file.getMimeType("image/jpeg").toMediaTypeOrNull())
             val image = MultipartBody.Part.createFormData("image", file.name, body)
             safeApiCall {
@@ -77,12 +77,12 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun submitExam(param: SubmitExamRequest): ResultWrapper<Unit> =
+    override suspend fun submitExam(param: SubmitExamRequest) =
         safeApiCall { service.submitExam(param) }
 
     override suspend fun getExamAnswer(param: GetExamAnswerRequest): ResultWrapper<ExamAnswer> =
         safeApiCall { service.getExamAnswer(param.build()) }
 
-    override suspend fun updateUserInfo(params: UpdateUserInfoRequest): ResultWrapper<Unit> =
+    override suspend fun updateUserInfo(params: UpdateUserInfoRequest) =
         safeApiCall { service.updateUserInfo(params) }
 }
