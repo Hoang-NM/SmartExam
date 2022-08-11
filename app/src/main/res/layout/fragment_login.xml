@@ -56,10 +56,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_username"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:lines="1"
                 android:minHeight="@dimen/common_edittext_height"
-                android:text="@={vm.userName}" />
+                android:text="@={vm.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +94,7 @@
             android:layout_marginTop="@dimen/space_large"
             android:text="@string/lbl_login"
             app:layout_constraintTop_toBottomOf="@id/edt_password"
-            app:viewCompatEnabled="@{!vm.userName.empty &amp;&amp; !vm.password.empty}" />
+            app:viewCompatEnabled="@{vm.enabled}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lbl_create_account"
@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_login"
-            app:viewCompatEnabled="@{vm.enabled}"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            app:viewCompatEnabled="@{vm.enabled}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

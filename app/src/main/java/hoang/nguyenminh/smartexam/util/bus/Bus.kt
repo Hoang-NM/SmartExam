@@ -1,4 +1,4 @@
-package hoang.nguyenminh.smartexam.model
+package hoang.nguyenminh.smartexam.util.bus
 
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 

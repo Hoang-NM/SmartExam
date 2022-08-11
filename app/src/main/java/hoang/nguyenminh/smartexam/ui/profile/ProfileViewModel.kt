@@ -7,13 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.base.util.postToBus
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
 import hoang.nguyenminh.smartexam.interactor.authentiaction.UpdateUserInfoUseCase
-import hoang.nguyenminh.smartexam.model.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.model.apiTimeToLocalMillis
 import hoang.nguyenminh.smartexam.model.authentication.UpdateUserInfoRequest
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
 import hoang.nguyenminh.smartexam.model.toApiInstantString
+import hoang.nguyenminh.smartexam.util.bus.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ class ProfileViewModel @Inject constructor(application: Application) :
         UpdateUserInfoRequest()
     }
 
-    val flowOfUserInfo = MutableStateFlow<UserInfo?>(null)
+    private val flowOfUserInfo = MutableStateFlow<UserInfo?>(null)
 
     private val flowOfFirstName = MutableStateFlow("")
 
@@ -46,6 +46,16 @@ class ProfileViewModel @Inject constructor(application: Application) :
     private val flowOfDateOfBirth = MutableStateFlow(0L)
 
     private val flowOfPhoneNumber = MutableStateFlow("")
+
+    private val flowOfEnabled =
+        combine(
+            flow = flowOfFirstName,
+            flow2 = flowOfLastName,
+            flow3 = flowOfAddress,
+            flow4 = flowOfPhoneNumber
+        ) { firstName, lastName, address, phone ->
+            firstName.isNotBlank() && lastName.isNotBlank() && address.isNotBlank() && phone.isNotBlank()
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     override fun onBind(args: Bundle?) {
         super.onBind(args)
@@ -74,24 +84,26 @@ class ProfileViewModel @Inject constructor(application: Application) :
             phoneNumber = flowOfPhoneNumber.value
         }
         execute(useCase, request, onSuccess = {
-            flowOfUserInfo.value?.let {
-                credentialManager.saveAuthenticationInfo(it.fromUpdateRequest(request))
+            flowOfUserInfo.value?.fromUpdateRequest(request)?.let {
+                credentialManager.saveAuthenticationInfo(it)
                 UpdateUserInfoEvent(it).postToBus()
             }
         })
     }
 
-    fun getFirstName() = flowOfFirstName
+    fun getFirstName(): MutableStateFlow<String> = flowOfFirstName
 
-    fun getLastName() = flowOfLastName
+    fun getLastName(): MutableStateFlow<String> = flowOfLastName
 
-    fun getAddress() = flowOfAddress
+    fun getAddress(): MutableStateFlow<String> = flowOfAddress
 
-    fun getClassName() = flowOfClass
+    fun getClassName(): MutableStateFlow<String> = flowOfClass
 
-    fun getGender() = flowOfGender
+    fun getGender(): MutableStateFlow<Int> = flowOfGender
 
-    fun getDateOfBirth() = flowOfDateOfBirth
+    fun getDateOfBirth(): MutableStateFlow<Long> = flowOfDateOfBirth
 
-    fun getPhoneNumber() = flowOfPhoneNumber
+    fun getPhoneNumber(): MutableStateFlow<String> = flowOfPhoneNumber
+
+    fun isEnabled(): StateFlow<Boolean> = flowOfEnabled
 }

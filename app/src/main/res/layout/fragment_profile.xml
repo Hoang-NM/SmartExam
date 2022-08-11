@@ -53,7 +53,7 @@
                 android:layout_marginHorizontal="@dimen/space_large"
                 android:layout_marginTop="@dimen/space_medium"
                 app:hint="@{@string/lbl_first_name}"
-                app:inputText="@={vm.firstName}"
+                app:inputText="@{vm.firstName}"
                 app:layout_constraintTop_toBottomOf="@id/view_curve" />
 
             <include
@@ -64,7 +64,7 @@
                 android:layout_marginHorizontal="@dimen/space_large"
                 android:layout_marginTop="@dimen/space_large"
                 app:hint="@{@string/lbl_last_name}"
-                app:inputText="@={vm.lastName}"
+                app:inputText="@{vm.lastName}"
                 app:layout_constraintTop_toBottomOf="@id/view_firstname" />
 
             <include
@@ -75,7 +75,7 @@
                 android:layout_marginHorizontal="@dimen/space_large"
                 android:layout_marginTop="@dimen/space_large"
                 app:hint="@{@string/lbl_address}"
-                app:inputText="@={vm.address}"
+                app:inputText="@{vm.address}"
                 app:layout_constraintTop_toBottomOf="@id/view_lastname" />
 
             <include
@@ -119,8 +119,9 @@
                 android:layout_marginTop="@dimen/space_large"
                 app:contentInputType="@{InputType.TYPE_CLASS_NUMBER}"
                 app:hint="@{@string/lbl_phone_number}"
-                app:inputText="@={vm.phoneNumber}"
-                app:layout_constraintTop_toBottomOf="@id/view_date_of_birth" />
+                app:inputText="@{vm.phoneNumber}"
+                app:layout_constraintTop_toBottomOf="@id/view_date_of_birth"
+                app:maxLength="@{11}" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
@@ -138,6 +139,7 @@
                 android:id="@+id/btn_save"
                 style="@style/AppWidget.Button"
                 android:layout_width="0dp"
+                app:viewCompatEnabled="@{vm.enabled}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_large"
                 android:layout_marginEnd="@dimen/space_large"

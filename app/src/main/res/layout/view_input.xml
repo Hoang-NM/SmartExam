@@ -15,7 +15,7 @@
 
         <variable
             name="inputText"
-            type="kotlinx.coroutines.flow.StateFlow&lt;String>" />
+            type="kotlinx.coroutines.flow.MutableStateFlow&lt;String>" />
 
         <variable
             name="enable"
@@ -23,6 +23,10 @@
 
         <variable
             name="contentInputType"
+            type="Integer" />
+
+        <variable
+            name="maxLength"
             type="Integer" />
     </data>
 
@@ -39,11 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:hint="@{hintContent}"
             android:inputType="text"
             android:lines="1"
+            android:maxLength="@{maxLength ?? 100}"
             android:minHeight="@dimen/common_edittext_height"
-            android:text="@{inputText}"
-            android:hint="@{hintContent}"
+            android:text="@={inputText}"
             app:bindInputType="@{contentInputType}"
             app:viewCompatEnabled="@{enable ?? true}"
             tools:text="@tools:sample/lorem" />

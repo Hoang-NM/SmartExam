@@ -7,8 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.base.scene.Scene
 import hoang.nguyenminh.base.util.subscribeBusEntireLifecycle
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
-import hoang.nguyenminh.smartexam.model.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.model.authentication.UserInfo
+import hoang.nguyenminh.smartexam.util.bus.UpdateUserInfoEvent
 import hoang.nguyenminh.smartexam.util.module.credential.CredentialManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

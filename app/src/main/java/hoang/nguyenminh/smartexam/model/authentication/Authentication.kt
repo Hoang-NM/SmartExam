@@ -9,12 +9,12 @@ data class LoginRequest(
 )
 
 data class UserInfo(
-    @SerializedName("id") @Expose val id: Int,
-    @SerializedName("email") @Expose val email: String,
+    @SerializedName("id") @Expose val id: Int = 0,
+    @SerializedName("email") @Expose val email: String = "",
     @SerializedName("firstName") @Expose val firstName: String? = null,
     @SerializedName("lastName") @Expose val lastName: String? = null,
     @SerializedName("address") @Expose val address: String? = null,
-    @SerializedName("class") @Expose val className: String? = null,
+    @SerializedName("class") @Expose val className: String = "",
     @SerializedName("gender") @Expose val gender: Int? = Gender.MALE.value,
     @SerializedName("dateOfBirth") @Expose val dob: String? = null,
     @SerializedName("phoneNumber") @Expose val phoneNumber: String? = null,
@@ -22,12 +22,12 @@ data class UserInfo(
     fun getName() = "$firstName $lastName"
 
     fun fromUpdateRequest(request: UpdateUserInfoRequest): UserInfo = UserInfo(
-        id = request.id,
+        id = id,
         email = email,
         firstName = request.firstName,
         lastName = request.lastName,
         address = request.address,
-        className = request.className,
+        className = className,
         gender = request.gender,
         dob = request.dob,
         phoneNumber = request.phoneNumber

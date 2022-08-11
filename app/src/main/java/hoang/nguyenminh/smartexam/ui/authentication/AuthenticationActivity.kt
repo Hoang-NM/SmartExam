@@ -25,10 +25,9 @@ class AuthenticationActivity : SmartExamActivity<ActivityAuthenticationBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                !this@AuthenticationActivity::credentialManager.isInitialized
-            }
-            if (this@AuthenticationActivity::credentialManager.isInitialized) {
-                if (credentialManager.getAuthenticationInfo() != null) toMain(true)
+                !this@AuthenticationActivity::credentialManager.isInitialized.apply {
+                    if (credentialManager.getAuthenticationInfo() != null) toMain(true)
+                }
             }
         }
         super.onCreate(savedInstanceState)

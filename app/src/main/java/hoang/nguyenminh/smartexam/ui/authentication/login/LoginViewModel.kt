@@ -1,6 +1,7 @@
 package hoang.nguyenminh.smartexam.ui.authentication.login
 
 import android.app.Application
+import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hoang.nguyenminh.smartexam.base.SmartExamViewModel
@@ -23,24 +24,32 @@ class LoginViewModel @Inject constructor(application: Application) :
         LoginRequest()
     }
 
-    private val flowOfUserName = MutableStateFlow("student1@gmail.com")
+    private val flowOfEmail = MutableStateFlow("student1@gmail.com")
 
     private val flowOfPassword = MutableStateFlow("123456")
 
     private val flowOfEnabled =
-        combine(flow = flowOfUserName, flow2 = flowOfPassword) { userName, password ->
+        combine(flow = flowOfEmail, flow2 = flowOfPassword) { userName, password ->
             userName.isNotBlank() && password.isNotBlank()
         }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    fun getUserName(): MutableStateFlow<String> = flowOfUserName
+    fun getEmail(): MutableStateFlow<String> = flowOfEmail
 
     fun getPassword(): MutableStateFlow<String> = flowOfPassword
 
     fun isEnabled() = flowOfEnabled
 
     fun login(onSuccess: () -> Unit) {
+        if (!flowOfEmail.value.matches(Patterns.EMAIL_ADDRESS.toRegex())) {
+            notifyError("Please enter a valid email address")
+            return
+        }
+        if (flowOfPassword.value.length < 6) {
+            notifyError("Password must contains at least 6 characters")
+            return
+        }
         request.apply {
-            username = flowOfUserName.value
+            username = flowOfEmail.value
             password = flowOfPassword.value
         }
         execute(useCase, request, onSuccess = { onSuccess() })
