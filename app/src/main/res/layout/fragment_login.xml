@@ -48,6 +48,9 @@
             android:layout_marginHorizontal="@dimen/space_large"
             android:layout_marginTop="@dimen/space_medium"
             android:hint="@string/lbl_username"
+            app:errorEnabled="true"
+            app:errorText="@{vm.errorEmail}"
+            app:focusWhenError="@{true}"
             app:layout_constraintTop_toBottomOf="@id/img_header"
             tools:text="@tools:sample/full_names">
 
@@ -68,8 +71,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_large"
-            android:layout_marginTop="@dimen/space_large"
+            android:layout_marginTop="@dimen/space_medium"
             android:hint="@string/lbl_password"
+            app:errorEnabled="true"
+            app:errorText="@{vm.errorPassword}"
+            app:focusWhenError="@{true}"
             app:layout_constraintTop_toBottomOf="@id/edt_username"
             app:passwordToggleEnabled="true"
             tools:text="@tools:sample/full_names">
@@ -91,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_large"
-            android:layout_marginTop="@dimen/space_large"
+            android:layout_marginTop="@dimen/space_medium"
             android:text="@string/lbl_login"
             app:layout_constraintTop_toBottomOf="@id/edt_password"
             app:viewCompatEnabled="@{vm.enabled}" />

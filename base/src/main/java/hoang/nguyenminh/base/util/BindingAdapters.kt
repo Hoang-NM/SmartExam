@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE
 import hoang.nguyenminh.base.util.DateTimeXs.FORMAT_DATE_TIME_ISO
 import java.text.SimpleDateFormat
@@ -56,5 +57,14 @@ object BindingAdapters {
     @JvmStatic
     fun AppCompatEditText.bindInputType(type: Int?) {
         inputType = type ?: InputType.TYPE_CLASS_TEXT
+    }
+
+    @BindingAdapter(value = ["errorText", "focusWhenError"], requireAll = false)
+    @JvmStatic
+    fun TextInputLayout.errorText(errorText: String?, focusWhenError: Boolean?) {
+        error = errorText
+        if (!errorText.isNullOrEmpty() && focusWhenError == true) {
+            requestFocus()
+        }
     }
 }
