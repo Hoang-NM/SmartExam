@@ -21,7 +21,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), Scene {
 
     private var baseActivityWeakReference: WeakReference<BaseActivity<*>?>? = null
 
-    protected fun getBaseActivity(): BaseActivity<*>? {
+    private fun getBaseActivity(): BaseActivity<*>? {
         return baseActivityWeakReference?.get() ?: (activity as? BaseActivity<*>)?.also {
             baseActivityWeakReference = WeakReference(it)
         }

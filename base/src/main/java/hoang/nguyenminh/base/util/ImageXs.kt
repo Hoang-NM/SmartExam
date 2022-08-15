@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.media.ExifInterface
 import android.util.Base64
 import androidx.camera.core.ImageProxy
+import androidx.exifinterface.media.ExifInterface
 import hoang.nguyenminh.base.appInstance
 import timber.log.Timber
 import java.io.ByteArrayOutputStream

@@ -1,9 +1,9 @@
 package hoang.nguyenminh.smartexam.repository
 
-import androidx.core.net.toFile
 import hoang.nguyenminh.base.network.safeDeserialize
 import hoang.nguyenminh.base.serializer.Serializer
 import hoang.nguyenminh.base.util.IMAGE_SIZE_LIMIT
+import hoang.nguyenminh.base.util.fileFromContentUri
 import hoang.nguyenminh.base.util.getMimeType
 import hoang.nguyenminh.base.util.prepareImageFileForUpload
 import hoang.nguyenminh.smartexam.model.BaseResponse
@@ -69,9 +69,12 @@ class SmartExamCloudRepositoryImpl @Inject constructor(
 
     override suspend fun sendExamImage(params: SubmitExamImageRequest) =
         run {
-            val file = prepareImageFileForUpload(params.uri.toFile(), IMAGE_SIZE_LIMIT)
-            val body = file.asRequestBody(file.getMimeType("image/jpeg").toMediaTypeOrNull())
-            val image = MultipartBody.Part.createFormData("image", file.name, body)
+            val rawFile = fileFromContentUri(params.uri)
+            val processedFile = prepareImageFileForUpload(rawFile, IMAGE_SIZE_LIMIT)
+            val body = processedFile.asRequestBody(
+                processedFile.getMimeType("image/jpeg").toMediaTypeOrNull()
+            )
+            val image = MultipartBody.Part.createFormData("image", processedFile.name, body)
             safeApiCall {
                 service.sendExamImage(image, params.query.examId, params.query.studentId)
             }

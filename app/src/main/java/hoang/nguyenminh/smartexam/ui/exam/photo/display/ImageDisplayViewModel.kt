@@ -37,5 +37,6 @@ class ImageDisplayViewModel @Inject constructor(application: Application) :
         }
     }
 
-    fun sendExamImage(onSuccess: () -> Unit) = execute(useCase, request, onSuccess = { onSuccess })
+    fun sendExamImage(onSuccess: () -> Unit) =
+        execute(useCase, request, onSuccess = { onSuccess() })
 }
